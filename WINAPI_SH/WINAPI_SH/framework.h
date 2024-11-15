@@ -13,3 +13,22 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+#include <vector>
+#include <unordered_map>
+#include <memory>
+#include <algorithm>
+#include <cctype>
+#include <cmath>
+
+using namespace std;
+
+// Math
+#include "Math/Vector2.h"
+
+using Vector2D = Vector2<float>;
+
+// Object
+#include "Object/CircleCollider.h"
+#include "Object/Line.h"
+#include "Object/RectCollider.h"

@@ -121,10 +121,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+
+shared_ptr<CircleCollider> circle = make_shared<CircleCollider>(Vector2D(500, 500), 50);
+shared_ptr<Line> line = make_shared<Line>(Vector2D(0, 0), Vector2D(500, 500));
+shared_ptr<RectCollider> rect = make_shared<RectCollider>(Vector2D(300, 300), Vector2D(300, 150));
+
+// Window Procedure : 윈도우가 진행되는 절차
+// Procedure ... 함수
+// 
+// 노가다 (게임이라는 건물을 짓는 일)
+// HWND : Handle Window => 인력사무소 (게임을 만드는데 필요한 작업을 하는
+// message : 윈도우 메세지 ... 윈도우 창에서 할 일을 써놓는 곳
+// HDC : Handle Device Context ... => 꾸미기 담당
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_MOUSEMOVE:
+    {
+        break;
+    }
+
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -145,8 +162,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
+            // 그리기 위해서 HDC를 고용
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            
+            // 1. 클래스 Line, RectCollider 두개 만들기
+            // 2. circle과 동일하게 Render함수를 이욯하여 그리기
+
+            // 사각형을 그리는 함수
+            rect->Render(hdc);
+            
+            // 원을 그리는 함수
+            // Ellipse(hdc, 50, 50, 150, 150);
+            circle->Render(hdc);
+
+            // 선을 그리는 함수
+            line->Render(hdc);
+
             EndPaint(hWnd, &ps);
         }
         break;
