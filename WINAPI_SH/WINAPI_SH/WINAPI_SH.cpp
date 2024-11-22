@@ -122,9 +122,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
+Vector2D mousePos;
+
 shared_ptr<CircleCollider> circle = make_shared<CircleCollider>(Vector2D(500, 500), 50);
-shared_ptr<Line> line = make_shared<Line>(Vector2D(0, 0), Vector2D(500, 500));
-shared_ptr<RectCollider> rect = make_shared<RectCollider>(Vector2D(300, 300), Vector2D(300, 150));
+shared_ptr<RectCollider> rect = make_shared<RectCollider>(Vector2D(500, 500), Vector2D(30, 30));
+shared_ptr<Line> line = make_shared<Line>(Vector2D(500, 500), Vector2D(30, 111));
 
 // Window Procedure : 윈도우가 진행되는 절차
 // Procedure ... 함수
@@ -137,8 +139,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+    {
+        SetTimer(hWnd, 1, 1, nullptr); // 1ms 마다 WM_TIMER메시지 Send
+
+        break;
+    }
+
+    case WM_TIMER:
+    {
+        rect->Update();
+        circle->Update();
+        line->Update();
+
+        InvalidateRect(hWnd, nullptr, true);
+
+        break;
+    }
+
     case WM_MOUSEMOVE:
     {
+        mousePos.x = static_cast<float>(LOWORD(lParam));
+        mousePos.y = static_cast<float>(HIWORD(lParam));
+
         break;
     }
 
@@ -170,13 +193,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // 사각형을 그리는 함수
             rect->Render(hdc);
-            
+
             // 원을 그리는 함수
             // Ellipse(hdc, 50, 50, 150, 150);
             circle->Render(hdc);
 
             // 선을 그리는 함수
             line->Render(hdc);
+            line->_end = mousePos;
 
             EndPaint(hWnd, &ps);
         }

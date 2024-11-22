@@ -58,6 +58,16 @@ public:
         return x * other.y - y * other.x;
     }
     float Length() const { return sqrtf(x * x + y * y); }
+    Vector2<T> NormalVector()
+    {
+        float length = Length();
+
+        Vector2<T> result;
+        result.x = x / length;
+        result.y = y / length;
+
+        return result;
+    }
 
     // 대입연산자
     // a = b : a에다가 b를 대입하고 원본을 반환한다.

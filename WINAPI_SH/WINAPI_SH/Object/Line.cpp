@@ -6,6 +6,10 @@ Line::Line(Vector2D start, Vector2D end)
 {
 }
 
+void Line::Update()
+{
+}
+
 void Line::Render(HDC hdc)
 {
 	MoveToEx(hdc, _start.x, _start.y, lpPoint);

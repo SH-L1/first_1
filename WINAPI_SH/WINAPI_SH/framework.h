@@ -28,7 +28,11 @@ using namespace std;
 
 using Vector2D = Vector2<float>;
 
+#define LERT(start, end, ratio) (end - start) * ratio
+
 // Object
 #include "Object/CircleCollider.h"
 #include "Object/Line.h"
 #include "Object/RectCollider.h"
+
+extern Vector2D mousePos;

@@ -2,16 +2,24 @@
 #include "RectCollider.h"
 
 RectCollider::RectCollider(Vector2D centre, Vector2D size)
-	: _centre(centre), _size(size)
+	: _centre(centre), _halfsize(size * 0.5f)
 {
+	_angle = 0;
+}
+
+RectCollider::~RectCollider()
+{
+}
+
+void RectCollider::Update()
+{
+	_angle += 0.1f;
+
+	_centre.x = 500 + 130 * cos(_angle);
+	_centre.y = 500 + 130 * sin(-_angle);
 }
 
 void RectCollider::Render(HDC hdc)
 {
-	int left = _centre.x - (_size.x / 2.0f);
-	int top = _centre.y - (_size.y / 2.0f);
-	int right = _centre.x + (_size.x / 2.0f);
-	int bottom = _centre.y + (_size.y / 2.f);
-
-	Rectangle(hdc, left, top, right, bottom);
+	Rectangle(hdc, Left(), Top(), Right(), Bottom());
 }

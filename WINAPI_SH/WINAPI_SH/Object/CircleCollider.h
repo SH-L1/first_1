@@ -5,7 +5,7 @@ class CircleCollider
 public:
 	CircleCollider(Vector2D centre, float radius);
 
-	// void Update();
+	void Update();
 	void Render(HDC hdc);
 
 private:
