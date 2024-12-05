@@ -124,9 +124,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 Vector2D mousePos;
 
-shared_ptr<CircleCollider> circle = make_shared<CircleCollider>(Vector2D(500, 500), 50);
-shared_ptr<RectCollider> rect = make_shared<RectCollider>(Vector2D(500, 500), Vector2D(30, 30));
-shared_ptr<Line> line = make_shared<Line>(Vector2D(500, 500), Vector2D(30, 111));
+shared_ptr<Program> program;
+
+// 색
+// HPEN redPen = CreatePen(3, 3, RGB(255, 0, 0));
 
 // Window Procedure : 윈도우가 진행되는 절차
 // Procedure ... 함수
@@ -142,17 +143,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
     {
         SetTimer(hWnd, 1, 1, nullptr); // 1ms 마다 WM_TIMER메시지 Send
+        program = make_shared<Program>();
 
         break;
     }
 
     case WM_TIMER:
     {
-        rect->Update();
+       /* rect->Update();
         circle->Update();
-        line->Update();
+        line->Update(); */
 
         InvalidateRect(hWnd, nullptr, true);
+        program->Update();
 
         break;
     }
@@ -187,20 +190,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             // 그리기 위해서 HDC를 고용
             HDC hdc = BeginPaint(hWnd, &ps);
+
+            // 이것도 HDC 사용됨
+            // SelectObject(hdc, redPen)
             
             // 1. 클래스 Line, RectCollider 두개 만들기
             // 2. circle과 동일하게 Render함수를 이욯하여 그리기
 
             // 사각형을 그리는 함수
-            rect->Render(hdc);
+            // rect->Render(hdc);
 
             // 원을 그리는 함수
             // Ellipse(hdc, 50, 50, 150, 150);
-            circle->Render(hdc);
+            // circle->Render(hdc);
 
             // 선을 그리는 함수
-            line->Render(hdc);
-            line->_end = mousePos;
+            // line->Render(hdc);
+            // line->_end = mousePos;
+
+            program->Render(hdc);
 
             EndPaint(hWnd, &ps);
         }

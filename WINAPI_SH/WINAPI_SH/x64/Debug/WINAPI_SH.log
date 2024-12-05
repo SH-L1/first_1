@@ -1,2 +1,119 @@
-﻿  RectCollider.cpp
+﻿  framwork.cpp
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,32): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,32): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,32): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,32): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,32): warning C4244:         ]
+  (소스 파일 'framwork.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,33): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,33): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,33): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,33): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,33): warning C4244:         ]
+  (소스 파일 'framwork.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,31): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,31): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,31): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,31): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,31): warning C4244:         ]
+  (소스 파일 'framwork.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,34): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,34): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,34): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,34): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,34): warning C4244:         ]
+  (소스 파일 'framwork.cpp'을(를) 컴파일하는 중)
+  
+  Collider.cpp
+  Line.cpp
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,32): warning C4244: '인수': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,32): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,32): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,32): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,32): warning C4244:         ]
+  (소스 파일 '/Object/Line.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,22): warning C4244: '인수': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,22): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,22): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,22): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(19,22): warning C4244:         ]
+  (소스 파일 '/Object/Line.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,26): warning C4244: '인수': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,26): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,26): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,26): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,26): warning C4244:         ]
+  (소스 파일 '/Object/Line.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,18): warning C4244: '인수': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,18): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,18): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,18): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Line.cpp(20,18): warning C4244:         ]
+  (소스 파일 '/Object/Line.cpp'을(를) 컴파일하는 중)
+  
+  CircleCollider.cpp
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(29,11): warning C4244: '초기화 중': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(29,11): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(29,11): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(29,11): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(29,11): warning C4244:         ]
+  (소스 파일 '/Object/CircleCollider.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(30,12): warning C4244: '초기화 중': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(30,12): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(30,12): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(30,12): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(30,12): warning C4244:         ]
+  (소스 파일 '/Object/CircleCollider.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(31,10): warning C4244: '초기화 중': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(31,10): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(31,10): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(31,10): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(31,10): warning C4244:         ]
+  (소스 파일 '/Object/CircleCollider.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(32,13): warning C4244: '초기화 중': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(32,13): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(32,13): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(32,13): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.cpp(32,13): warning C4244:         ]
+  (소스 파일 '/Object/CircleCollider.cpp'을(를) 컴파일하는 중)
+  
+  Vector2.cpp
+  RectCollider.cpp
+  PaintScene.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         ]
+  (소스 파일 '/Scenes/PaintScene.cpp'을(를) 컴파일하는 중)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82):
+      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+          C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Scenes\PaintScene.h(13,32):
+          컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<CircleCollider> std::make_shared<CircleCollider,Vector2D,int>(Vector2D &&,int &&)'에 대한 참조를 확인하세요.
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(2906,46):
+          컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<CircleCollider>::_Ref_count_obj2<_Ty,int>(_Ty &&,int &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=Vector2D
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(2095,18):
+          컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,Vector2<float>,int>(_Ty &,Vector2<float> &&,int &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=CircleCollider
+          ]
+  
+  Program.cpp
+  Scene.cpp
+  WINAPI_SH.cpp
+  코드를 생성하고 있습니다...
   WINAPI_SH.vcxproj -> C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\x64\Debug\WINAPI_SH.exe

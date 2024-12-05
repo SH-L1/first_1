@@ -6,6 +6,10 @@ Line::Line(Vector2D start, Vector2D end)
 {
 }
 
+Line::~Line()
+{
+}
+
 void Line::Update()
 {
 }

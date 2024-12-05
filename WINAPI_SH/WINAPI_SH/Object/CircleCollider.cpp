@@ -2,8 +2,9 @@
 #include "CircleCollider.h"
 
 CircleCollider::CircleCollider(Vector2D centre, float radius)
-	: _centre(centre), _radius(radius)
+	: _radius(radius)
 {
+	_centre = centre;
 }
 
 void CircleCollider::Update()
@@ -18,15 +19,16 @@ void CircleCollider::Update()
 
 	// 보간을 이용해서 부드럽게 움직이는 방법
 	// Linear Interporation
-	_centre = (mousePos - _centre) * 0.01f + _centre;
+	_centre = (mousePos - _centre) * 0.5f + _centre;
 }
 
 void CircleCollider::Render(HDC hdc)
 {
-	int left = _centre.x - _radius;
-	int top = _centre.y - _radius;
-	int right = _centre.x + _radius;
-	int bottom = _centre.y + _radius;
+	SelectObject(hdc, _pens[_curColor]);
 
+	int left = _centre.x - _radius;
+	int right = _centre.x + _radius;
+	int top = _centre.y - _radius;
+	int bottom = _centre.y + _radius;
 	Ellipse(hdc, left, top, right, bottom);
 }

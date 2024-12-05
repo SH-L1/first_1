@@ -14,6 +14,7 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include <string>
 #include <vector>
 #include <unordered_map>
 #include <memory>
@@ -30,9 +31,20 @@ using Vector2D = Vector2<float>;
 
 #define LERT(start, end, ratio) (end - start) * ratio
 
+#define BLACK RGB(0, 0, 0)
+#define WHITE RGB(255, 255, 255)
+#define RED RGB(255, 0, 0)
+#define GREEN RGB(0, 255, 0)
+#define BLUE RGB(0, 0, 255)
+
 // Object
-#include "Object/CircleCollider.h"
 #include "Object/Line.h"
+#include "Object/Collider.h"
+#include "Object/CircleCollider.h"
 #include "Object/RectCollider.h"
+
+#include "Scenes/Scene.h"
+
+#include "Program.h"
 
 extern Vector2D mousePos;

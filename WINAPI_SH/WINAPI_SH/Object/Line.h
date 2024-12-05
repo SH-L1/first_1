@@ -4,6 +4,7 @@ class Line
 {
 public:
 	Line(Vector2D start, Vector2D end);
+	~Line();
 	
 	void Update();
 	void Render(HDC hdc);
