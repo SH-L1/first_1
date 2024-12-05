@@ -3,52 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\CollisionScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\PaintScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\PaintScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\RectCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Scenes\\CollisionScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\RectCollider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\Line.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\Line.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\Collider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\Collider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\CircleCollider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70452409-77C6-41EE-B316-417FA9481272}|WINAPI_SH\\WINAPI_SH.vcxproj|solutionrelative:WINAPI_SH\\Object\\CircleCollider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,152 +22,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 145,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Scene.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\Scene.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.h",
-              "RelativeToolTip": "WINAPI_SH\\Scenes\\Scene.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:28.703Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Scene.cpp",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.cpp",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\Scene.cpp",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\Scene.cpp",
-              "RelativeToolTip": "WINAPI_SH\\Scenes\\Scene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:26.705Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PaintScene.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\PaintScene.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.h",
-              "RelativeToolTip": "WINAPI_SH\\Scenes\\PaintScene.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:25.896Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PaintScene.cpp",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.cpp",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\PaintScene.cpp",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\PaintScene.cpp",
-              "RelativeToolTip": "WINAPI_SH\\Scenes\\PaintScene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:25.119Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RectCollider.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\RectCollider.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.h",
-              "RelativeToolTip": "WINAPI_SH\\Object\\RectCollider.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:23.565Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "RectCollider.cpp",
               "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.cpp",
               "RelativeDocumentMoniker": "WINAPI_SH\\Object\\RectCollider.cpp",
               "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\RectCollider.cpp",
               "RelativeToolTip": "WINAPI_SH\\Object\\RectCollider.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAmwCcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:22.671Z"
+              "WhenOpened": "2024-12-05T12:56:15.607Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Line.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\Line.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.h",
-              "RelativeToolTip": "WINAPI_SH\\Object\\Line.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CollisionScene.h",
+              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.h",
+              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\CollisionScene.h",
+              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.h",
+              "RelativeToolTip": "WINAPI_SH\\Scenes\\CollisionScene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:21.789Z"
+              "WhenOpened": "2024-12-05T12:55:41.1Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Line.cpp",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.cpp",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\Line.cpp",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Line.cpp",
-              "RelativeToolTip": "WINAPI_SH\\Object\\Line.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CollisionScene.cpp",
+              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.cpp",
+              "RelativeDocumentMoniker": "WINAPI_SH\\Scenes\\CollisionScene.cpp",
+              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Scenes\\CollisionScene.cpp",
+              "RelativeToolTip": "WINAPI_SH\\Scenes\\CollisionScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:21.092Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Collider.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\Collider.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.h",
-              "RelativeToolTip": "WINAPI_SH\\Object\\Collider.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:20.161Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Collider.cpp",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.cpp",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\Collider.cpp",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\Collider.cpp",
-              "RelativeToolTip": "WINAPI_SH\\Object\\Collider.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:18.487Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CircleCollider.h",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.h",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\CircleCollider.h",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.h",
-              "RelativeToolTip": "WINAPI_SH\\Object\\CircleCollider.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-05T02:46:17.762Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CircleCollider.cpp",
-              "DocumentMoniker": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.cpp",
-              "RelativeDocumentMoniker": "WINAPI_SH\\Object\\CircleCollider.cpp",
-              "ToolTip": "C:\\Users\\dlatj\\Documents\\GitHub\\first_1\\WINAPI_SH\\WINAPI_SH\\Object\\CircleCollider.cpp",
-              "RelativeToolTip": "WINAPI_SH\\Object\\CircleCollider.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T02:46:15.727Z"
+              "WhenOpened": "2024-12-05T12:54:38.514Z",
+              "EditorCaption": ""
             }
           ]
         }

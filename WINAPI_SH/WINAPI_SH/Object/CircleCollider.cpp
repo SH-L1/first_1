@@ -4,7 +4,7 @@
 CircleCollider::CircleCollider(Vector2D centre, float radius)
 	: _radius(radius)
 {
-	_centre = centre;
+	this->centre = centre;
 }
 
 void CircleCollider::Update()
@@ -19,16 +19,39 @@ void CircleCollider::Update()
 
 	// 보간을 이용해서 부드럽게 움직이는 방법
 	// Linear Interporation
-	_centre = (mousePos - _centre) * 0.5f + _centre;
+	// centre = (mousePos - centre) * 0.5f + centre;
 }
 
 void CircleCollider::Render(HDC hdc)
 {
 	SelectObject(hdc, _pens[_curColor]);
 
-	int left = _centre.x - _radius;
-	int right = _centre.x + _radius;
-	int top = _centre.y - _radius;
-	int bottom = _centre.y + _radius;
+	int left = centre.x - _radius;
+	int right = centre.x + _radius;
+	int top = centre.y - _radius;
+	int bottom = centre.y + _radius;
 	Ellipse(hdc, left, top, right, bottom);
 }
+
+bool CircleCollider::IsCollision(const Vector2D& pos)
+{
+	return (pos - centre).Length() < _radius;
+}
+
+bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
+{
+	return (other->centre - centre).Length() < (_radius + other->_radius);
+}
+
+bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
+{
+	float closeX = max(other->Left(), min(centre.x, other->Right()));
+	float closeY = max(other->Top(), min(centre.y, other->Bottom()));
+
+	float distanceX = centre.x - closeX;
+	float distanceY = centre.y - closeY;
+
+	float result = (distanceX * distanceX) + (distanceY * distanceY);
+
+	return result <= (_radius * _radius);
+}	

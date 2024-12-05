@@ -51,12 +51,15 @@
     <ClInclude Include="Scenes\PaintScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\CollisionScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WINAPI_SH.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="framwork.cpp">
+    <ClCompile Include="framework.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\CircleCollider.cpp">
@@ -81,6 +84,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\PaintScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\CollisionScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
