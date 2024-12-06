@@ -1,25 +1,43 @@
-﻿  CollisionScene.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:             _Ty=int
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82): warning C4244:         ]
-  (소스 파일 '/Scenes/CollisionScene.cpp'을(를) 컴파일하는 중)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xutility(403,82):
-      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
-          C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Scenes\CollisionScene.cpp(6,18):
-          컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<CircleCollider> std::make_shared<CircleCollider,Vector2D,int>(Vector2D &&,int &&)'에 대한 참조를 확인하세요.
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(2906,46):
-          컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<CircleCollider>::_Ref_count_obj2<_Ty,int>(_Ty &&,int &&)'에 대한 참조를 확인하세요.
-          with
-          [
-              _Ty=Vector2D
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\memory(2095,18):
-          컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,Vector2<float>,int>(_Ty &,Vector2<float> &&,int &&) noexcept(false)'에 대한 참조를 확인하세요.
-          with
-          [
-              _Ty=CircleCollider
-          ]
+﻿  framework.cpp
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Collider.h(24,38): error C2065: 'CircleCollider': 선언되지 않은 식별자입니다.
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
   
-  WINAPI_SH.vcxproj -> C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\x64\Debug\WINAPI_SH.exe
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Collider.h(24,27): error C2923: 'std::shared_ptr': 'CircleCollider'은(는) '_Ty' 매개 변수에 대한 올바른 템플릿 형식 인수가 아닙니다.
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+      C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\Collider.h(24,38):
+      'CircleCollider' 선언을 참조하십시오.
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\CircleCollider.h(12,15): error C3668: 'CircleCollider::IsCollision': 재정의 지정자 'override'가 있는 메서드가 기본 클래스 메서드를 재정의하지 않았습니다.
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(19,15): error C3668: 'RectCollider::IsCollision': 재정의 지정자 'override'가 있는 메서드가 기본 클래스 메서드를 재정의하지 않았습니다.
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,31): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,31): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,31): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,31): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(12,31): warning C4244:         ]
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,32): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,32): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,32): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,32): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(13,32): warning C4244:         ]
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,30): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,30): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,30): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,30): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(14,30): warning C4244:         ]
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,33): warning C4244: 'return': 'T'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,33): warning C4244:         with
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,33): warning C4244:         [
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,33): warning C4244:             T=float
+C:\Users\dlatj\Documents\GitHub\first_1\WINAPI_SH\WINAPI_SH\Object\RectCollider.h(15,33): warning C4244:         ]
+  (소스 파일 'framework.cpp'을(를) 컴파일하는 중)
+  

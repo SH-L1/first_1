@@ -3,7 +3,7 @@
 
 Collider::Collider()
 {
-	_pens.push_back(CreatePen(3, 3, BLACK));
+	_pens.push_back(CreatePen(3, 3, GREEN));
 	_pens.push_back(CreatePen(3, 3, RED));
 }
 
@@ -13,4 +13,9 @@ Collider::~Collider()
 	{
 		DeleteObject(pen);
 	}
+}
+
+bool Collider::IsCollision(shared_ptr<Collider> other)
+{
+	return false;
 }

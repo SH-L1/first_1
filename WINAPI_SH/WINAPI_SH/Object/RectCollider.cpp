@@ -36,15 +36,47 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
 		Top() < other->Bottom());
 }
 
+// AABB 충돌
 bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-	float closeX = max(Left(), min(other->GetCentre().x, Right()));
-	float closeY = max(Top(), min(other->GetCentre().y, Bottom()));
+	Vector2D circleCentre = other->centre;
+	float radius = other->GetRadius();
+	float length = (circleCentre - centre).Length();
 
-	float distanceX = other->GetCentre().x - closeX;
-	float distanceY = other->GetCentre().y - closeY;
+	// 상하 충돌체크
+	if (circleCentre.x < Right() && circleCentre.x > Left())
+	{
+		float result = 0.0f;
+		if (circleCentre.y > centre.y) // circle이 아래쪽이다.
+			result = circleCentre.y = centre.y;
+		else
+			result = centre.y - circleCentre.y;
 
-	float result = (distanceX * distanceX) + (distanceY * distanceY);
+		return result < radius + _halfSize.y;
+	}
 
-	return result <= (other->GetRadius() * other->GetRadius());
+	// 좌우 충돌체크
+	if (circleCentre.y < Bottom() && circleCentre.y > Top())
+	{
+		float result = 0.0f;
+		if (circleCentre.x > centre.x)
+			result = circleCentre.x - centre.x;
+		else
+			result = centre.x - circleCentre.x;
+
+		return result < radius + _halfSize.x;
+	}
+
+	// 각 꼭짓점 체크
+	Vector2D leftTop = Vector2D(Left(), Top());
+	Vector2D rightTop =  Vector2D(Right(), Top());
+	Vector2D leftBottom = Vector2D(Left(), Bottom());
+	Vector2D rightBottom = Vector2D(Right(), Bottom());
+
+	bool check1 = other->IsCollision(leftTop);
+	bool check2 = other->IsCollision(rightTop);
+	bool check3 = other->IsCollision(leftBottom);
+	bool check4 = other->IsCollision(rightBottom);
+
+	return check1 || check2 || check3 || check4;
 }

@@ -14,9 +14,9 @@ public:
 	int Top() { return centre.y - _halfSize.y; }
 	int Bottom() { return centre.y + _halfSize.y; }
 
-	bool IsCollision(const Vector2D& pos);
-	bool IsCollision(shared_ptr<class RectCollider> other);
-	bool IsCollision(shared_ptr<class CircleCollider> other);
+	virtual bool IsCollision(const Vector2D& pos) override;
+	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
 
 private:
 	Vector2D _halfSize;

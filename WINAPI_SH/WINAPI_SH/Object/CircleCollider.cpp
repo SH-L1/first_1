@@ -45,13 +45,5 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
 {
-	float closeX = max(other->Left(), min(centre.x, other->Right()));
-	float closeY = max(other->Top(), min(centre.y, other->Bottom()));
-
-	float distanceX = centre.x - closeX;
-	float distanceY = centre.y - closeY;
-
-	float result = (distanceX * distanceX) + (distanceY * distanceY);
-
-	return result <= (_radius * _radius);
-}	
+	return other->IsCollision(shared_from_this());
+}
