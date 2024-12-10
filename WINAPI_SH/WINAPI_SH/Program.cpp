@@ -11,7 +11,7 @@ Program::Program()
 	_sceneTable["CollisionScene"] = make_shared<CollisionScene>();
 	_sceneTable["LineScene"] = make_shared<LineScene>();
 
-	_curScene = "CollisionScene";
+	_curScene = "LineScene";
 }
 
 Program::~Program()
