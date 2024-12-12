@@ -17,5 +17,11 @@ Collider::~Collider()
 
 bool Collider::IsCollision(shared_ptr<Collider> other)
 {
+    shared_ptr<CircleCollider> circle = dynamic_pointer_cast<CircleCollider>(other);
+    shared_ptr<RectCollider> rect = dynamic_pointer_cast<RectCollider>(other);
+    
+	if (circle && rect)
+		return true;
+
 	return false;
 }

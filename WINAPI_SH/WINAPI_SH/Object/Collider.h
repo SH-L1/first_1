@@ -1,5 +1,8 @@
 #pragma once
 
+class CircleCollider;
+class RectCollider;
+
 class Collider
 {
 public:
@@ -12,17 +15,17 @@ public:
 	Collider();
 	virtual ~Collider();
 
-	virtual void Update() abstract;
-	virtual void Render(HDC hdc) abstract;
+	virtual void Update() = 0;
+	virtual void Render(HDC hdc) = 0;
 
 	void SetRed() { _curColor = Color::C_RED; }
 	void SetGreen() { _curColor = Color::C_GREEN; }
 
 	bool IsCollision(shared_ptr<Collider> other);
 
-	virtual bool IsCollision(const Vector2D& pos) abstract;
-	virtual bool IsCollision(shared_ptr<class CircleCollider> other) abstract;
-	virtual bool IsCollision(shared_ptr<class RectCollider> other) abstract;
+	virtual bool IsCollision(const Vector2D& pos) = 0;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other) = 0;
+	virtual bool IsCollision(shared_ptr<class RectCollider> other) = 0;
 
 	Vector2D centre;
 
