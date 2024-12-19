@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\LineCollider.h" />
     <ClInclude Include="Scenes\LineScene.h" />
     <ClInclude Include="Scenes\CollisionScene.h" />
     <ClInclude Include="Object\Collider.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="WINAPI_SH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\LineCollider.cpp" />
     <ClCompile Include="Scenes\LineScene.cpp" />
     <ClCompile Include="Scenes\CollisionScene.cpp" />
     <ClCompile Include="Object\Collider.cpp" />

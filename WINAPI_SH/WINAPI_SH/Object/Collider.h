@@ -1,8 +1,5 @@
 #pragma once
 
-class CircleCollider;
-class RectCollider;
-
 class Collider
 {
 public:

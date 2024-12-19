@@ -29,7 +29,8 @@ using namespace std;
 
 using Vector2D = Vector2<float>;
 
-#define LERT(start, end, ratio) (end - start) * ratio
+// 선형보간
+#define LERT(start, end, ratio) start + (end - start) * ratio
 
 #define BLACK RGB(0, 0, 0)
 #define WHITE RGB(255, 255, 255)
@@ -42,6 +43,7 @@ using Vector2D = Vector2<float>;
 #include "Object/Collider.h"
 #include "Object/CircleCollider.h"
 #include "Object/RectCollider.h"
+#include "Object/LineCollider.h"
 
 #include "Scenes/Scene.h"
 

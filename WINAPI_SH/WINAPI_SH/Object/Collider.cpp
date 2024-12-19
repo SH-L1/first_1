@@ -17,11 +17,11 @@ Collider::~Collider()
 
 bool Collider::IsCollision(shared_ptr<Collider> other)
 {
-    shared_ptr<CircleCollider> circle = dynamic_pointer_cast<CircleCollider>(other);
-    shared_ptr<RectCollider> rect = dynamic_pointer_cast<RectCollider>(other);
-    
-	if (circle && rect)
-		return true;
+	auto rect = dynamic_pointer_cast<RectCollider>(other);
+	if (rect != nullptr) return IsCollision(rect);
+
+	auto circle = dynamic_pointer_cast<CircleCollider>(other);
+	if (circle != nullptr) return IsCollision(circle);
 
 	return false;
 }

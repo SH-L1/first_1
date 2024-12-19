@@ -10,8 +10,10 @@ public:
 	virtual void Render(HDC hdc) override;
 
 private:
-	shared_ptr<Line> _line1;
-	shared_ptr<Line> _line2;
-	shared_ptr<Line> _floor;
+	shared_ptr<LineCollider> _line1;
+	shared_ptr<LineCollider> _line2;
+	shared_ptr<LineCollider> _floor;
+
+	shared_ptr<Collider>
 };
 

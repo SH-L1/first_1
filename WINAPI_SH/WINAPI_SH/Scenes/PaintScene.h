@@ -12,5 +12,5 @@ public:
 private:
 	shared_ptr<Collider> circle = make_shared<CircleCollider>(Vector2D(500, 500), 50);
 	shared_ptr<Collider> rect = make_shared<RectCollider>(Vector2D(500, 500), Vector2D(30, 30));
-	shared_ptr<Line> line = make_shared<Line>(Vector2D(500, 500), Vector2D(30, 111));
+	shared_ptr<Line> line = make_shared<LineCollider>(Vector2D(500, 500), Vector2D(30, 111));
 };
