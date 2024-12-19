@@ -17,7 +17,7 @@ void LineCollider::Render(HDC hdc)
 	LineTo(hdc, _end.x, _end.y);
 }
 
-bool LineCollider::IsCollision(shared_ptr<LineCollider> other)
+Line::HitResult LineCollider::IsCollision(shared_ptr<Line> other)
 {
 	// »ï°¢Çü ³ÐÀÌ a, b
 	float a = 0;
@@ -54,9 +54,13 @@ bool LineCollider::IsCollision(shared_ptr<LineCollider> other)
 
 	Vector2D dir = (other->_end - other->_start).NormalVector();
 	float ratio = a / (a + b);
-	Vector2D crashPoint = LERP(other->_start, other->_end, ratio);
+	Vector2D point = LERP(other->_start, other->_end, ratio);
 
-	return isBetween1 && isBetween2;
+	HitResult result;
+	result.isCollision = isBetween1 && isBetween2;
+	result.point = point;
+
+	return result;
 }
 
 // ¿Ö Length() ±îÁö?

@@ -15,10 +15,7 @@ Line::~Line()
 	}
 }
 
-bool Line::IsCollision(shared_ptr<Line> other)
+Line::HitResult Line::IsCollision(shared_ptr<Line> other)
 {
-	auto line = dynamic_pointer_cast<LineCollider>(other);
-	if (line != nullptr) return IsCollision(line);
-
-	return false;
+	return HitResult();
 }

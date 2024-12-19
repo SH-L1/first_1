@@ -132,6 +132,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\GameObjects\Ball.h" />
+    <ClInclude Include="Object\GameObjects\Barrel.h" />
+    <ClInclude Include="Object\GameObjects\Cannon.h" />
+    <ClInclude Include="Scenes\CannonScene.h" />
     <ClInclude Include="Object\LineCollider.h" />
     <ClInclude Include="Scenes\LineScene.h" />
     <ClInclude Include="Scenes\CollisionScene.h" />
@@ -149,6 +153,10 @@
     <ClInclude Include="WINAPI_SH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\GameObjects\Ball.cpp" />
+    <ClCompile Include="Object\GameObjects\Barrel.cpp" />
+    <ClCompile Include="Object\GameObjects\Cannon.cpp" />
+    <ClCompile Include="Scenes\CannonScene.cpp" />
     <ClCompile Include="Object\LineCollider.cpp" />
     <ClCompile Include="Scenes\LineScene.cpp" />
     <ClCompile Include="Scenes\CollisionScene.cpp" />

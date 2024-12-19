@@ -30,7 +30,7 @@ using namespace std;
 using Vector2D = Vector2<float>;
 
 // 선형보간
-#define LERT(start, end, ratio) start + (end - start) * ratio
+#define LERP(start, end, ratio) start + (end - start) * ratio
 
 #define BLACK RGB(0, 0, 0)
 #define WHITE RGB(255, 255, 255)
@@ -46,6 +46,7 @@ using Vector2D = Vector2<float>;
 #include "Object/LineCollider.h"
 
 #include "Scenes/Scene.h"
+#include "Scenes/CannonScene.h"
 
 #include "Program.h"
 

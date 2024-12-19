@@ -8,7 +8,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-	bool IsCollision(shared_ptr<LineCollider> other);
+	virtual HitResult IsCollision(shared_ptr<Line> other) override;
 
 public:
 	LPPOINT lpPoint = nullptr;

@@ -6,7 +6,7 @@ public:
 	struct HitResult
 	{
 		bool isCollision = false;
-		
+		Vector2D point;
 	};
 
 	enum Color
@@ -24,9 +24,12 @@ public:
 	void SetRed() { _curColor = Color::C_RED; }
 	void SetGreen() { _curColor = Color::C_GREEN; }
 
-	HitResult IsCollision(shared_ptr<Line> other);
+	virtual HitResult IsCollision(shared_ptr<Line> other);
 
 public:
-	Color _curColor = Color::C_GREEN;
+	Vector2D _start;
+	Vector2D _end;
+
+	Color _curColor = C_GREEN;
 	vector<HPEN> _pens;
 };

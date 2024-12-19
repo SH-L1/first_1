@@ -14,6 +14,6 @@ private:
 	shared_ptr<LineCollider> _line2;
 	shared_ptr<LineCollider> _floor;
 
-	shared_ptr<Collider>
+	shared_ptr<CircleCollider> _circle;
 };
 

@@ -9,6 +9,13 @@ public:
 		C_RED = 1
 	};
 
+	enum Type
+	{
+		NONE,
+		CIRCLE,
+		RECT
+	};
+
 	Collider();
 	virtual ~Collider();
 
@@ -27,6 +34,8 @@ public:
 	Vector2D centre;
 
 protected:
+	Type _type = NONE;
+
 	Color _curColor = Color::C_GREEN;
 	vector<HPEN> _pens;
 };
