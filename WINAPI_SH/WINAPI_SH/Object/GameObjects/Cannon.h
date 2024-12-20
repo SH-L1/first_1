@@ -22,7 +22,8 @@ private:
 
 	float _speed = 2.0f;
 	float _angle = 0.0f;
-	float _ballspeed = 50.0f;
+	float _ballspeed = 9.0f;
+	bool _isShot = false;
 
 private:
 	shared_ptr<class Barrel> _barrel;

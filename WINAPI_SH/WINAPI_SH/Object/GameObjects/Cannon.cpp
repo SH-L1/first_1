@@ -7,7 +7,7 @@
 Cannon::Cannon()
 {
 	_body = make_shared<RectCollider>(Vector2D(), Vector2D(120, 70));
-	_barrel = make_shared<Barrel>(150);
+	_barrel = make_shared<Barrel>(120);
 	_ball = make_shared<Ball>(5);
 }
 
@@ -19,15 +19,24 @@ void Cannon::Update()
 {
 	Move();
 	RotateBarrel();
+	Shooting();
 
 	_body->Update();
 	_barrel->Update();
+	_ball->Update();
+
+	if (_ball->BallEnd(static_cast<float>(_body->Bottom())))
+	{
+		_isShot = false;
+		_ball->UpdateBody(_ball->ResetLC());
+	}
 }
 
 void Cannon::Render(HDC hdc)
 {
 	_barrel->Render(hdc);
 	_body->Render(hdc);
+	_ball->Render(hdc);
 }
 
 void Cannon::Move()
@@ -66,11 +75,13 @@ void Cannon::Shooting()
 {
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		_ball->UpdateBody(_barrel->GetEndPoint());
-
-		if (_ball->BallEnd())
-			_ball->UpdateBody(_ball->ResetLC());
+		if (!_isShot)
+		{
+			_isShot = true;
+			_ball->UpdateBody(_barrel->GetEndPoint());
+			_ball->SetDir(Vector2D(cosf(_angle), -sinf(_angle)));
+			_ball->SetVelocity(_ballspeed);
+			_ball->SetShot();
+		}
 	}
-
-	_ball->SetDir(Vector2D(cosf(_angle), -sinf(_angle)));
 }
