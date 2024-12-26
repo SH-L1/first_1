@@ -7,8 +7,14 @@
 Cannon::Cannon()
 {
 	_body = make_shared<RectCollider>(Vector2D(), Vector2D(120, 70));
-	_barrel = make_shared<Barrel>(120);
-	_ball = make_shared<Ball>(5);
+	_barrel = make_shared<Barrel>(150);
+	
+	// Object Pooling
+	for (int i = 0; i < _ballCount; i++)
+	{
+		auto ball = make_shared<Ball>(10);
+		_balls.push_back(ball);
+	}
 }
 
 Cannon::~Cannon()
@@ -23,20 +29,28 @@ void Cannon::Update()
 
 	_body->Update();
 	_barrel->Update();
-	_ball->Update();
 
-	if (_ball->BallEnd(static_cast<float>(_body->Bottom())))
+	for(auto ball : _balls)
+		ball->Update();
+
+	for (auto& _ball : _balls)
 	{
-		_isShot = false;
-		_ball->UpdateBody(_ball->ResetLC());
+		if (_ball->BallEnd(static_cast<float>(_body->Bottom())))
+		{
+			_ball->SetActive(false);
+		}
 	}
+
+	_timer += 0.03f;
 }
 
 void Cannon::Render(HDC hdc)
 {
 	_barrel->Render(hdc);
 	_body->Render(hdc);
-	_ball->Render(hdc);
+
+	for (auto ball : _balls)
+		ball->Render(hdc);
 }
 
 void Cannon::Move()
@@ -44,13 +58,13 @@ void Cannon::Move()
 	if (GetAsyncKeyState('A') & 0x8001)
 	{
 		Vector2D left = Vector2D(-1, 0);
-		AddPos(left * _speed);
+		AddPos(left * _barrelspeed);
 	}
 
 	if (GetAsyncKeyState('D') & 0x8001)
 	{
 		Vector2D right = Vector2D(1, 0);
-		AddPos(right * _speed);
+		AddPos(right * _barrelspeed);
 	}
 
 	_barrel->UpdateBody(_body->centre);
@@ -73,15 +87,27 @@ void Cannon::RotateBarrel()
 
 void Cannon::Shooting()
 {
-	if (GetAsyncKeyState(VK_SPACE))
+	if (_timer < _delay) return;
+
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		if (!_isShot)
-		{
-			_isShot = true;
-			_ball->UpdateBody(_barrel->GetEndPoint());
-			_ball->SetDir(Vector2D(cosf(_angle), -sinf(_angle)));
-			_ball->SetVelocity(_ballspeed);
-			_ball->SetShot();
-		}
+		auto it = find_if(_balls.begin(), _balls.end(), [](shared_ptr<Ball> ball)->bool
+			{
+				if (ball->IsActive() == false)
+					return true;
+
+				return false;
+			});
+
+		if (it == _balls.end()) return;
+
+		_timer = 0.0f;
+		auto _ball = (*it);
+
+		_ball->SetActive(true);
+		_ball->UpdateBody(_barrel->GetEndPoint());
+		_ball->SetDir(_barrel->GetDir());
+		_ball->SetVelocity(_ballspeed * _barrel->GetBarrelLength());
+		_ball->SetShot();
 	}
 }

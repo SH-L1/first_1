@@ -16,18 +16,21 @@ public:
 
 	void SetPos(Vector2D  pos) { _body->centre = pos; }
 	void AddPos(Vector2D  vec) { _body->centre += vec; }
+	void SetBD() { _barrel->SetDir(Vector2D(-1, 0)); }
 
 private:
 	shared_ptr<RectCollider> _body; // 컴포넌트 패턴 ... 유니티
 
-	float _speed = 2.0f;
+	float _barrelspeed = 2.0f;
 	float _angle = 0.0f;
-	float _ballspeed = 9.0f;
-	bool _isShot = false;
+	float _ballspeed = 0.07f;
+
+	float _timer = 3.0f;
+	float _delay = 3.0f;
 
 private:
 	shared_ptr<class Barrel> _barrel;
-	shared_ptr<class Ball> _ball;
-};
 
-// 왜 Render하면 Cannon이 Rect처럼 Rend해?
+	int _ballCount = 30;
+	vector<shared_ptr<class Ball>> _balls;
+};

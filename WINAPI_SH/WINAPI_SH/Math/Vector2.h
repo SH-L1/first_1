@@ -96,7 +96,12 @@ public:
 
         return result;
     }
-
+    void Normalize()
+    {
+        float length = Length();
+        x /= length;
+        y /= length;
+    }
     // 대입연산자
     // a = b : a에다가 b를 대입하고 원본을 반환한다.
 

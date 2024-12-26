@@ -4,7 +4,7 @@
 Ball::Ball(float radius)
 	: _radius(radius)
 {
-	_circle = make_shared<CircleCollider>(_reset, _radius);
+	_circle = make_shared<CircleCollider>(Vector2D(), _radius);
 }
 
 Ball::~Ball()
@@ -13,6 +13,8 @@ Ball::~Ball()
 
 void Ball::Update()
 {
+	if (_isActive == false) return;
+
 	if (_shot)
 	{
 		_velocity.y += _gravity;
@@ -24,6 +26,8 @@ void Ball::Update()
 
 void Ball::Render(HDC hdc)
 {
+	if (_isActive == false) return;
+
 	_circle->Render(hdc);
 }
 

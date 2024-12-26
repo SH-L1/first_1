@@ -11,8 +11,9 @@ public:
 
 	void UpdateBody(Vector2D bodycentre) { _line->_start = bodycentre; }
 	void SetDir(Vector2D dir) { _dir = dir; }
-
+	Vector2D GetDir() { return _dir; }
 	Vector2D GetEndPoint() { return _line->_end; }
+	float GetBarrelLength() { return _length; }
 
 private:
 	shared_ptr<LineCollider> _line;
