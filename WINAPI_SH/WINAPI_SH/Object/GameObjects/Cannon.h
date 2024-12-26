@@ -1,10 +1,12 @@
 #pragma once
+#include "Barrel.h"
 
 // 상속 기반 클래스 : 디자인패턴
 class Cannon// : public shared_ptr<RectCollider>
 {
 public:
 	Cannon();
+	Cannon(int hp, int atk);
 	~Cannon();
 
 	void Update();
@@ -14,9 +16,9 @@ public:
 	void RotateBarrel();
 	void Shooting();
 
-	void SetPos(Vector2D  pos) { _body->centre = pos; }
-	void AddPos(Vector2D  vec) { _body->centre += vec; }
-	void SetBD() { _barrel->SetDir(Vector2D(-1, 0)); }
+	void SetPos(Vector2D pos) { _body->centre = pos; }
+	void AddPos(Vector2D vec) { _body->centre += vec; }
+	void SetBD(Vector2D dir) { _barrel->SetDir(dir); }
 
 private:
 	shared_ptr<RectCollider> _body; // 컴포넌트 패턴 ... 유니티
@@ -27,10 +29,15 @@ private:
 
 	float _timer = 3.0f;
 	float _delay = 3.0f;
+	float _holdTime = 0.0f;
 
 private:
 	shared_ptr<class Barrel> _barrel;
 
 	int _ballCount = 30;
 	vector<shared_ptr<class Ball>> _balls;
+
+private:
+	int _hp;
+	int _atk;
 };

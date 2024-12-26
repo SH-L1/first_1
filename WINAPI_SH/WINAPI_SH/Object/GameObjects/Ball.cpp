@@ -31,6 +31,10 @@ void Ball::Render(HDC hdc)
 	_circle->Render(hdc);
 }
 
+void Ball::HitTarget()
+{
+}
+
 bool Ball::BallEnd(float floor)
 {
 	if (_circle->centre.y >= floor)

@@ -5,10 +5,16 @@
 #include "Ball.h"
 
 Cannon::Cannon()
+	: _hp(0), _atk(0)
+{
+}
+
+Cannon::Cannon(int hp, int atk)
+	: _hp(hp), _atk(atk)
 {
 	_body = make_shared<RectCollider>(Vector2D(), Vector2D(120, 70));
 	_barrel = make_shared<Barrel>(150);
-	
+
 	// Object Pooling
 	for (int i = 0; i < _ballCount; i++)
 	{
@@ -91,23 +97,35 @@ void Cannon::Shooting()
 
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		auto it = find_if(_balls.begin(), _balls.end(), [](shared_ptr<Ball> ball)->bool
-			{
-				if (ball->IsActive() == false)
-					return true;
+		_holdTime += 0.03f;
+		
+		if (_holdTime > 2.0f)
+			_holdTime = 2.0f;
+	}
+	else
+	{
+		if (_holdTime > 0.0f)
+		{
+			auto it = find_if(_balls.begin(), _balls.end(), [](shared_ptr<Ball> ball)->bool
+				{
+					if (ball->IsActive() == false)
+						return true;
 
-				return false;
-			});
+					return false;
+				});
 
-		if (it == _balls.end()) return;
+			if (it == _balls.end()) return;
 
-		_timer = 0.0f;
-		auto _ball = (*it);
+			_timer = 0.0f;
+			auto _ball = (*it);
 
-		_ball->SetActive(true);
-		_ball->UpdateBody(_barrel->GetEndPoint());
-		_ball->SetDir(_barrel->GetDir());
-		_ball->SetVelocity(_ballspeed * _barrel->GetBarrelLength());
-		_ball->SetShot();
+			_ball->SetActive(true);
+			_ball->UpdateBody(_barrel->GetEndPoint());
+			_ball->SetDir(_barrel->GetDir());
+			_ball->SetVelocity(_ballspeed * _barrel->GetBarrelLength() * _holdTime);
+			_ball->SetShot();
+		}
+
+		_holdTime = 0.0f;
 	}
 }

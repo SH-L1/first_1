@@ -17,6 +17,8 @@ public:
 	void SetActive(bool value) { _isActive = value; }
 	bool IsActive() { return _isActive; }
 
+	void HitTarget();
+
 	bool BallEnd(float floor);
 
 private:
