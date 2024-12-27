@@ -14,7 +14,6 @@ public:
 private:
 	shared_ptr<Cannon> _cannon;
 	shared_ptr<Cannon> _rivalcannon;
-	
-private:
-	int _turn = 1;
-};
+
+	bool _turn = true;
+}; 

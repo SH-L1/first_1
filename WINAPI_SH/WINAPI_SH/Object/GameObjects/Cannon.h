@@ -1,5 +1,6 @@
 #pragma once
-#include "Barrel.h"
+
+class Ball;
 
 // 상속 기반 클래스 : 디자인패턴
 class Cannon// : public shared_ptr<RectCollider>
@@ -14,11 +15,19 @@ public:
 
 	void Move();
 	void RotateBarrel();
-	void Shooting();
+	void Shooting(bool& turn);
+
+	shared_ptr<Ball> FindActiveBall();
 
 	void SetPos(Vector2D pos) { _body->centre = pos; }
 	void AddPos(Vector2D vec) { _body->centre += vec; }
-	void SetBD(Vector2D dir) { _barrel->SetDir(dir); }
+
+	vector<shared_ptr<Ball>> GetBalls() { return _balls; }
+
+	bool IsCollision_Ball(shared_ptr<Ball> ball);
+	void TakeDamage(int amount);
+
+	bool isActive = true;
 
 private:
 	shared_ptr<RectCollider> _body; // 컴포넌트 패턴 ... 유니티

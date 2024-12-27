@@ -6,11 +6,17 @@
 
 CannonScene::CannonScene()
 {
-	_cannon = make_shared<Cannon>(100, 10);
-	_rivalcannon = make_shared<Cannon>(100, 10);
+	_cannon = make_shared<Cannon>(100, 20);
+	_rivalcannon = make_shared<Cannon>(100, 20);
+
 	_cannon->SetPos(Vector2D(300, 500));
 	_rivalcannon->SetPos(Vector2D(1600, 500));
-	_rivalcannon->SetBD(Vector2D(-1, 0));
+
+	_cannon->Update();
+	_rivalcannon->Update();
+
+	_cannon->Move();
+	_rivalcannon->Move();
 }
 
 CannonScene::~CannonScene()
@@ -19,14 +25,30 @@ CannonScene::~CannonScene()
 
 void CannonScene::Update()
 {
-	switch (_turn)
+	if (_turn)
 	{
-	case 1:
-		_cannon->Update();
-		break;
-	case 2:
-		_rivalcannon->Update();
-		break;
+		_cannon->Move();
+		_cannon->RotateBarrel();
+		_cannon->Shooting(_turn);
+	}
+	else
+	{
+		_rivalcannon->Move();
+		_rivalcannon->RotateBarrel();
+		_rivalcannon->Shooting(_turn);
+	}
+
+	_cannon->Update();
+	_rivalcannon->Update();
+
+	for (auto ball : _cannon->GetBalls())
+	{
+		_rivalcannon->IsCollision_Ball(ball);
+	}
+
+	for (auto ball : _rivalcannon->GetBalls())
+	{
+		_cannon->IsCollision_Ball(ball);
 	}
 }
 

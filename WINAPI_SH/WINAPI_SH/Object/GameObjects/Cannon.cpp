@@ -29,9 +29,7 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
-	Move();
-	RotateBarrel();
-	Shooting();
+	if (isActive == false) return;
 
 	_body->Update();
 	_barrel->Update();
@@ -46,12 +44,12 @@ void Cannon::Update()
 			_ball->SetActive(false);
 		}
 	}
-
-	_timer += 0.03f;
 }
 
 void Cannon::Render(HDC hdc)
 {
+	if (isActive == false) return;
+
 	_barrel->Render(hdc);
 	_body->Render(hdc);
 
@@ -91,8 +89,10 @@ void Cannon::RotateBarrel()
 	_barrel->SetDir(Vector2D(cosf(_angle), -sinf(_angle)));
 }
 
-void Cannon::Shooting()
+void Cannon::Shooting(bool& turn)
 {
+	_timer += 0.03f;
+
 	if (_timer < _delay) return;
 
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
@@ -106,26 +106,73 @@ void Cannon::Shooting()
 	{
 		if (_holdTime > 0.0f)
 		{
-			auto it = find_if(_balls.begin(), _balls.end(), [](shared_ptr<Ball> ball)->bool
-				{
-					if (ball->IsActive() == false)
-						return true;
+			auto it = FindActiveBall();
 
-					return false;
-				});
-
-			if (it == _balls.end()) return;
+			if (it == nullptr) return;
 
 			_timer = 0.0f;
-			auto _ball = (*it);
+			auto _ball = it;
 
 			_ball->SetActive(true);
 			_ball->UpdateBody(_barrel->GetEndPoint());
 			_ball->SetDir(_barrel->GetDir());
 			_ball->SetVelocity(_ballspeed * _barrel->GetBarrelLength() * _holdTime);
-			_ball->SetShot();
+			turn = !turn;
 		}
 
 		_holdTime = 0.0f;
+	}
+}
+
+shared_ptr<Ball> Cannon::FindActiveBall()
+{
+	auto it = find_if(_balls.begin(), _balls.end(), [](shared_ptr<Ball> ball)->bool
+		{
+			if (ball->IsActive() == false)
+				return true;
+
+			return false;
+		});
+
+	if (it == _balls.end())
+	{
+		for (auto& iter : _balls)
+		{
+			iter->SetActive(false);
+		}
+
+		return nullptr;
+	}
+
+	return *it;
+}
+
+bool Cannon::IsCollision_Ball(shared_ptr<Ball> ball)
+{
+	if (ball->IsActive() == false)
+		return false;
+
+	if (isActive == false)
+		return false;
+
+	if (_body->Collider::IsCollision(ball->GetCollider()))
+	{
+		TakeDamage(_atk);
+		ball->SetActive(false);
+
+		return true;
+	}
+
+	return false;
+}
+
+void Cannon::TakeDamage(int amount)
+{
+	_hp -= amount;
+
+	if (_hp <= 0)
+	{
+		isActive = false;
+		_hp = 0;
 	}
 }

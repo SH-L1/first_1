@@ -15,12 +15,23 @@ void Ball::Update()
 {
 	if (_isActive == false) return;
 
-	if (_shot)
+	Vector2D centre = _circle->centre;
+
+	if (centre.x > WIN_WIDTH || centre.x < 0)
 	{
-		_velocity.y += _gravity;
-		_circle->centre += _velocity;
+		_dir.x *= -1;
+		_velocity.x *= -1;
 	}
 
+	if (centre.y > WIN_HEIGHT || centre.y < 0)
+	{
+		_dir.y *= -1;
+		_velocity.y *= -1;
+	}
+
+	_velocity.y += _gravity;
+	_circle->centre += _velocity;
+	
 	_circle->Update();
 }
 
@@ -31,17 +42,10 @@ void Ball::Render(HDC hdc)
 	_circle->Render(hdc);
 }
 
-void Ball::HitTarget()
-{
-}
-
 bool Ball::BallEnd(float floor)
 {
 	if (_circle->centre.y >= floor)
-	{
-		_shot = false;
 		return true;
-	}
-
+	
 	return false;
 }

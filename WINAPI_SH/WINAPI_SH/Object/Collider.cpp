@@ -17,7 +17,7 @@ Collider::~Collider()
 
 bool Collider::IsCollision(shared_ptr<Collider> other)
 {
-	switch (_type)
+	switch (other->_type)
 	{
 	case Collider::NONE:
 		break;
