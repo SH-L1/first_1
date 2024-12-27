@@ -40,8 +40,8 @@ using Vector2D = Vector2<float>;
 #include "Object/LineCollider.h"
 
 #include "Scenes/Scene.h"
-#include "Scenes/CannonScene.h"
 
 #include "Program.h"
 
 extern Vector2D mousePos;
+extern HWND hWnd;
