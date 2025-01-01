@@ -14,4 +14,3 @@ public:
 private:
 	shared_ptr<RectCollider> _block;
 };
-

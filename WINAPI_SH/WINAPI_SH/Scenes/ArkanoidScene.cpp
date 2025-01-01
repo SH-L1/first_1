@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "ArkanoidScene.h"
 
-#include "Object/GameObjects/Arkanoid/Block.h"
 #include "Object/GameObjects/Arkanoid/Map.h"
 
 ArkanoidScene::ArkanoidScene()

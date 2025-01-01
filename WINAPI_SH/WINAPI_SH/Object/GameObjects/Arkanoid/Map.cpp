@@ -2,6 +2,7 @@
 #include "Map.h"
 
 #include "Object/GameObjects/Arkanoid/Block.h"
+#include "Object/GameObjects/Arkanoid/Energy.h"
 
 Map::Map()
 {
@@ -23,6 +24,8 @@ Map::Map()
 			_blocks.push_back(block);
 		}
 	}
+
+	_energy = make_shared<Energy>(3);
 }
 
 Map::~Map()
@@ -43,4 +46,8 @@ void Map::Render(HDC hdc)
 	{
 		block->Render(hdc);
 	}
+}
+
+void Map::Move()
+{
 }

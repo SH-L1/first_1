@@ -1,5 +1,6 @@
 #pragma once
 
+class Bar;
 class Block;
 class Map;
 
