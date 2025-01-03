@@ -22,18 +22,17 @@ void Bar::Render(HDC hdc)
 
 Vector2D Bar::GetCollisionPoint(shared_ptr<CircleCollider> energy)
 {
-	if (_bar->IsCollision(energy))
-	{
-		Vector2D closestPoint = _bar->GetClosestPoint(energy->centre) - energy->centre;
-		Vector2D unit = closestPoint.NormalVector();
+    if (_bar->IsCollision(energy))
+    {
+        Vector2D closestPoint = _bar->GetClosestPoint(energy->centre);
 
-		if (unit.x == 0 && unit.y == 0)
-		{
-			Vector2D collisionPoint = energy->centre + unit * energy->GetRadius();
-			
-			return collisionPoint;
-		}
-	}
+        Vector2D direction = closestPoint - energy->centre;
+        direction.Normalize();
+
+        Vector2D collisionPoint = energy->centre + direction * energy->GetRadius();
+
+        return collisionPoint;
+    }
 
 	return Vector2D();
 }

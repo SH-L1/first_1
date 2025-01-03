@@ -5,6 +5,11 @@
 #include "Object/GameObjects/Arkanoid/Block.h"
 #include "Object/GameObjects/Arkanoid/Energy.h"
 
+#include "Object/GameObjects/Arkanoid/Item/Additional.h"
+#include "Object/GameObjects/Arkanoid/Item/Catch.h"
+#include "Object/GameObjects/Arkanoid/Item/Enlarge.h"
+#include "Object/GameObjects/Arkanoid/Item/Slow.h"
+
 Map::Map()
 {
 	Vector2D blockHalf = { 50.0f, 20.0f };
@@ -26,7 +31,7 @@ Map::Map()
 		}
 	}
 
-	_energy = make_shared<Energy>(_radius);
+	_energy = make_shared<Energy>();
 	_bar = make_shared<Bar>();
 }
 
@@ -50,11 +55,11 @@ void Map::Update()
 
 	_bar->Update();
 
-	if (_energy->IsActive() == false)
-		_energy->StartPos(Vector2D(_bar->GetCollider()->centre.x,
-			_bar->GetCollider()->centre.y - (_bar->GetSize().y + _radius)));
-	else if(_energy->IsActive() == true)
+	if (_energy->IsActive() == true)
 		_energy->Update();
+	else if (_energy->IsActive() == false)
+ 		_energy->StartPos(Vector2D(_bar->GetCollider()->centre.x,
+			_bar->GetCollider()->centre.y - (_bar->GetSize().y + _energy->GetRadius())));
 }
 
 void Map::Render(HDC hdc)
@@ -108,13 +113,13 @@ void Map::Collision_Energy()
 {
 	if (_energy->IsActive() == false) return;
 
-	bool _isCollision = _energy->IsCollision_Bar(
+	bool _isCollisionWithBar = _energy->IsCollision_Bar(
 		static_pointer_cast<RectCollider>(_bar->GetCollider()));
 
-	if (_isCollision)
+	if (_isCollisionWithBar)
 	{
-		Vector2D newDir = _energy->GetDir();
-		newDir.y *= -1 * Reflect_Angle();
+		Vector2D newDir = Reflect_Angle();
+		
 		_energy->SetDir(newDir);
 		_energy->SetVelocity(_energySpeed);
 
@@ -123,35 +128,52 @@ void Map::Collision_Energy()
 
 	for (auto& block : _blocks)
 	{
-		bool _isCollision = _energy->IsCollision_Block(
-			static_pointer_cast<RectCollider>(block->GetCollider()));
-
-		if (block != nullptr && _isCollision)
+		if (block != nullptr)
 		{
-			Vector2D newDir = _energy->GetDir();
-			newDir.y *= -1;
-			_energy->SetDir(newDir);
-			_energy->SetVelocity(_energySpeed);
+			bool _isCollisionWithBlock = _energy->IsCollision_Block(
+				static_pointer_cast<RectCollider>(block->GetCollider()));
 
-			block = nullptr;
-			
-			return;
+			if (_isCollisionWithBlock)
+			{
+				Vector2D newDir = _energy->GetDir();
+				newDir.y *= -1;
+				_energy->SetDir(newDir);
+				_energy->SetVelocity(_energySpeed);
+
+				block = nullptr;
+
+				return;
+			}
 		}
 	}
 }
 
-float Map::Reflect_Angle()
+Vector2D Map::Reflect_Angle()
 {
-	Vector2D collisionPoint = _bar->GetCollisionPoint(
-		static_pointer_cast<CircleCollider>(_energy->GetCollider()));
+	Vector2D collisionPoint = _bar->GetCollisionPoint(static_pointer_cast<CircleCollider>(_energy->GetCollider()));
 
-	float reflectionPoint = static_cast<float>(abs(
-		_bar->GetCollider()->centre.x - collisionPoint.x));
+	float offset = collisionPoint.x - _bar->GetCollider()->centre.x;
+	float sectionWidth = _bar->GetSize().x / 2.5f;
 
-	if (reflectionPoint <= _bar->GetSize().x / 3)
-		return 1.0f;
-	else if (reflectionPoint <= (_bar->GetSize().x / 3) * 2)
-		return 1.5f;
+	float maxAngle = 50.0f;
+	float halfMaxAngle = maxAngle / 2.0f;
+	float angle = 0.0f;
+
+	if (offset < -2 * sectionWidth)
+		angle = -maxAngle;
+	else if (offset >= -2 * sectionWidth && offset < -sectionWidth)
+		angle = -halfMaxAngle;
+	else if (offset >= -sectionWidth && offset < sectionWidth)
+		angle = 0.0f;
+	else if (offset >= sectionWidth && offset < 2 * sectionWidth)
+		angle = halfMaxAngle;
 	else
-		return 2.0f;
-}	
+		angle = maxAngle;
+
+	float newAngle = angle * (3.14f / 180.0f);
+
+	Vector2D newDir(sin(newAngle), -cos(newAngle));
+	newDir.Normalize();
+
+	return newDir;
+}

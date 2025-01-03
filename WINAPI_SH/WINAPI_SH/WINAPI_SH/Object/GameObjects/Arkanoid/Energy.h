@@ -3,7 +3,7 @@
 class Energy
 {
 public:
-	Energy(float radius);
+	Energy();
 	~Energy();
 
 	void Update();
@@ -12,6 +12,7 @@ public:
 	void StartPos(Vector2D startpos) { _energy->centre = startpos; }
 	void SetDir(Vector2D dir) { dir.Normalize(); _dir = dir; }
 	void SetVelocity(float speed) { _velocity = _dir * speed; }
+	float GetRadius() { return _radius; }
 	Vector2D GetDir() { return _dir; }
 
 	void SetActive(bool value) { _isActive = value; }
@@ -30,5 +31,6 @@ private:
 	Vector2D _velocity = Vector2D(0, 0);
 
 private:
+	float _radius = 12.0f;
 	bool _isActive = false;
 };

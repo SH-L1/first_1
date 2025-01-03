@@ -4,7 +4,7 @@ class Block;
 class Bar;
 class Energy;
 
-class Map : public shared_ptr<RectCollider>
+class Map
 {
 public:
 	Map();
@@ -16,7 +16,7 @@ public:
 	
 	void EnergyShooting();
 	void Collision_Energy();
-	float Reflect_Angle();
+	Vector2D Reflect_Angle();
 
 	bool isActive = true;
 
@@ -28,9 +28,7 @@ private:
 private:
 	int _blockCount_x = 14;
 	int _blockCount_y = 6;
-
-	float _radius = 12.0f;
 	
-	float _barSpeed = 5.0f;
+	float _barSpeed = 8.0f;
 	float _energySpeed = 7.0f;
 };

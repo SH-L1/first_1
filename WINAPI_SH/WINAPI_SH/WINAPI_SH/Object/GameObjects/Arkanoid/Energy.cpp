@@ -1,9 +1,9 @@
 #include "framework.h"
 #include "Energy.h"
 
-Energy::Energy(float radius)
+Energy::Energy()
 {
-	_energy = make_shared<CircleCollider>(Vector2D(), radius);
+	_energy = make_shared<CircleCollider>(Vector2D(), _radius);
 }
 
 Energy::~Energy()
@@ -14,13 +14,13 @@ void Energy::Update()
 {
 	Vector2D centre = _energy->centre;
 
-	if (centre.x > WIN_WIDTH || centre.x < 0)
+	if (centre.x > (WIN_WIDTH - _radius) || centre.x < _radius)
 	{
 		_dir.x *= -1;
 		_velocity.x *= -1;
 	}
 
-	if (centre.y < 0)
+	if (centre.y < _radius)
 	{
 		_dir.y *= -1;
 		_velocity.y *= -1;
