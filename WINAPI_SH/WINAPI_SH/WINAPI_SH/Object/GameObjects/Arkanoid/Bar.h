@@ -11,9 +11,10 @@ public:
 
 	void AddPos(Vector2D vec) { _bar->centre += vec; }
 	void UpdateBar(Vector2D barcentre) { _bar->centre = barcentre; }
-	Vector2D GetSize() { return _halfsize; }
+	void ResizeBar(float addsize);
+	Vector2D GetSize() { return _halfsize; };
+
 	Vector2D GetCollisionPoint(shared_ptr<CircleCollider> energy);
-	
 	shared_ptr<Collider> GetCollider() { return _bar; }
 
 private:

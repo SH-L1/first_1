@@ -132,12 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Additional.h" />
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Catch.h" />
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Enlarge.h" />
+    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Item.h" />
     <ClInclude Include="Object\GameObjects\Arkanoid\Bar.h" />
     <ClInclude Include="Object\GameObjects\Arkanoid\Energy.h" />
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Slow.h" />
     <ClInclude Include="Object\GameObjects\Arkanoid\Map.h" />
     <ClInclude Include="Object\GameObjects\Arkanoid\Block.h" />
     <ClInclude Include="Scenes\ArkanoidScene.h" />
@@ -163,12 +160,9 @@
     <ClInclude Include="WINAPI_SH.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Additional.cpp" />
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Catch.cpp" />
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Enlarge.cpp" />
+    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Item.cpp" />
     <ClCompile Include="Object\GameObjects\Arkanoid\Bar.cpp" />
     <ClCompile Include="Object\GameObjects\Arkanoid\Energy.cpp" />
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Slow.cpp" />
     <ClCompile Include="Object\GameObjects\Arkanoid\Map.cpp" />
     <ClCompile Include="Object\GameObjects\Arkanoid\Block.cpp" />
     <ClCompile Include="Scenes\ArkanoidScene.cpp" />

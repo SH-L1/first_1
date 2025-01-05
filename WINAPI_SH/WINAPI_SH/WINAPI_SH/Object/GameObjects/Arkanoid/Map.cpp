@@ -5,10 +5,7 @@
 #include "Object/GameObjects/Arkanoid/Block.h"
 #include "Object/GameObjects/Arkanoid/Energy.h"
 
-#include "Object/GameObjects/Arkanoid/Item/Additional.h"
-#include "Object/GameObjects/Arkanoid/Item/Catch.h"
-#include "Object/GameObjects/Arkanoid/Item/Enlarge.h"
-#include "Object/GameObjects/Arkanoid/Item/Slow.h"
+#include "Object/GameObjects/Arkanoid/Item/Item.h"
 
 Map::Map()
 {
@@ -33,6 +30,9 @@ Map::Map()
 
 	_energy = make_shared<Energy>();
 	_bar = make_shared<Bar>();
+
+	_slowItem = make_shared<Item>(Item::Type::Slow);
+	_enlargeItem = make_shared<Item>(Item::Type::Enlarge);
 }
 
 Map::~Map()
@@ -57,7 +57,7 @@ void Map::Update()
 
 	if (_energy->IsActive() == true)
 		_energy->Update();
-	else if (_energy->IsActive() == false)
+	else if (_energy->IsActive() == false) 
  		_energy->StartPos(Vector2D(_bar->GetCollider()->centre.x,
 			_bar->GetCollider()->centre.y - (_bar->GetSize().y + _energy->GetRadius())));
 }
@@ -141,6 +141,7 @@ void Map::Collision_Energy()
 				_energy->SetVelocity(_energySpeed);
 
 				block = nullptr;
+				_blockNum -= 1;
 
 				return;
 			}
@@ -176,4 +177,37 @@ Vector2D Map::Reflect_Angle()
 	newDir.Normalize();
 
 	return newDir;
+}
+
+void Map::ConditionsOfItem(Item::Type type)
+{
+	int itemRequirement = (_blockCount_x * _blockCount_y) / 3;
+
+	if (_blockNum == itemRequirement * 2)
+	{
+		_slowItem->SetActive(true);
+		_slowItem->StartPos();
+		_slowItem->SetDir(Vector2D(0, 1));
+		_slowItem->SetVelocity(_itemSpeed);
+		
+		if (_slowItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+		{
+			float setting = _slowItem->ItemUtil();
+			_energy->SetVelocity(_energySpeed * setting);
+		}
+	}
+
+	if (_blockNum == itemRequirement)
+	{
+		_enlargeItem->SetActive(true);
+		_enlargeItem->StartPos();
+		_enlargeItem->SetDir(Vector2D(0, 1));
+		_enlargeItem->SetVelocity(_itemSpeed);
+
+		if (_enlargeItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+		{
+			float setting = _enlargeItem->ItemUtil();
+			_bar->ResizeBar(setting);
+		}
+	}
 }

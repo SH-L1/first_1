@@ -90,16 +90,7 @@
     <ClInclude Include="Object\GameObjects\Arkanoid\Bar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Enlarge.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Catch.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Slow.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Additional.h">
+    <ClInclude Include="Object\GameObjects\Arkanoid\Item\Item.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -170,16 +161,7 @@
     <ClCompile Include="Object\GameObjects\Arkanoid\Bar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Enlarge.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Catch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Slow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Additional.cpp">
+    <ClCompile Include="Object\GameObjects\Arkanoid\Item\Item.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -20,6 +20,13 @@ void Bar::Render(HDC hdc)
 	_bar->Render(hdc);
 }
 
+void Bar::ResizeBar(float addsize)
+{
+    _halfsize.x *= addsize;
+
+    _bar = make_shared<RectCollider>(_bar->centre, _halfsize * 2.0f);
+}
+
 Vector2D Bar::GetCollisionPoint(shared_ptr<CircleCollider> energy)
 {
     if (_bar->IsCollision(energy))
