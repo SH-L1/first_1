@@ -53,6 +53,17 @@ void Map::Update()
 		block->Update();
 	}
 
+	CheckItemConditions();
+	
+	if (_slowItem->IsActive() == true)
+		_slowItem->Update();
+
+	if (_enlargeItem->IsActive() == true)
+		_enlargeItem->Update();		
+	
+	ActivateEffects();
+	UpdateItemEffects();
+
 	_bar->Update();
 
 	if (_energy->IsActive() == true)
@@ -66,8 +77,6 @@ void Map::Render(HDC hdc)
 {
 	if (isActive == false) return;
 
-	if (_energy->DeadPoint()) return;
-
 	for (auto block : _blocks)
 	{
 		if (block == nullptr)
@@ -75,6 +84,12 @@ void Map::Render(HDC hdc)
 
 		block->Render(hdc);
 	}
+
+	if (_slowItem->IsActive() == true)
+		_slowItem->Render(hdc);
+
+	if (_enlargeItem->IsActive() == true)
+		_enlargeItem->Render(hdc);
 
 	_bar->Render(hdc);
 	_energy->Render(hdc);
@@ -179,35 +194,75 @@ Vector2D Map::Reflect_Angle()
 	return newDir;
 }
 
-void Map::ConditionsOfItem(Item::Type type)
+void Map::CheckItemConditions()
 {
 	int itemRequirement = (_blockCount_x * _blockCount_y) / 3;
 
 	if (_blockNum == itemRequirement * 2)
 	{
-		_slowItem->SetActive(true);
-		_slowItem->StartPos();
-		_slowItem->SetDir(Vector2D(0, 1));
-		_slowItem->SetVelocity(_itemSpeed);
-		
-		if (_slowItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+		if (!_slowItem->IsActive() && !_slowEffect.activation)
 		{
-			float setting = _slowItem->ItemUtil();
-			_energy->SetVelocity(_energySpeed * setting);
+			_slowItem->SetActive(true);
+			_slowItem->StartPos();
+			_slowItem->SetDir(Vector2D(0, 1));
+			_slowItem->SetVelocity(_itemSpeed);
 		}
 	}
 
 	if (_blockNum == itemRequirement)
 	{
-		_enlargeItem->SetActive(true);
-		_enlargeItem->StartPos();
-		_enlargeItem->SetDir(Vector2D(0, 1));
-		_enlargeItem->SetVelocity(_itemSpeed);
-
-		if (_enlargeItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+		if (!_enlargeItem->IsActive() && !_enlargeEffect.activation)
 		{
-			float setting = _enlargeItem->ItemUtil();
-			_bar->ResizeBar(setting);
+			_enlargeItem->SetActive(true);
+			_enlargeItem->StartPos();
+			_enlargeItem->SetDir(Vector2D(0, 1));
+			_enlargeItem->SetVelocity(_itemSpeed);
+		}
+	}
+}
+
+void Map::ActivateEffects()
+{
+	if (_slowItem->IsActive() && _slowItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+	{
+		_slowEffect.activation = true;
+		_slowItem->SetActive(false);
+		_slowEffect.time = 0.0f;
+		_slowEffect.durationTime = 5.0f;
+		_energy->SetVelocity(_energySpeed * 0.5f);
+	}
+
+	if (_enlargeItem->IsActive() && _enlargeItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+	{
+		_enlargeEffect.activation = true;
+		_enlargeItem->SetActive(false);
+		_enlargeEffect.time = 0.0f;
+		_enlargeEffect.durationTime = 10.0f;
+		_bar->ResizeBar(10.0f);
+	}
+}
+
+void Map::UpdateItemEffects()
+{
+	if (_slowEffect.activation)
+	{
+		_slowEffect.time += 0.016f;
+
+		if (_slowEffect.time >= 5.0f)
+		{
+			_slowEffect.activation = false;
+			_energy->SetVelocity(_energySpeed);
+		}
+	}
+
+	if (_enlargeEffect.activation)
+	{
+		_enlargeEffect.time += 0.016f;
+
+		if (_enlargeEffect.time >= 10.0f)
+		{
+			_enlargeEffect.activation = false;
+			_bar->ResizeBar(1.5f);
 		}
 	}
 }

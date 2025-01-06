@@ -20,9 +20,20 @@ public:
 	void Collision_Energy();
 	Vector2D Reflect_Angle();
 
-	void ConditionsOfItem(Item::Type type);
+	void CheckItemConditions();
+	void ActivateEffects();
+	void UpdateItemEffects();
+	
+private:
+	struct ItemEffect
+	{
+		bool activation = false;
+		float time = 0.0f;
+		float durationTime = 0.0f;
+	};
 
-	bool isActive = true;
+	ItemEffect _slowEffect;
+	ItemEffect _enlargeEffect;
 
 private:
 	vector<shared_ptr<Block>> _blocks;
@@ -33,8 +44,10 @@ private:
 	shared_ptr<Item> _slowItem;
 
 private:
-	int _blockCount_x = 14;
-	int _blockCount_y = 6;
+	bool isActive = true;
+
+	int _blockCount_x = 3;
+	int _blockCount_y = 1;
 	int _blockNum = _blockCount_x * _blockCount_y;
 
 	float _barSpeed = 8.0f;
