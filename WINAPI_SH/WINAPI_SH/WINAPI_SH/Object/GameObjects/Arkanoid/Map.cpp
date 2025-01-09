@@ -166,10 +166,7 @@ void Map::Collision_Energy()
 			static_pointer_cast<RectCollider>(_blocks[i]->GetCollider()));
 
 		if (_isCollisionWithBlock)
-		{
-			Vector2D collisionPoint = _blocks[i]->GetCollisionPoint(
-				static_pointer_cast<CircleCollider>(_energy->GetCollider()));
-			
+		{			
 			Vector2D blockPos = _blocks[i]->GetCollider()->centre;
 
 			if (i == _slowItemBlockIndex)
@@ -190,8 +187,10 @@ void Map::Collision_Energy()
 			shared_ptr<RectCollider> col = static_pointer_cast<RectCollider>(_blocks[i]->GetCollider());
 			Vector2D newDir = _energy->GetDir();
 
-			if (collisionPoint.y <= col->Bottom() || collisionPoint.y >= col->Top()) newDir.y *= -1;
-			if (collisionPoint.x <= col->Left() || collisionPoint.x >= col->Right()) newDir.x *= -1;
+			if (_energy->GetCollider()->centre.y > col->Bottom() || _energy->GetCollider()->centre.y < col->Top())
+				newDir.y *= -1.0f;
+			else if (_energy->GetCollider()->centre.x < col->Left() || _energy->GetCollider()->centre.x > col->Right())
+				newDir.x *= -1.0f;
 
 			_energy->SetDir(newDir);
 			_energy->SetVelocity(_energySpeed);
