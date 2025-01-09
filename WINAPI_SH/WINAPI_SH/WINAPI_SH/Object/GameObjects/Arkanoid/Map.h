@@ -16,6 +16,8 @@ public:
 	void Render(HDC hdc);
 	void Move();
 	
+	bool GameEnd();
+
 	void EnergyShooting();
 	void Collision_Energy();
 	Vector2D Reflect_Angle();
@@ -44,13 +46,13 @@ private:
 	shared_ptr<Item> _slowItem;
 
 private:
-	bool isActive = true;
-
-	int _blockCount_x = 3;
-	int _blockCount_y = 1;
-	int _blockNum = _blockCount_x * _blockCount_y;
+	int _blockCount_x = 16;
+	int _blockCount_y = 4;
 
 	float _barSpeed = 8.0f;
-	float _energySpeed = 7.0f;
-	float _itemSpeed = 8.0f;
+	float _energySpeed = 8.0f;
+	float _itemSpeed = 3.0f;
+
+	int _slowItemBlockIndex = -1;
+	int _enlargeItemBlockIndex = -1;
 };

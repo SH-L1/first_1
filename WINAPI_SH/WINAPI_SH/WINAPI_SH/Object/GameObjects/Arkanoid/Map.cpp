@@ -11,7 +11,7 @@ Map::Map()
 {
 	Vector2D blockHalf = { 50.0f, 20.0f };
 	Vector2D gap(blockHalf.x * 2 + 3, blockHalf.y * 2 + 1);
-	Vector2D offset = Vector2D(250, 50);
+	Vector2D offset = Vector2D(200, 50);
 
 	for (int y = 0; y < _blockCount_y; y++)
 	{
@@ -33,6 +33,16 @@ Map::Map()
 
 	_slowItem = make_shared<Item>(Item::Type::Slow);
 	_enlargeItem = make_shared<Item>(Item::Type::Enlarge);
+	
+	vector<int> indices(_blocks.size());
+	iota(indices.begin(), indices.end(), 0);
+	
+	random_device rd;
+	mt19937 gen(rd());
+	shuffle(indices.begin(), indices.end(), gen);
+
+	_slowItemBlockIndex = indices[0];
+	_enlargeItemBlockIndex = indices[1];
 }
 
 Map::~Map()
@@ -41,9 +51,7 @@ Map::~Map()
 
 void Map::Update()
 {
-	if (isActive == false) return;
-
-	if (_energy->DeadPoint()) return;
+	if (GameEnd()) return;
 
 	for (auto block : _blocks)
 	{
@@ -53,16 +61,14 @@ void Map::Update()
 		block->Update();
 	}
 
-	CheckItemConditions();
+	ActivateEffects();
+	UpdateItemEffects();
 	
 	if (_slowItem->IsActive() == true)
 		_slowItem->Update();
 
 	if (_enlargeItem->IsActive() == true)
 		_enlargeItem->Update();		
-	
-	ActivateEffects();
-	UpdateItemEffects();
 
 	_bar->Update();
 
@@ -75,7 +81,7 @@ void Map::Update()
 
 void Map::Render(HDC hdc)
 {
-	if (isActive == false) return;
+	if (GameEnd()) return;
 
 	for (auto block : _blocks)
 	{
@@ -97,6 +103,8 @@ void Map::Render(HDC hdc)
 
 void Map::Move()
 {
+	if (GameEnd()) return;
+
 	if (GetAsyncKeyState('A') & 0x8001)
 	{
 		Vector2D left = Vector2D(-1, 0);
@@ -110,6 +118,14 @@ void Map::Move()
 	}
 
 	_bar->UpdateBar(_bar->GetCollider()->centre);
+}
+
+bool Map::GameEnd()
+{
+	if (_energy->GetCollider()->centre.y > WIN_HEIGHT) return true;
+	for (auto& block : _blocks) if (block != nullptr) return false;
+
+	return true;
 }
 
 void Map::EnergyShooting()
@@ -141,47 +157,63 @@ void Map::Collision_Energy()
 		return;
 	}
 
-	for (auto& block : _blocks)
+	for (int i = 0; i < _blocks.size(); i++)
 	{
-		if (block != nullptr)
+		if (_blocks[i] == nullptr)
+			continue;
+
+		bool _isCollisionWithBlock = _energy->IsCollision_Block(
+			static_pointer_cast<RectCollider>(_blocks[i]->GetCollider()));
+
+		if (_isCollisionWithBlock)
 		{
-			bool _isCollisionWithBlock = _energy->IsCollision_Block(
-				static_pointer_cast<RectCollider>(block->GetCollider()));
+			Vector2D blockPos = _blocks[i]->GetCollider()->centre;
 
-			if (_isCollisionWithBlock)
+			if (i == _slowItemBlockIndex)
 			{
-				Vector2D newDir = _energy->GetDir();
-				newDir.y *= -1;
-				_energy->SetDir(newDir);
-				_energy->SetVelocity(_energySpeed);
-
-				block = nullptr;
-				_blockNum -= 1;
-
-				return;
+				_slowItem->SetActive(true);
+				_slowItem->SetPos(blockPos);
+				_slowItem->SetDir(Vector2D(0, 1));
+				_slowItem->SetVelocity(_itemSpeed);
 			}
+			else if (i == _enlargeItemBlockIndex)
+			{
+				_enlargeItem->SetActive(true);
+				_enlargeItem->SetPos(blockPos);
+				_enlargeItem->SetDir(Vector2D(0, 1));
+				_enlargeItem->SetVelocity(_itemSpeed);
+			}
+
+			Vector2D newDir = _energy->GetDir();
+			newDir.y *= -1;
+			_energy->SetDir(newDir);
+			_energy->SetVelocity(_energySpeed);
+
+			_blocks[i] = nullptr;
+			return;
 		}
 	}
 }
 
 Vector2D Map::Reflect_Angle()
 {
-	Vector2D collisionPoint = _bar->GetCollisionPoint(static_pointer_cast<CircleCollider>(_energy->GetCollider()));
+	Vector2D collisionPoint = _bar->GetCollisionPoint(
+		static_pointer_cast<CircleCollider>(_energy->GetCollider()));
 
 	float offset = collisionPoint.x - _bar->GetCollider()->centre.x;
-	float sectionWidth = _bar->GetSize().x / 2.5f;
+	float barWidth = _bar->GetSize().x;
 
 	float maxAngle = 50.0f;
 	float halfMaxAngle = maxAngle / 2.0f;
 	float angle = 0.0f;
 
-	if (offset < -2 * sectionWidth)
+	if (offset <= -0.6f * barWidth)
 		angle = -maxAngle;
-	else if (offset >= -2 * sectionWidth && offset < -sectionWidth)
+	else if (offset <= -0.15f * barWidth)
 		angle = -halfMaxAngle;
-	else if (offset >= -sectionWidth && offset < sectionWidth)
+	else if (offset < 0.15f * barWidth)
 		angle = 0.0f;
-	else if (offset >= sectionWidth && offset < 2 * sectionWidth)
+	else if (offset < 0.6f * barWidth)
 		angle = halfMaxAngle;
 	else
 		angle = maxAngle;
@@ -196,49 +228,42 @@ Vector2D Map::Reflect_Angle()
 
 void Map::CheckItemConditions()
 {
-	int itemRequirement = (_blockCount_x * _blockCount_y) / 3;
-
-	if (_blockNum == itemRequirement * 2)
+	if (!_slowItem->IsActive() && !_slowEffect.activation)
 	{
-		if (!_slowItem->IsActive() && !_slowEffect.activation)
-		{
-			_slowItem->SetActive(true);
-			_slowItem->StartPos();
-			_slowItem->SetDir(Vector2D(0, 1));
-			_slowItem->SetVelocity(_itemSpeed);
-		}
+		_slowItem->SetActive(true);
+		_slowItem->SetDir(Vector2D(0, 1));
+		_slowItem->SetVelocity(_itemSpeed);
 	}
-
-	if (_blockNum == itemRequirement)
+	
+	if (!_enlargeItem->IsActive() && !_enlargeEffect.activation)
 	{
-		if (!_enlargeItem->IsActive() && !_enlargeEffect.activation)
-		{
-			_enlargeItem->SetActive(true);
-			_enlargeItem->StartPos();
-			_enlargeItem->SetDir(Vector2D(0, 1));
-			_enlargeItem->SetVelocity(_itemSpeed);
-		}
+		_enlargeItem->SetActive(true);
+		_enlargeItem->SetDir(Vector2D(0, 1));
+		_enlargeItem->SetVelocity(_itemSpeed);
 	}
 }
 
 void Map::ActivateEffects()
 {
-	if (_slowItem->IsActive() && _slowItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+	if (_slowItem->IsActive() &&
+		_slowItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
 	{
 		_slowEffect.activation = true;
 		_slowItem->SetActive(false);
 		_slowEffect.time = 0.0f;
-		_slowEffect.durationTime = 5.0f;
-		_energy->SetVelocity(_energySpeed * 0.5f);
+		_slowEffect.durationTime = 30.0f;
+		_energySpeed *= 0.5f;
+		_energy->SetVelocity(_energySpeed);
 	}
 
-	if (_enlargeItem->IsActive() && _enlargeItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
+	if (_enlargeItem->IsActive() &&
+		_enlargeItem->IsCollision_Bar(static_pointer_cast<RectCollider>(_bar->GetCollider())))
 	{
 		_enlargeEffect.activation = true;
 		_enlargeItem->SetActive(false);
 		_enlargeEffect.time = 0.0f;
-		_enlargeEffect.durationTime = 10.0f;
-		_bar->ResizeBar(10.0f);
+		_enlargeEffect.durationTime = 30.0f;
+		_bar->ResizeBar(2.0f);
 	}
 }
 
@@ -248,9 +273,10 @@ void Map::UpdateItemEffects()
 	{
 		_slowEffect.time += 0.016f;
 
-		if (_slowEffect.time >= 5.0f)
+		if (_slowEffect.time >= _slowEffect.durationTime)
 		{
 			_slowEffect.activation = false;
+			_energySpeed *= 2.0f;
 			_energy->SetVelocity(_energySpeed);
 		}
 	}
@@ -259,10 +285,10 @@ void Map::UpdateItemEffects()
 	{
 		_enlargeEffect.time += 0.016f;
 
-		if (_enlargeEffect.time >= 10.0f)
+		if (_enlargeEffect.time >= _enlargeEffect.durationTime)
 		{
 			_enlargeEffect.activation = false;
-			_bar->ResizeBar(1.5f);
+			_bar->ResizeBar(0.5f);
 		}
 	}
 }

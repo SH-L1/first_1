@@ -20,6 +20,7 @@
 #include <unordered_map>
 #include <memory>
 #include <algorithm>
+#include <numeric>
 #include <cctype>
 #include <cmath>
 #include <random>

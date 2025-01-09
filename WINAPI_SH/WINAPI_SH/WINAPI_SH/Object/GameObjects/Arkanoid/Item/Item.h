@@ -14,7 +14,7 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	void StartPos();
+	void SetPos(Vector2D pos) { _item->centre = pos; }
 	void SetDir(Vector2D dir) { dir.Normalize(); _dir = dir; }
 	void SetVelocity(float speed) { _velocity = _dir * speed; }
 

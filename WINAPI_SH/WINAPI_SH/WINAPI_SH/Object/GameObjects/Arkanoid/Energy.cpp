@@ -36,14 +36,6 @@ void Energy::Render(HDC hdc)
 	_energy->Render(hdc);
 }
 
-bool Energy::DeadPoint()
-{
-	if (_energy->centre.y > WIN_HEIGHT)
-		return true;
-
-	return false;
-}
-
 bool Energy::IsCollision_Bar(shared_ptr<RectCollider> bar)
 {
 	if (_energy->IsCollision(bar))

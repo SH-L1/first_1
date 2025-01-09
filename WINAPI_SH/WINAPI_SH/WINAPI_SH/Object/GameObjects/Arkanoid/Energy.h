@@ -17,7 +17,6 @@ public:
 
 	void SetActive(bool value) { _isActive = value; }
 	bool IsActive() { return _isActive; }
-	bool DeadPoint();
 
 	bool IsCollision_Bar(shared_ptr<RectCollider> bar);
 	bool IsCollision_Block(shared_ptr<RectCollider> block);
