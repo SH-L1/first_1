@@ -1,21 +1,20 @@
 #pragma once
+
 class VertexBuffer
 {
 public:
-	VertexBuffer();
+	VertexBuffer(void* data, UINT stride, UINT count, UINT offset = 0);
 	~VertexBuffer();
 
 	void IASet(int slot);
 
 private:
-	void CreateVertices();
 	void CreateVertexBuffer();
 
-	Microsoft::WRL::ComPtr<ID3D11Buffer> vertexBuffer;
-
-	vector<Vertex_Texture> _vertices;
-
-	UINT stride;
-	UINT offset;
+	Microsoft::WRL::ComPtr<ID3D11Buffer> _vertexBuffer;
+	
+	void* _data;
+	UINT _count;
+	UINT _stride;
+	UINT _offset;
 };
-

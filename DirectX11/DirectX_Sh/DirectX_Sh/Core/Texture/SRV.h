@@ -1,4 +1,5 @@
 #pragma once
+
 class SRV
 {
 public:
@@ -14,4 +15,3 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 };
-

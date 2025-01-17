@@ -56,12 +56,14 @@ using namespace DirectX;
 #include "Core/Texture/SRV.h"
 #include "Core/Texture/SamplerState.h"
 
+// OBJECTS
+#include "Objects/Basic/Quad.h"
+
 // SCENE
 #include "Scene/Scene.h"
 
 // PROGRAM
 #include "Program/Program.h"
-
 
 // MACRO
 #define DEVICE	Device::Instance()->GetDevice()

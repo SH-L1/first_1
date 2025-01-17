@@ -3,14 +3,8 @@
 
 TutorialScene::TutorialScene()
 {
-    _vertexBuffer = make_shared<VertexBuffer>();
-    _vs = make_shared<VertexShader>(L"Shaders/TutorialShader.hlsl");
-    _ps = make_shared<PixelShader>(L"Shaders/TutorialShader.hlsl");
-
-    _srv = make_shared<SRV>(L"Resource/SIUUUU.jpg");
-    _samplerState = make_shared<SamplerState>();
-
-    // TEST : °æ¼·,Áö¹Î
+    _quad = make_shared<Quad>(L"Resource/SIUUUU.jpg");
+    _quad2 = make_shared<Quad>(L"Resource/CryingMessi.jpg");
 }
 
 TutorialScene::~TutorialScene()
@@ -19,19 +13,12 @@ TutorialScene::~TutorialScene()
 
 void TutorialScene::Update()
 {
+    _quad->Update();
+    _quad2->Update();
 }
 
 void TutorialScene::Render()
 {
-    _vs->IASetInputLayout();
-
-    _vertexBuffer->IASet(0);
-
-    _vs->VSSet();
-    _ps->PSSet();
-
-    _srv->PSSet_SRV(0);
-    _samplerState->PSSet_Sampler(0);
-
-    DC->Draw(6, 0);
+    _quad->Render();
+    _quad2->Render();
 }

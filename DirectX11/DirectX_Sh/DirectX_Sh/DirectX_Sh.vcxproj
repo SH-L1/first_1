@@ -150,6 +150,7 @@
     <ClInclude Include="DirectX_Sh.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Program\Program.h" />
+    <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
@@ -169,6 +170,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Program\Program.cpp" />
+    <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />
   </ItemGroup>
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX_Sh.ico" />
+    <Image Include="Resource\CryingMessi.png" />
     <Image Include="Resource\SIUUUU.jpg" />
     <Image Include="small.ico" />
   </ItemGroup>

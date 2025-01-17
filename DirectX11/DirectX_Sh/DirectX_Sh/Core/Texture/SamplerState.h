@@ -1,4 +1,5 @@
 #pragma once
+
 class SamplerState
 {
 public:
@@ -11,4 +12,3 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 };
-
