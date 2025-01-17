@@ -109,10 +109,14 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <EntryPointName>main</EntryPointName>
@@ -136,23 +140,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Device\Device.h" />
+    <ClInclude Include="Core\Render\PixelShader.h" />
+    <ClInclude Include="Core\Render\VertexBuffer.h" />
+    <ClInclude Include="Core\Render\VertexLayout.h" />
+    <ClInclude Include="Core\Render\VertexShader.h" />
+    <ClInclude Include="Core\Texture\SamplerState.h" />
+    <ClInclude Include="Core\Texture\SRV.h" />
     <ClInclude Include="DirectX_Sh.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Device\Device.cpp" />
+    <ClCompile Include="Core\Render\PixelShader.cpp" />
+    <ClCompile Include="Core\Render\VertexBuffer.cpp" />
+    <ClCompile Include="Core\Render\VertexLayout.cpp" />
+    <ClCompile Include="Core\Render\VertexShader.cpp" />
+    <ClCompile Include="Core\Texture\SamplerState.cpp" />
+    <ClCompile Include="Core\Texture\SRV.cpp" />
     <ClCompile Include="DirectX_Sh.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">framework.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Program\Program.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX_Sh.ico" />
+    <Image Include="Resource\SIUUUU.jpg" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
