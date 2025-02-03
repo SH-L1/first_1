@@ -1,14 +1,10 @@
 #include "framework.h"
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(void* data, UINT stride, UINT count, UINT offset = 0)
-    : _data(data), _stride(stride), _count(count)
+VertexBuffer::VertexBuffer(void* data, UINT stride, UINT count, UINT offset)
+    : _data(data), _stride(stride), _count(count), _offset(offset)
 {
     CreateVertexBuffer();
-}
-
-VertexBuffer::VertexBuffer(void* data, UINT stride, UINT count, UINT offset)
-{
 }
 
 VertexBuffer::~VertexBuffer()
@@ -29,7 +25,7 @@ void VertexBuffer::CreateVertexBuffer()
     bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
     D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = &_data;
+    initData.pSysMem = _data;
 
     DEVICE->CreateBuffer(&bd, &initData, _vertexBuffer.GetAddressOf());
 }

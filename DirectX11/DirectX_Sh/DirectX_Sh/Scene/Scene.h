@@ -1,4 +1,5 @@
 #pragma once
+
 class Scene
 {
 public:
@@ -8,4 +9,3 @@ public:
 	virtual void Update() abstract;
 	virtual void Render() abstract;
 };
-

@@ -46,15 +46,26 @@ using namespace DirectX;
 // CORE
 #include "Core/Device/Device.h"
 
+// MATH
+#include "Core/Math/Vector.h"
+#include "Core/Math/Transform.h"
+
 // RENDER
 #include "Core/Render/VertexLayout.h"
 #include "Core/Render/VertexBuffer.h"
+#include "Core/Render/IndexBuffer.h"
 #include "Core/Render/VertexShader.h"
 #include "Core/Render/PixelShader.h"
 
 // TEXTURE
 #include "Core/Texture/SRV.h"
 #include "Core/Texture/SamplerState.h"
+#include "Core/Texture/BlendState.h"
+#include "Core/Texture/StateManager.h"
+
+// BUFFER
+#include "Core/Buffers/ConstantBuffer.h"
+#include "Core/Buffers/BufferLayout.h"
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"
@@ -66,7 +77,7 @@ using namespace DirectX;
 #include "Program/Program.h"
 
 // MACRO
-#define DEVICE	Device::Instance()->GetDevice()
-#define DC		Device::Instance()->GetDC()
+#include "GMacro.h"
 
 extern HWND hWnd;
+extern Vector mousePos;

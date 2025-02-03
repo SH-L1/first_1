@@ -24,7 +24,7 @@ Device::Device()
     sd.BufferDesc.Width = width;
     sd.BufferDesc.Height = height;
     sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
+    sd.BufferDesc.RefreshRate.Numerator = 144;
     sd.BufferDesc.RefreshRate.Denominator = 1;
     // Numerator / Denominator = 화면 프레임 갱신 최고 속도
 

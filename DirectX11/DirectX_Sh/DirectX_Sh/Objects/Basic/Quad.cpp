@@ -5,6 +5,8 @@ Quad::Quad(wstring textureFile)
 {
     CreateMesh();
     CreateMaterial(textureFile);
+
+    _transform = make_shared<Transform>();
 }
 
 Quad::~Quad()
@@ -13,7 +15,7 @@ Quad::~Quad()
 
 void Quad::Update()
 {
-
+    _transform->Update();
 }
 
 void Quad::Render()
@@ -21,14 +23,16 @@ void Quad::Render()
     _vs->IASetInputLayout();
 
     _vertexBuffer->IASet(0);
+    _indexBuffer->IASetIndexBuffer();
 
     _vs->VSSet();
     _ps->PSSet();
+    _transform->SetVS(0);
 
     _srv->PSSet_SRV(0);
-    _samplerState->PSSet_Sampler(0);
+    SAMPLER->PSSet_Sampler(0);
 
-    DC->Draw(6, 0);
+    DC->DrawIndexed(_indices.size(), 0, 0);
 }
 
 void Quad::CreateMaterial(wstring textureFile)
@@ -37,21 +41,26 @@ void Quad::CreateMaterial(wstring textureFile)
     _ps = make_shared<PixelShader>(L"Shaders/TutorialShader.hlsl");
 
     _srv = make_shared<SRV>(textureFile);
-    _samplerState = make_shared<SamplerState>();
 }
 
 void Quad::CreateMesh()
 {
     _vertices =
     {
-        { XMFLOAT3(-0.5f, 0.5f, 0.0f), XMFLOAT2(0,0) },
-        { XMFLOAT3(0.5f, -0.5f, 0.0f), XMFLOAT2(1,1) },
-        { XMFLOAT3(-0.5f, -0.5f, 0.0f), XMFLOAT2(0,1) },
-
-        { XMFLOAT3(-0.5f, 0.5f, 0.0f), XMFLOAT2(0,0) },
-        { XMFLOAT3(0.5f, 0.5f, 0.0f), XMFLOAT2(1,0) },
-        { XMFLOAT3(0.5f, -0.5f, 0.0f), XMFLOAT2(1,1) },
+        { XMFLOAT3(-100, 100, 0.0f), XMFLOAT2(0,0) }, 
+        { XMFLOAT3(100, 100, 0.0f), XMFLOAT2(1,0) },
+        { XMFLOAT3(100, -100, 0.0f), XMFLOAT2(1,1) },
+        { XMFLOAT3(-100, -100, 0.0f), XMFLOAT2(0,1) },
     };
 
+    _indices.push_back(0);
+    _indices.push_back(1);
+    _indices.push_back(2);
+
+    _indices.push_back(0);
+    _indices.push_back(2);
+    _indices.push_back(3);
+
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
+    _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
 }

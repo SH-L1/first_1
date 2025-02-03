@@ -34,6 +34,15 @@
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Objects\Basic\Quad.h" />
+    <ClInclude Include="Core\Math\Vector.h" />
+    <ClInclude Include="Core\Math\Transform.h" />
+    <ClInclude Include="Core\Buffers\BufferLayout.h" />
+    <ClInclude Include="Core\Buffers\ConstantBuffer.h" />
+    <ClInclude Include="Core\Render\IndexBuffer.h" />
+    <ClInclude Include="GMacro.h" />
+    <ClInclude Include="Core\Texture\StateManager.h" />
+    <ClInclude Include="Core\Texture\BlendState.h" />
+    <ClInclude Include="Scene\SolarSystemScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -75,6 +84,24 @@
     <ClCompile Include="Objects\Basic\Quad.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Math\Transform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Buffers\ConstantBuffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Render\IndexBuffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Texture\StateManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Texture\BlendState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SolarSystemScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc">
@@ -92,6 +119,24 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\CryingMessi.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bow.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bullet.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\earth.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\monster.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\moon.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\sun.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

@@ -12,16 +12,19 @@ public:
 	void CreateMaterial(wstring textureFile);
 	void CreateMesh();
 
+	shared_ptr<Transform> GetTransform() { return _transform; }
+
 private:
-	// Mesh
 	vector<Vertex_Texture> _vertices;
+	vector<UINT> _indices;
+
 	shared_ptr<VertexBuffer> _vertexBuffer;
-	
-	// Material : Shader
+	shared_ptr<IndexBuffer> _indexBuffer;
+
 	shared_ptr<VertexShader> _vs;
 	shared_ptr<PixelShader> _ps;
 
-	// Material : Texture
 	shared_ptr<SRV> _srv;
-	shared_ptr<SamplerState> _samplerState;
+
+	shared_ptr<Transform> _transform;
 };
