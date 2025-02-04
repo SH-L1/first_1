@@ -140,6 +140,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Arrow\Bow.h" />
+    <ClInclude Include="Objects\Arrow\Bullet.h" />
+    <ClInclude Include="Objects\Arrow\Monster.h" />
+    <ClInclude Include="Objects\Arrow\Player.h" />
+    <ClInclude Include="Scene\ArrowScene.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
     <ClInclude Include="Core\Buffers\ConstantBuffer.h" />
     <ClInclude Include="Core\Buffers\BufferLayout.h" />
@@ -166,6 +171,11 @@
     <ClInclude Include="Core\Math\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Arrow\Bow.cpp" />
+    <ClCompile Include="Objects\Arrow\Bullet.cpp" />
+    <ClCompile Include="Objects\Arrow\Monster.cpp" />
+    <ClCompile Include="Objects\Arrow\Player.cpp" />
+    <ClCompile Include="Scene\ArrowScene.cpp" />
     <ClCompile Include="Core\Texture\BlendState.cpp" />
     <ClCompile Include="Core\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="Core\Device\Device.cpp" />
@@ -200,6 +210,7 @@
     <Image Include="Resource\earth.png" />
     <Image Include="Resource\monster.png" />
     <Image Include="Resource\moon.png" />
+    <Image Include="Resource\Player.png" />
     <Image Include="Resource\SIUUUU.jpg" />
     <Image Include="Resource\sun.png" />
     <Image Include="small.ico" />

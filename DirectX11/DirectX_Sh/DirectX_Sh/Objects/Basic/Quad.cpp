@@ -50,7 +50,7 @@ void Quad::CreateMesh()
         { XMFLOAT3(-100, 100, 0.0f), XMFLOAT2(0,0) }, 
         { XMFLOAT3(100, 100, 0.0f), XMFLOAT2(1,0) },
         { XMFLOAT3(100, -100, 0.0f), XMFLOAT2(1,1) },
-        { XMFLOAT3(-100, -100, 0.0f), XMFLOAT2(0,1) },
+        { XMFLOAT3(-100, -100, 0.0f), XMFLOAT2(0,1) }
     };
 
     _indices.push_back(0);

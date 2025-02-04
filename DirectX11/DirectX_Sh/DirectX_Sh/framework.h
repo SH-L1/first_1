@@ -69,6 +69,10 @@ using namespace DirectX;
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"
+#include "Objects/Arrow/Player.h"
+#include "Objects/Arrow/Monster.h"
+#include "Objects/Arrow/Bow.h"
+#include "Objects/Arrow/Bullet.h"
 
 // SCENE
 #include "Scene/Scene.h"

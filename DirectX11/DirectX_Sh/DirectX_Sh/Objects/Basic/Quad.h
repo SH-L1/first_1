@@ -6,15 +6,15 @@ public:
 	Quad(wstring textureFile);
 	~Quad();
 
-	void Update();
-	void Render();
+	virtual void Update();
+	virtual void Render();
 
 	void CreateMaterial(wstring textureFile);
-	void CreateMesh();
+	virtual void CreateMesh();
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 
-private:
+protected:
 	vector<Vertex_Texture> _vertices;
 	vector<UINT> _indices;
 

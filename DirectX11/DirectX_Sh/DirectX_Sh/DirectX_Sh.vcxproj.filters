@@ -43,6 +43,11 @@
     <ClInclude Include="Core\Texture\StateManager.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
     <ClInclude Include="Scene\SolarSystemScene.h" />
+    <ClInclude Include="Scene\ArrowScene.h" />
+    <ClInclude Include="Objects\Arrow\Monster.h" />
+    <ClInclude Include="Objects\Arrow\Player.h" />
+    <ClInclude Include="Objects\Arrow\Bullet.h" />
+    <ClInclude Include="Objects\Arrow\Bow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -102,6 +107,21 @@
     <ClCompile Include="Scene\SolarSystemScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\ArrowScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Arrow\Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Arrow\Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Arrow\Bullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Arrow\Bow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc">
@@ -137,6 +157,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\sun.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Player.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
