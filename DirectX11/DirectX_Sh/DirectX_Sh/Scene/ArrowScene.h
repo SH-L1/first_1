@@ -10,8 +10,8 @@ public:
 	void Render() override;
 
 private:
-	shared_ptr<Quad> _player;
-	shared_ptr<Quad> _bow;
+	shared_ptr<Player> _player;
+	shared_ptr<Bow> _bow;
 	shared_ptr<Quad> _bullet;
 	shared_ptr<Quad> _monster;
 

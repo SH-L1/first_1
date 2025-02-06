@@ -88,8 +88,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance;
 
+   RECT rc = { 0 ,0, WIN_WIDTH, WIN_HEIGHT };
+
+   AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
+
    hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+       0, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+
+   SetMenu(hWnd, nullptr);
 
    if (!hWnd)
    {
@@ -101,6 +107,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    return TRUE;
 }
+
+Vector mousePos;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -129,6 +137,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HDC hdc = BeginPaint(hWnd, &ps);
             EndPaint(hWnd, &ps);
         }
+        break;
+    case WM_MOUSEMOVE:
+    {
+        mousePos.x = static_cast<float>(LOWORD(lParam));
+        mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
+    }
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
