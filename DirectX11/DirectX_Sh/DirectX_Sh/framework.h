@@ -69,6 +69,7 @@ using namespace DirectX;
 
 // UTILITY
 #include "Core/Utility/InputManager.h"
+#include "Core/Utility/TimeManager.h"
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"

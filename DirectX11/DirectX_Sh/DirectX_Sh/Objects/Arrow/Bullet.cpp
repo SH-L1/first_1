@@ -16,16 +16,15 @@ void Bullet::Update()
     if (_isActive == false) return;
 
 	Quad::Update();
-    GetTransform()->AddPos(_bulletDir * _bulletSpeed);
+    GetTransform()->AddPos(_bulletDir * _bulletSpeed * TimeManager::Instance()->DeltaTime());
 
-    _time += 0.0001f;
+    _time += TimeManager::Instance()->DeltaTime();
 
     if (_time > _lifeTime)
     {
         _time = 0.0f;
         _isActive = false;
     }
-
 }
 
 void Bullet::Render()

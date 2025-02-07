@@ -11,6 +11,8 @@ public:
 
 	void CreateMesh() override;
 
+	void Move();
+
 private:
 	vector<Vertex_Texture> _vertices;
 };

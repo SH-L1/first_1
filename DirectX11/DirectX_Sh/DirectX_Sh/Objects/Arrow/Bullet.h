@@ -27,5 +27,5 @@ private:
 
 	bool _isActive = false;
 	Vector _bulletDir = Vector(0, 0);
-	float _bulletSpeed = 0.1f;
+	float _bulletSpeed = 300.0f;
 };
