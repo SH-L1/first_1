@@ -11,3 +11,7 @@
 #define BLEND StateManager::Instance()->GetBlend()
 #define ALPHA StateManager::Instance()->GetAlpha()
 #define ADDITIVE StateManager::Instance()->GetAdditive()
+
+#define KEY_DOWN(k) InputManager::Instance()->Down(k)
+#define KEY_UP(k) InputManager::Instance()->Up(k)
+#define KEY_PRESS(k) InputManager::Instance()->Press(k)

@@ -4,6 +4,7 @@
 Player::Player(wstring textureFile)
 	: Quad(textureFile)
 {
+    Init();
 }
 
 Player::~Player()

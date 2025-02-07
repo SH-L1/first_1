@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Utility\InputManager.h" />
     <ClInclude Include="Objects\Arrow\Bow.h" />
     <ClInclude Include="Objects\Arrow\Bullet.h" />
     <ClInclude Include="Objects\Arrow\Monster.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Core\Math\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Utility\InputManager.cpp" />
     <ClCompile Include="Objects\Arrow\Bow.cpp" />
     <ClCompile Include="Objects\Arrow\Bullet.cpp" />
     <ClCompile Include="Objects\Arrow\Monster.cpp" />

@@ -67,6 +67,9 @@ using namespace DirectX;
 #include "Core/Buffers/ConstantBuffer.h"
 #include "Core/Buffers/BufferLayout.h"
 
+// UTILITY
+#include "Core/Utility/InputManager.h"
+
 // OBJECTS
 #include "Objects/Basic/Quad.h"
 #include "Objects/Arrow/Player.h"

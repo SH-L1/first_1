@@ -3,7 +3,6 @@
 
 Quad::Quad(wstring textureFile)
 {
-    CreateMesh();
     CreateMaterial(textureFile);
 
     _transform = make_shared<Transform>();
@@ -33,6 +32,11 @@ void Quad::Render()
     SAMPLER->PSSet_Sampler(0);
 
     DC->DrawIndexed(_indices.size(), 0, 0);
+}
+
+void Quad::Init()
+{
+    CreateMesh();
 }
 
 void Quad::CreateMaterial(wstring textureFile)

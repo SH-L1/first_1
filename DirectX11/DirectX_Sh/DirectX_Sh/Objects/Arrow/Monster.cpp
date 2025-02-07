@@ -4,6 +4,7 @@
 Monster::Monster(wstring textureFile)
 	: Quad(textureFile)
 {
+    Init();
 }
 
 Monster::~Monster()

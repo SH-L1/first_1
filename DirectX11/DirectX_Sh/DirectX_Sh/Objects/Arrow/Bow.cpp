@@ -4,6 +4,7 @@
 Bow::Bow(wstring textFile)
 	: Quad(textFile)
 {
+    Init();
 }
 
 Bow::~Bow()

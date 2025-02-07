@@ -32,3 +32,14 @@ void Transform::SetVS(int slot)
 {
 	_world->SetVS(slot);
 }
+
+Vector Transform::GetWorldPos()
+{
+	Vector _result;
+
+	// За·Д
+	_result.x = _srtMatrix.r[3].m128_f32[0];
+	_result.y = _srtMatrix.r[3].m128_f32[1];
+
+	return _result;
+}

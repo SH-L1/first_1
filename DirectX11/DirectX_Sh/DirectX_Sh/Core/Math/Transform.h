@@ -15,7 +15,8 @@ public:
 	void SetScale(Vector scale) { _scale = scale; }
 	void SetAngle(float angle) { _angle = angle; }
 
-	Vector GetPos() { return _pos; }
+	Vector GetLocalPos() { return _pos; }
+	Vector GetWorldPos();
 	Vector GetScale() { return _scale; }
 	float GetAngle() { return _angle; }
 

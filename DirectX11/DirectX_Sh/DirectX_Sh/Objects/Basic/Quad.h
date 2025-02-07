@@ -9,6 +9,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void Init();
 	void CreateMaterial(wstring textureFile);
 	virtual void CreateMesh();
 

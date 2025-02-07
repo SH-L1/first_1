@@ -15,4 +15,5 @@ private:
 	shared_ptr<Quad> _moon;
 
 	shared_ptr<Transform> _sunTrans;
+	shared_ptr<Transform> _earthTrans;
 };

@@ -25,6 +25,8 @@ Program::~Program()
 
 void Program::Update()
 {
+    InputManager::Instance()->Update();
+
     _scene->Update();
 }
 

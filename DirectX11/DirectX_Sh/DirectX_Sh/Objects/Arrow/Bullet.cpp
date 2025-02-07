@@ -4,6 +4,7 @@
 Bullet::Bullet(wstring textureFile)
 	: Quad(textureFile)
 {
+    Init();
 }
 
 Bullet::~Bullet()
@@ -12,11 +13,25 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
+    if (_isActive == false) return;
+
 	Quad::Update();
+    GetTransform()->AddPos(_bulletDir * _bulletSpeed);
+
+    _time += 0.0001f;
+
+    if (_time > _lifeTime)
+    {
+        _time = 0.0f;
+        _isActive = false;
+    }
+
 }
 
 void Bullet::Render()
 {
+    if (_isActive == false) return;
+
 	Quad::Render();
 }
 
@@ -40,4 +55,19 @@ void Bullet::CreateMesh()
 
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
     _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
+}
+
+void Bullet::SetDir(Vector dir)
+{
+    _bulletDir = dir.NormalVector();
+}
+
+void Bullet::SetPos(Vector pos)
+{
+    GetTransform()->SetPos(pos);
+}
+
+void Bullet::SetAngle(float angle)
+{
+    GetTransform()->SetAngle(angle);
 }

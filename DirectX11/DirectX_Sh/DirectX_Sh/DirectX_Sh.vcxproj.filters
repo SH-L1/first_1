@@ -48,6 +48,7 @@
     <ClInclude Include="Objects\Arrow\Player.h" />
     <ClInclude Include="Objects\Arrow\Bullet.h" />
     <ClInclude Include="Objects\Arrow\Bow.h" />
+    <ClInclude Include="Core\Utility\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -120,6 +121,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Arrow\Bow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Utility\InputManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

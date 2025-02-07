@@ -107,4 +107,6 @@ public:
         x /= length;
         y /= length;
     }
+    
+    float Angle() { return atan2(y, x); }
 };
