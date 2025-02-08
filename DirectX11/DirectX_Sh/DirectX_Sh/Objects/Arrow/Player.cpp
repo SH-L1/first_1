@@ -13,6 +13,8 @@ Player::~Player()
 
 void Player::Update()
 {
+    Move();
+
     Quad::Update();
 }
 
@@ -45,5 +47,20 @@ void Player::CreateMesh()
 
 void Player::Move()
 {
-
+	Vector moveDir = Vector(0,0);
+	
+	if (KEY_PRESS('W'))
+		moveDir.y += 1.0f;
+	if (KEY_PRESS('S'))
+		moveDir.y -= 1.0f;
+	if (KEY_PRESS('A'))
+		moveDir.x -= 1.0f;
+	if (KEY_PRESS('D'))
+		moveDir.x += 1.0f;
+		
+	if (moveDir.Length() > 0.0f)
+	{
+		moveDir.Normalize();
+        GetTransform()->AddPos(moveDir * _playerSpeed * DELTA_TIME);
+	}
 }

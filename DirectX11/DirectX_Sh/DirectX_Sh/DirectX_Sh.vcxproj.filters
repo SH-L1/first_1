@@ -50,6 +50,9 @@
     <ClInclude Include="Objects\Arrow\Bow.h" />
     <ClInclude Include="Core\Utility\InputManager.h" />
     <ClInclude Include="Core\Utility\TimeManager.h" />
+    <ClInclude Include="Core\Collider\CircleCollider.h" />
+    <ClInclude Include="Core\Collider\Collider.h" />
+    <ClInclude Include="Core\Collider\RectCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -130,6 +133,15 @@
     <ClCompile Include="Core\Utility\TimeManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Collider\CircleCollider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Collider\Collider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Collider\RectCollider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc">
@@ -173,5 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\TutorialShader.hlsl" />
+    <FxCompile Include="Shaders\ColliderVertexShader.hlsl" />
+    <FxCompile Include="Shaders\ColliderPixelShader.hlsl" />
   </ItemGroup>
 </Project>

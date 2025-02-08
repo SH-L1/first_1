@@ -18,4 +18,6 @@ private:
 	vector<shared_ptr<Bullet>> _bullets;
 
 	shared_ptr<Transform> _muzzle;
+
+	shared_ptr<RectCollider> _rectCollider;
 };

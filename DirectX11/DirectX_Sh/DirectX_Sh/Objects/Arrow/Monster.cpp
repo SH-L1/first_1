@@ -42,3 +42,8 @@ void Monster::CreateMesh()
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
     _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
 }
+
+void Monster::Move()
+{
+    
+}

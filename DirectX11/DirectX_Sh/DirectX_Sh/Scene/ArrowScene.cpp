@@ -23,6 +23,8 @@ ArrowScene::ArrowScene()
 	
 	_muzzle->SetParent(_bow->GetTransform());
 	_muzzle->SetPos(Vector(100, 0));
+
+	_rectCollider = make_shared<RectCollider>(CENTRE, Vector(100, 100));
 }
 
 ArrowScene::~ArrowScene()
@@ -31,6 +33,8 @@ ArrowScene::~ArrowScene()
 
 void ArrowScene::Update()
 {
+	_rectCollider->Update();
+
 	_player->Update();
 	_bow->Update();
 	_muzzle->Update();
@@ -55,6 +59,8 @@ void ArrowScene::Render()
 	{
 		_bullets[i]->Render();
 	}
+
+	_rectCollider->Render(); // 가려지면 안되기 떄문에
 }
 
 void ArrowScene::Input()

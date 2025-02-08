@@ -15,4 +15,10 @@ public:
 
 private:
 	vector<Vertex_Texture> _vertices;
+
+private:
+	int _hp = 10;
+	int _atk = 1;
+
+	float _playerSpeed = 300.0f;
 };
