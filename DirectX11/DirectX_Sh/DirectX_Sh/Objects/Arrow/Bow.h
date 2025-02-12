@@ -10,7 +10,4 @@ public:
 	void Render() override;
 
 	void CreateMesh() override;
-
-private:
-	vector<Vertex_Texture> _vertices;
 };

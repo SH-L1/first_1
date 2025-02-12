@@ -1,18 +1,46 @@
 #include "framework.h"
 #include "Collider.h"
 
-Collider::Collider()
+Collider::Collider(Type type)
+	: _type(type)
 {
-	_pens.push_back(CreatePen(3, 3, GREEN));
-	_pens.push_back(CreatePen(3, 3, RED));
 }
 
 Collider::~Collider()
 {
-	for (auto& pen : _pens)
-	{
-		DeleteObject(pen);
-	}
+}
+
+void Collider::Update()
+{
+	_transform->Update();
+}
+
+void Collider::Render()
+{
+	_transform->SetVS(0);
+
+	_vertexBuffer->IASet(0);
+
+	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+	_vs->VSSet();
+	_ps->PSSet();
+
+	DC->Draw(_vertices.size(), 0);
+}
+
+void Collider::CreateMaterial()
+{
+	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
+
+	_vs = make_shared<VertexShader>(L"Shaders/ColliderVertexShader.hlsl");
+	_ps = make_shared<PixelShader>(L"Shaders/ColliderPixelShader.hlsl");
+
+	_transform = make_shared<Transform>();
+
+	_colorBuffer = make_shared<ColorBuffer>();
+
+	SetColor(WHITE);
 }
 
 bool Collider::IsCollision(shared_ptr<Collider> other)

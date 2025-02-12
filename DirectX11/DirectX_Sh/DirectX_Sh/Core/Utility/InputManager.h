@@ -41,10 +41,16 @@ public:
 	bool Up(UINT key) { return _stateMap[key] == UP; }
 	bool Press(UINT key) { return _stateMap[key] == PRESS; }
 
+	void SetMousePos(const Vector& pos) { mousePos = pos; }
+	const Vector& GetMousePos() { return mousePos; }
+	Vector GetScreenMousePos() { return mousePos - CENTRE; }
+
 private:
 	static InputManager* _instance;
 
 	byte _curState[KEY_MAX];
 	byte _oldState[KEY_MAX];
 	byte _stateMap[KEY_MAX];
+
+	Vector mousePos;
 };

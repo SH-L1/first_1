@@ -1,36 +1,66 @@
 #include "framework.h"
 #include "CircleCollider.h"
 
-CircleCollider::CircleCollider(Vector centre, float radius)
-	: _radius(radius)
+CircleCollider::CircleCollider(float radius)
+	: _radius(radius), Collider(Type::CIRCLE)
 {
-	this->centre = centre;
-	_type = Collider::CIRCLE;
+	CreateMesh();
+	Collider::CreateMaterial();
+}
+
+CircleCollider::~CircleCollider()
+{
 }
 
 void CircleCollider::Update()
 {
+	Collider::Update();
 }
 
-void CircleCollider::Render(HDC hdc)
+void CircleCollider::Render()
 {
-	SelectObject(hdc, _pens[_curColor]);
+	Collider::Render();
+}
 
-	int left = centre.x - _radius;
-	int right = centre.x + _radius;
-	int top = centre.y - _radius;
-	int bottom = centre.y + _radius;
-	Ellipse(hdc, left, top, right, bottom);
+void CircleCollider::CreateMesh()
+{
+	Vertex _tempVertices;
+
+	float theta = PI * (1.0f / 18.0f);
+
+	for (int i = 0; i < 37; i++)
+	{
+		_tempVertices.pos = XMFLOAT3(_radius * cos(i * theta), _radius * sin(i * theta), 0.0f);
+		_vertices.push_back(_tempVertices);
+	}
+
+	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
 }
 
 bool CircleCollider::IsCollision(const Vector& pos)
 {
-	return (pos - centre).Length() < _radius;
+	float distance = (_transform->GetWorldPos() - pos).Length();
+
+	if (distance > GetWorldRadius())
+		return false;
+	
+	return true;
 }
 
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 {
-	return (other->centre - centre).Length() < (_radius + other->_radius);
+	Vector _centre = _transform->GetWorldPos();
+	Vector _otherCentre = other->GetTransform()->GetWorldPos();
+
+	float distance = (_centre - _otherCentre).Length();
+
+	float _rad = this->GetWorldRadius();
+	float _otherRad = other->GetWorldRadius();
+
+	if (distance > _rad + _otherRad)
+		return false;
+
+	return true;
 }
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)

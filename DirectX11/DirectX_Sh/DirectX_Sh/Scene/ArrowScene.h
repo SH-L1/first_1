@@ -12,12 +12,10 @@ public:
 	void Input();
 
 private:
-	shared_ptr<Player> _player;
-	shared_ptr<Bow> _bow;
+	shared_ptr<class Player> _player;
+	shared_ptr<class Bow> _bow;
 	shared_ptr<Quad> _monster;
-	vector<shared_ptr<Bullet>> _bullets;
+	vector<shared_ptr<class Bullet>> _bullets;
 
 	shared_ptr<Transform> _muzzle;
-
-	shared_ptr<RectCollider> _rectCollider;
 };

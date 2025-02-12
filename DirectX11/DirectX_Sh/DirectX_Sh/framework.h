@@ -37,6 +37,9 @@
 using namespace std;
 using namespace DirectX;
 
+// MACRO
+#include "GMacro.h"
+
 // CORE
 #include "Core/Device/Device.h"
 
@@ -72,19 +75,12 @@ using namespace DirectX;
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"
-#include "Objects/Arrow/Player.h"
-#include "Objects/Arrow/Monster.h"
-#include "Objects/Arrow/Bow.h"
-#include "Objects/Arrow/Bullet.h"
 
 // SCENE
 #include "Scene/Scene.h"
 
 // PROGRAM
 #include "Program/Program.h"
-
-// MACRO
-#include "GMacro.h"
 
 extern HWND hWnd;
 extern Vector mousePos;

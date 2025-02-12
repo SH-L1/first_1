@@ -4,6 +4,7 @@
 #include "Scene/TutorialScene.h"
 #include "Scene/SolarSystemScene.h"
 #include "Scene/ArrowScene.h"
+#include "Scene/ColliderScene.h"
 
 Program::Program()
 {

@@ -46,19 +46,13 @@ public:
 
         return *this;
     }
-    Vector& operator==(const Vector& other)
+    bool operator==(const Vector& other) const
     {
-        x == other.x;
-        y == other.y;
-
-        return *this;
+        return (x == other.x && y == other.y);
     }
-    Vector& operator!=(const Vector& other)
+    bool operator!=(const Vector& other) const
     {
-        x != other.x;
-        y != other.y;
-
-        return *this;
+        return !(*this == other);
     }
     bool operator>(const Vector& other)
     {

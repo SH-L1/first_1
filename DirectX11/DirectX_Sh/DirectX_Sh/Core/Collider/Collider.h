@@ -2,13 +2,7 @@
 
 class Collider
 {
-public:
-	enum Color
-	{
-		C_GREEN = 0,
-		C_RED = 1
-	};
-
+protected:
 	enum Type
 	{
 		NONE,
@@ -16,14 +10,15 @@ public:
 		RECT
 	};
 
-	Collider();
+public:
+	Collider(Type type);
 	virtual ~Collider();
 
-	virtual void Update() = 0;
-	virtual void Render(HDC hdc) = 0;
+	virtual void Update();
+	virtual void Render();
 
-	void SetRed() { _curColor = Color::C_RED; }
-	void SetGreen() { _curColor = Color::C_GREEN; }
+	void CreateMaterial();
+	virtual void CreateMesh() = 0;
 
 	bool IsCollision(shared_ptr<Collider> other);
 
@@ -31,11 +26,27 @@ public:
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other) = 0;
 	virtual bool IsCollision(shared_ptr<class RectCollider> other) = 0;
 
-	Vector centre;
+	void SetColor(XMFLOAT4 color) { _colorBuffer->SetData(color); _colorBuffer->Update(); }
+	void SetRed() { _colorBuffer->SetData(RED); _colorBuffer->Update(); }
+	void SetGreen() { _colorBuffer->SetData(GREEN); _colorBuffer->Update(); }
+
+	void SetPos(Vector pos) { _transform->SetPos(pos); }
+	Vector GetLocalPos() { return _transform->GetLocalPos(); }
+	Vector GetWorldPos() { return _transform->GetWorldPos(); }
+
+	const shared_ptr<Transform> GetTransform() { return _transform; }
+	void SetParent(shared_ptr<Transform> transform) { _transform->SetParent(transform); }
 
 protected:
 	Type _type = NONE;
 
-	Color _curColor = Color::C_GREEN;
-	vector<HPEN> _pens;
+	vector<Vertex> _vertices;
+	shared_ptr<VertexBuffer> _vertexBuffer;
+
+	shared_ptr<VertexShader> _vs;
+	shared_ptr<PixelShader> _ps;
+
+	shared_ptr<Transform> _transform;
+	shared_ptr<ColorBuffer> _colorBuffer;
+
 };

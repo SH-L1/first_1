@@ -19,9 +19,6 @@ public:
 	bool GetActive() { return _isActive; }
 
 private:
-	vector<Vertex_Texture> _vertices;
-
-private:
 	float _lifeTime = 5.0f;
 	float _time = 0.0f;
 

@@ -7,6 +7,8 @@
 #define WIN_HEIGHT 720
 #define CENTRE Vector(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f)
 
+#define PI 3.141592
+
 #define SAMPLER StateManager::Instance()->GetSampler()
 #define BLEND StateManager::Instance()->GetBlend()
 #define ALPHA StateManager::Instance()->GetAlpha()
@@ -16,12 +18,16 @@
 #define KEY_UP(k) InputManager::Instance()->Up(k)
 #define KEY_PRESS(k) InputManager::Instance()->Press(k)
 
+#define MOUSE_POS InputManager::Instance()->GetMousePos()
+
 #define DELTA_TIME TimeManager::Instance()->DeltaTime()
 #define RUN_TIME TimeManager::Instance()->RunTime()
 
 #define LERP(start, end, ratio)  start + (end - start) * ratio
 
-#define BLACK		 RGB(0,0,0)
-#define WHITE		 RGB(255,255,255)
-#define RED			 RGB(255,0,0)
-#define GREEN		 RGB(0,255,0)
+#define RED	{1.0f,0.0f,0.0f,1.0f}
+#define GREEN {0.0f,1.0f,0.0f,1.0f}
+#define BLUE {0.0f,0.0f,1.0f,1.0f}
+#define WHITE {1.0f,1.0f,1.0f,1.0f}
+#define BLACK {0.0f,0.0f,0.0f,1.0f}
+#define GREY {0.5f,0.5f,0.5f,1.0f}
