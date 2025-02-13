@@ -9,6 +9,7 @@
 ArrowScene::ArrowScene()
 {
 	_player = make_shared<Player>(L"Resource/Player.png");
+	_monster = make_shared<Monster>(L"Resource/monster.png");
 	_bow = make_shared<Bow>(L"Resource/Bow.png");
 
 	for (int i = 0;i < 30;i++)
@@ -21,6 +22,9 @@ ArrowScene::ArrowScene()
 
 	_player->GetTransform()->SetPos(CENTRE);
 	_player->GetTransform()->SetScale(Vector(0.2f, 0.2f));
+
+	_monster->GetTransform()->SetPos(CENTRE * 0.1f);
+	_monster->GetTransform()->SetScale(Vector(0.25f, 0.3f));
 
 	_bow->GetTransform()->SetParent(_player->GetTransform());
 	_bow->GetTransform()->SetPos(Vector(100, -50));
@@ -37,6 +41,7 @@ ArrowScene::~ArrowScene()
 void ArrowScene::Update()
 {
 	_player->Update();
+	_monster->Update();
 	_bow->Update();
 	_muzzle->Update();
 
@@ -44,6 +49,8 @@ void ArrowScene::Update()
 	{
 		_bullets[i]->Update();
 	}
+
+	_monster->Move(_player);
 
 	Vector _dir = mousePos - _bow->GetTransform()->GetWorldPos();
 	_bow->GetTransform()->SetAngle(_dir.Angle());
@@ -54,6 +61,7 @@ void ArrowScene::Update()
 void ArrowScene::Render()
 {
 	_player->Render();
+	_monster->Render();
 	_bow->Render();
 
 	for (int i = 0; i < 30; i++)

@@ -40,8 +40,6 @@
 
 		_tempVertices.pos = XMFLOAT3(-_halfSize.x, _halfSize.y, 0.0f);
 		_vertices.push_back(_tempVertices);
-
-		_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
 	}
 
 	Vector RectCollider::GetScale()
@@ -76,9 +74,8 @@
 
 		if (pos.x >= _temp.left && pos.x <= _temp.right &&
 			pos.y >= _temp.bottom && pos.y <= _temp.top)
-		{
 			return true;
-		}
+		
 		return false;
 	}
 
@@ -96,29 +93,19 @@
 
 	bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
 	{
-		AABBRect _temp = GetAABBRect();
+		AABBRect rect = GetAABBRect();
+		Vector circlePos = other->GetTransform()->GetWorldPos();
+		float radius = other->GetWorldRadius();
 
-		Vector leftTop = Vector(_temp.left, _temp.top);
-		Vector leftBottom = Vector(_temp.left, _temp.bottom);
-		Vector rightTop = Vector(_temp.right, _temp.top);
-		Vector rightBottom = Vector(_temp.right, _temp.bottom);
+		Vector closestPoint;
 
-		if (other->IsCollision(leftTop) || other->IsCollision(leftBottom) ||
-			other->IsCollision(rightTop) || other->IsCollision(rightBottom))
-			return true;
+		closestPoint.x = max(rect.left, min(circlePos.x, rect.right));
+		closestPoint.y = max(rect.bottom, min(circlePos.y, rect.top));
 
-		if (_temp.right > other->GetTransform()->GetWorldPos().x && _temp.left < other->GetTransform()->GetWorldPos().x)
-		{
-			if (_temp.top + other->GetWorldRadius() > other->GetTransform()->GetWorldPos().y
-				&& _temp.bottom - other->GetWorldRadius() < other->GetTransform()->GetWorldPos().y)
-				return true;
-		}
-		if (_temp.bottom < other->GetTransform()->GetWorldPos().y && _temp.top > other->GetTransform()->GetWorldPos().y)
-		{
-			if (_temp.left - other->GetWorldRadius() < other->GetTransform()->GetWorldPos().x
-				&& _temp.right + other->GetWorldRadius() > other->GetTransform()->GetWorldPos().x)
-				return true;
-		}
+		float distance = (circlePos - closestPoint).Length();
 
-		return false;
+		if (distance > radius)
+			return false;
+
+		return true;
 	}

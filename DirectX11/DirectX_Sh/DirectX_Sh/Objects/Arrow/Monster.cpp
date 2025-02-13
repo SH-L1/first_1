@@ -43,7 +43,12 @@ void Monster::CreateMesh()
     _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
 }
 
-void Monster::Move()
+void Monster::Move(shared_ptr<Quad> _player)
 {
-    
+    Vector _playerPos = _player->GetTransform()->GetWorldPos();
+    Vector _monsterPos = GetTransform()->GetWorldPos();
+
+    Vector _dir = (_playerPos - _monsterPos).NormalVector();
+
+    GetTransform()->AddPos(_dir * _speed * DELTA_TIME);
 }

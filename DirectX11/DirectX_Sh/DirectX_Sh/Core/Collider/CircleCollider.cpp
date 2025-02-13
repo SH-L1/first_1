@@ -33,8 +33,6 @@ void CircleCollider::CreateMesh()
 		_tempVertices.pos = XMFLOAT3(_radius * cos(i * theta), _radius * sin(i * theta), 0.0f);
 		_vertices.push_back(_tempVertices);
 	}
-
-	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
 }
 
 bool CircleCollider::IsCollision(const Vector& pos)
