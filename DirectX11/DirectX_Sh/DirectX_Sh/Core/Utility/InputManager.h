@@ -42,7 +42,7 @@ public:
 	bool Press(UINT key) { return _stateMap[key] == PRESS; }
 
 	void SetMousePos(const Vector& pos) { mousePos = pos; }
-	const Vector& GetMousePos() { return mousePos; }
+	Vector GetMousePos() { return mousePos; }
 	Vector GetScreenMousePos() { return mousePos - CENTRE; }
 
 private:

@@ -3,7 +3,7 @@
 class RectCollider : public Collider
 {
 private:
-	struct AABBRect
+	struct AABB_DESC
 	{
 		float top = 0.0f;
 		float bottom = 0.0f;
@@ -11,10 +11,12 @@ private:
 		float right = 0.0f;
 	};
 
-	/*struct OBBRect
+	struct OBB_DESC
 	{
-
-	};*/
+		Vector pos;
+		Vector halfSize;
+		Vector direction[2];
+	};
 
 public:
 	RectCollider(Vector size);
@@ -25,14 +27,17 @@ public:
 
 	virtual void CreateMesh() override;
 
-	Vector GetScale();
+	Vector GetWorldScale();
 
-	AABBRect GetAABBRect();
-	// OBBRect GetOBBRect();
+	AABB_DESC GetAABBDesc();
+	OBB_DESC GetOBBDesc();
 
 	virtual bool IsCollision(const Vector& pos) override;
-	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
+	virtual bool IsCollision(shared_ptr<RectCollider> other) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
+
+	virtual bool IsCollision_OBB(shared_ptr<class CircleCollider> other) override;
+	virtual bool IsCollision_OBB(shared_ptr<RectCollider> other) override;
 
 private:
 	Vector _halfSize;

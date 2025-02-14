@@ -31,12 +31,11 @@ public:
 	ColorBuffer() : ConstantBuffer(&_data, sizeof(Data)) {}
 	~ColorBuffer() {}
 
-	void SetData(XMFLOAT4 value)
+	void SetData(XMFLOAT4 color)
 	{
-		_data.color = value;
+		_data.color = color;
 	}
 
 private:
 	Data _data;
-
 };

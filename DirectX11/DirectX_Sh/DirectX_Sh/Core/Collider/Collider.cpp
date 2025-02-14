@@ -4,6 +4,10 @@
 Collider::Collider(Type type)
 	: _type(type)
 {
+	_transform = make_shared<Transform>();
+
+	_colorBuffer = make_shared<ColorBuffer>();
+	SetColor(WHITE);
 }
 
 Collider::~Collider()
@@ -13,13 +17,16 @@ Collider::~Collider()
 void Collider::Update()
 {
 	_transform->Update();
+	_colorBuffer->Update();
 }
 
 void Collider::Render()
 {
-	_transform->SetVS(0);
-
+	_vs->IASetInputLayout();
 	_vertexBuffer->IASet(0);
+
+	_transform->SetVS(0);
+	_colorBuffer->SetPS(0);
 
 	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
@@ -31,16 +38,8 @@ void Collider::Render()
 
 void Collider::CreateMaterial()
 {
-	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
-
 	_vs = make_shared<VertexShader>(L"Shaders/ColliderVertexShader.hlsl");
 	_ps = make_shared<PixelShader>(L"Shaders/ColliderPixelShader.hlsl");
-
-	_transform = make_shared<Transform>();
-
-	_colorBuffer = make_shared<ColorBuffer>();
-
-	SetColor(WHITE);
 }
 
 bool Collider::IsCollision(shared_ptr<Collider> other)

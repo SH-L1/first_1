@@ -19,6 +19,8 @@ public:
 	bool GetActive() { return _isActive; }
 
 private:
+	shared_ptr<RectCollider> _collider;
+
 	float _lifeTime = 5.0f;
 	float _time = 0.0f;
 

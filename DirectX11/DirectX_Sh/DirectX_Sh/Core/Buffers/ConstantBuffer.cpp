@@ -2,17 +2,17 @@
 #include "ConstantBuffer.h"
 
 ConstantBuffer::ConstantBuffer(void* data, UINT dataSize)
-	: _data(data), _dataSize(dataSize)
+    : _data(data), _dataSize(dataSize)
 {
-	D3D11_BUFFER_DESC bd = {};
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = _dataSize;
-	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    D3D11_BUFFER_DESC bd = {};
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = dataSize;
+    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 
-	D3D11_SUBRESOURCE_DATA initData = {};
-	initData.pSysMem = _data;
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = _data;
 
-	DEVICE->CreateBuffer(&bd, &initData, _buffer.GetAddressOf());
+    DEVICE->CreateBuffer(&bd, &initData, _buffer.GetAddressOf());
 }
 
 ConstantBuffer::~ConstantBuffer()
@@ -21,15 +21,15 @@ ConstantBuffer::~ConstantBuffer()
 
 void ConstantBuffer::Update()
 {
-	DC->UpdateSubresource(_buffer.Get(), 0, nullptr, _data, 0, 0);
+    DC->UpdateSubresource(_buffer.Get(), 0, nullptr, _data, 0, 0);
 }
 
 void ConstantBuffer::SetVS(UINT slot)
 {
-	DC->VSSetConstantBuffers(slot, 1, _buffer.GetAddressOf());
+    DC->VSSetConstantBuffers(slot, 1, _buffer.GetAddressOf());
 }
 
 void ConstantBuffer::SetPS(UINT slot)
 {
-	DC->PSSetConstantBuffers(slot, 1, _buffer.GetAddressOf());
+    DC->PSSetConstantBuffers(slot, 1, _buffer.GetAddressOf());
 }

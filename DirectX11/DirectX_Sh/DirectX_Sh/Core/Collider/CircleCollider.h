@@ -12,11 +12,14 @@ public:
 	virtual void CreateMesh() override;
 
 	float GetRadius() { return _radius; }
-	float GetWorldRadius() { return _radius * _transform->GetScale().x; }
+	float GetWorldRadius() { return _radius * _transform->GetWorldScale().x; }
 
 	virtual bool IsCollision(const Vector& pos) override;
 	virtual bool IsCollision(shared_ptr<CircleCollider> other) override;
 	virtual bool IsCollision(shared_ptr<class RectCollider> other) override;
+
+	virtual bool IsCollision_OBB(shared_ptr<class RectCollider> other) override;
+	virtual bool IsCollision_OBB(shared_ptr<CircleCollider> other) override;
 
 private:
 	float _radius;

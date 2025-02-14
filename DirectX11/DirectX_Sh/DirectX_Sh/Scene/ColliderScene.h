@@ -10,8 +10,8 @@ public:
 	void Render() override;
 
 private:
-	shared_ptr<class RectCollider> _rect1;
-	shared_ptr<class RectCollider> _rect2;
-	shared_ptr<class CircleCollider> _circle1;
-	shared_ptr<class CircleCollider> _circle2;
+	shared_ptr<RectCollider> _rect1;
+	shared_ptr<RectCollider> _rect2;
+	shared_ptr<CircleCollider> _circle1;
+	shared_ptr<CircleCollider> _circle2;
 };

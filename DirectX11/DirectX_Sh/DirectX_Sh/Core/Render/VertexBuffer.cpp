@@ -18,7 +18,6 @@ void VertexBuffer::IASet(int slot)
 
 void VertexBuffer::CreateVertexBuffer()
 {
-  
     D3D11_BUFFER_DESC bd = {};
     bd.Usage = D3D11_USAGE_DEFAULT;
     bd.ByteWidth = _stride * _count;

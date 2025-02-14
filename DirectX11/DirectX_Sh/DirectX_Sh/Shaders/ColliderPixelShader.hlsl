@@ -1,7 +1,9 @@
-cbuffer ColorBuffer : register(b0)
+
+cbuffer Color : register(b0)
 {
     float4 color;
 }
+
 
 struct PixelInput
 {

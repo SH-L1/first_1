@@ -1,3 +1,4 @@
+
 cbuffer World : register(b0)
 {
     matrix world;
@@ -30,6 +31,6 @@ PixelInput VS(VertexInput input)
     result.pos = mul(result.pos, world);
     result.pos = mul(result.pos, view);
     result.pos = mul(result.pos, projection);
-        
+    
     return result;
 }

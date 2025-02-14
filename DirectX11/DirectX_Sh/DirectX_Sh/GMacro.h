@@ -1,13 +1,13 @@
 #pragma once
 
+#define PI 3.141592f
+
 #define DEVICE Device::Instance()->GetDevice()
 #define DC Device::Instance()->GetDC()
 
 #define WIN_WIDTH 1200
 #define WIN_HEIGHT 720
 #define CENTRE Vector(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f)
-
-#define PI 3.141592
 
 #define SAMPLER StateManager::Instance()->GetSampler()
 #define BLEND StateManager::Instance()->GetBlend()
@@ -17,8 +17,6 @@
 #define KEY_DOWN(k) InputManager::Instance()->Down(k)
 #define KEY_UP(k) InputManager::Instance()->Up(k)
 #define KEY_PRESS(k) InputManager::Instance()->Press(k)
-
-#define MOUSE_POS InputManager::Instance()->GetMousePos()
 
 #define DELTA_TIME TimeManager::Instance()->DeltaTime()
 #define RUN_TIME TimeManager::Instance()->RunTime()

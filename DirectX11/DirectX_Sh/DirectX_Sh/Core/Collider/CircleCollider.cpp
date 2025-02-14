@@ -24,15 +24,18 @@ void CircleCollider::Render()
 
 void CircleCollider::CreateMesh()
 {
+	int _vertexCount = 36;
 	Vertex _tempVertices;
 
-	float theta = PI * (1.0f / 18.0f);
+	float theta = 2 * PI / _vertexCount;
 
-	for (int i = 0; i < 37; i++)
+	for (int i = 0; i < _vertexCount + 1; i++)
 	{
-		_tempVertices.pos = XMFLOAT3(_radius * cos(i * theta), _radius * sin(i * theta), 0.0f);
+		_tempVertices.pos = XMFLOAT3(_radius * cosf(i * theta), _radius * sinf(i * theta), 0.0f);
 		_vertices.push_back(_tempVertices);
 	}
+
+	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex), _vertices.size(), 0);
 }
 
 bool CircleCollider::IsCollision(const Vector& pos)
@@ -43,6 +46,11 @@ bool CircleCollider::IsCollision(const Vector& pos)
 		return false;
 	
 	return true;
+}
+
+bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
+{
+	return other->IsCollision(shared_from_this());
 }
 
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
@@ -61,7 +69,12 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 	return true;
 }
 
-bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
+bool CircleCollider::IsCollision_OBB(shared_ptr<RectCollider> other)
 {
 	return other->IsCollision(shared_from_this());
+}
+
+bool CircleCollider::IsCollision_OBB(shared_ptr<CircleCollider> other)
+{
+	return IsCollision(other);
 }

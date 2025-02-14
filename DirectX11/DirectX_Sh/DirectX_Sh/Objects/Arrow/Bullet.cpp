@@ -5,6 +5,8 @@ Bullet::Bullet(wstring textureFile)
 	: Quad(textureFile)
 {
     Init();
+    _collider = make_shared<RectCollider>(GetTransform()->GetScale());
+    _collider->SetParent(GetTransform());
 }
 
 Bullet::~Bullet()
@@ -16,6 +18,8 @@ void Bullet::Update()
     if (_isActive == false) return;
 
 	Quad::Update();
+    _collider->Update();
+
     GetTransform()->AddPos(_bulletDir * _bulletSpeed * TimeManager::Instance()->DeltaTime());
 
     _time += TimeManager::Instance()->DeltaTime();
@@ -32,6 +36,7 @@ void Bullet::Render()
     if (_isActive == false) return;
 
 	Quad::Render();
+    _collider->Render();
 }
 
 void Bullet::CreateMesh()

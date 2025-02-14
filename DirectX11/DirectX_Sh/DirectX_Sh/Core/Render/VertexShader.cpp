@@ -3,9 +3,9 @@
 
 VertexShader::VertexShader(wstring file)
 {
-	CreateBlob(file);
-	CreateInputLayOut();
-	CreateVertexShader();
+    CreateBlob(file);
+    CreateInputLayOut();
+    CreateVertexShader();
 }
 
 VertexShader::~VertexShader()
@@ -24,8 +24,8 @@ void VertexShader::VSSet()
 
 void VertexShader::CreateBlob(wstring file)
 {
-	DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
-	D3DCompileFromFile(file.c_str(), nullptr, nullptr, "VS", "vs_5_0", flags, 0, vertexBlob.GetAddressOf(), nullptr);
+    DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
+    D3DCompileFromFile(file.c_str(), nullptr, nullptr, "VS", "vs_5_0", flags, 0, vertexBlob.GetAddressOf(), nullptr);
 }
 
 void VertexShader::CreateInputLayOut()
@@ -44,7 +44,7 @@ void VertexShader::CreateInputLayOut()
 
     UINT layoutSize = ARRAYSIZE(layout);
 
-	DEVICE->CreateInputLayout(layout, layoutSize, vertexBlob->GetBufferPointer(), vertexBlob->GetBufferSize(), inputLayOut.GetAddressOf());
+    DEVICE->CreateInputLayout(layout, layoutSize, vertexBlob->GetBufferPointer(), vertexBlob->GetBufferSize(), inputLayOut.GetAddressOf());
 }
 
 void VertexShader::CreateVertexShader()
