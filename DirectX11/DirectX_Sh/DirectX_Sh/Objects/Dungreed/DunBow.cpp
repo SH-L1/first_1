@@ -1,29 +1,35 @@
 #include "framework.h"
-#include "Player.h"
+#include "DunBow.h"
 
-Player::Player(wstring textureFile)
+DunBow::DunBow(wstring textureFile)
 	: Quad(textureFile)
 {
-    Init();
+	Init();
 }
 
-Player::~Player()
+DunBow::~DunBow()
 {
 }
 
-void Player::Update()
+void DunBow::PreUpdate()
 {
-    Move();
-
-    Quad::Update();
 }
 
-void Player::Render()
+void DunBow::Update()
 {
-    Quad::Render();
+	Quad::Update();
 }
 
-void Player::CreateMesh()
+void DunBow::Render()
+{
+	Quad::Render();
+}
+
+void DunBow::PostRender()
+{
+}
+
+void DunBow::CreateMesh()
 {
     Vector _halfSize = _srv->GetImageSize() * 0.5f;
 
@@ -45,24 +51,4 @@ void Player::CreateMesh()
 
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
     _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
-}
-
-void Player::Move()
-{
-	Vector moveDir = Vector(0,0);
-	
-	if (KEY_PRESS('W'))
-		moveDir.y += 1.0f;
-	if (KEY_PRESS('S'))
-		moveDir.y -= 1.0f;
-	if (KEY_PRESS('A'))
-		moveDir.x -= 1.0f;
-	if (KEY_PRESS('D'))
-		moveDir.x += 1.0f;
-		
-	if (moveDir.Length() > 0.0f)
-	{
-		moveDir.Normalize();
-        GetTransform()->AddPos(moveDir * _playerSpeed * DELTA_TIME);
-	}
 }

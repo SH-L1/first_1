@@ -143,13 +143,12 @@
     <ClInclude Include="Core\Collider\CircleCollider.h" />
     <ClInclude Include="Core\Collider\Collider.h" />
     <ClInclude Include="Core\Collider\RectCollider.h" />
-    <ClInclude Include="Scene\ArrowScene.h" />
-    <ClInclude Include="Scene\ColliderScene.h" />
+    <ClInclude Include="Objects\Dungreed\DunBow.h" />
+    <ClInclude Include="Objects\Dungreed\DunBullet.h" />
+    <ClInclude Include="Objects\Dungreed\DunMonster.h" />
+    <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
+    <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Core\Utility\InputManager.h" />
-    <ClInclude Include="Objects\Arrow\Bow.h" />
-    <ClInclude Include="Objects\Arrow\Bullet.h" />
-    <ClInclude Include="Objects\Arrow\Monster.h" />
-    <ClInclude Include="Objects\Arrow\Player.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
     <ClInclude Include="Core\Buffers\ConstantBuffer.h" />
     <ClInclude Include="Core\Buffers\BufferLayout.h" />
@@ -169,9 +168,7 @@
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
-    <ClInclude Include="Scene\SolarSystemScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Math\Transform.h" />
     <ClInclude Include="Core\Utility\TimeManager.h" />
@@ -180,13 +177,12 @@
     <ClCompile Include="Core\Collider\CircleCollider.cpp" />
     <ClCompile Include="Core\Collider\Collider.cpp" />
     <ClCompile Include="Core\Collider\RectCollider.cpp" />
-    <ClCompile Include="Scene\ArrowScene.cpp" />
-    <ClCompile Include="Scene\ColliderScene.cpp" />
+    <ClCompile Include="Objects\Dungreed\DunBow.cpp" />
+    <ClCompile Include="Objects\Dungreed\DunBullet.cpp" />
+    <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
+    <ClCompile Include="Objects\Dungreed\DunPlayer.cpp" />
+    <ClCompile Include="Scene\DungreedScene.cpp" />
     <ClCompile Include="Core\Utility\InputManager.cpp" />
-    <ClCompile Include="Objects\Arrow\Bow.cpp" />
-    <ClCompile Include="Objects\Arrow\Bullet.cpp" />
-    <ClCompile Include="Objects\Arrow\Monster.cpp" />
-    <ClCompile Include="Objects\Arrow\Player.cpp" />
     <ClCompile Include="Core\Texture\BlendState.cpp" />
     <ClCompile Include="Core\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="Core\Device\Device.cpp" />
@@ -205,10 +201,8 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
-    <ClCompile Include="Scene\TutorialScene.cpp" />
     <ClCompile Include="Core\Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
-    <ClCompile Include="Scene\SolarSystemScene.cpp" />
     <ClCompile Include="Core\Utility\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,12 +212,8 @@
     <Image Include="DirectX_Sh.ico" />
     <Image Include="Resource\Bow.png" />
     <Image Include="Resource\Bullet.png" />
-    <Image Include="Resource\CryingMessi.png" />
-    <Image Include="Resource\earth.png" />
     <Image Include="Resource\monster.png" />
-    <Image Include="Resource\moon.png" />
     <Image Include="Resource\Player.png" />
-    <Image Include="Resource\SIUUUU.jpg" />
     <Image Include="Resource\sun.png" />
     <Image Include="small.ico" />
   </ItemGroup>

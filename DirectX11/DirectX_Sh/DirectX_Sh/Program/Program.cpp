@@ -5,10 +5,11 @@
 #include "Scene/SolarSystemScene.h"
 #include "Scene/ArrowScene.h"
 #include "Scene/ColliderScene.h"
+#include "Scene/DungreedScene.h"
 
 Program::Program()
 {
-    _scene = make_shared<ColliderScene>();
+    _scene = make_shared<DungreedScene>();
 
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();
@@ -29,6 +30,7 @@ void Program::Update()
     InputManager::Instance()->Update();
     TimeManager::Instance()->Update();
 
+    _scene->PreUpdate();
     _scene->Update();
 }
 
@@ -50,6 +52,7 @@ void Program::Render()
     _projection->SetVS(2);
 
     _scene->Render();
+    _scene->PostRender();
 
     Device::Instance()->GetSwapChain()->Present(0, 0);
 }

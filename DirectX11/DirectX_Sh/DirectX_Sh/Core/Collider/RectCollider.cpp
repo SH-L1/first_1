@@ -44,10 +44,10 @@ RectCollider::AABB_DESC RectCollider::GetAABBDesc()
 {
 	AABB_DESC _temp;
 
-	_temp.top = _transform->GetWorldPos().y + _transform->GetWorldScale().y * 0.5f;
-	_temp.bottom = _transform->GetWorldPos().y - _transform->GetWorldScale().y * 0.5f;
-	_temp.left = _transform->GetWorldPos().x - _transform->GetWorldScale().x * 0.5f;
-	_temp.right = _transform->GetWorldPos().x + _transform->GetWorldScale().x * 0.5f;
+	_temp.top = _transform->GetWorldPos().y + _transform->GetWorldScale().y * _halfSize.y;
+	_temp.bottom = _transform->GetWorldPos().y - _transform->GetWorldScale().y * _halfSize.y;
+	_temp.left = _transform->GetWorldPos().x - _transform->GetWorldScale().x * _halfSize.x;
+	_temp.right = _transform->GetWorldPos().x + _transform->GetWorldScale().x * _halfSize.x;
 
 	return _temp;
 }
@@ -75,40 +75,63 @@ RectCollider::OBB_DESC RectCollider::GetOBBDesc()
 
 bool RectCollider::IsCollision(const Vector& pos)
 {
-	AABB_DESC _temp = GetAABBDesc();
+	OBB_DESC _temp = GetOBBDesc();
 
-	if (pos.x >= _temp.left && pos.x <= _temp.right &&
-		pos.y >= _temp.bottom && pos.y <= _temp.top)
-		return true;
+	Vector distance = _temp.pos - pos;
+	Vector _axisX = _temp.direction[0];
+	Vector _axisY = _temp.direction[1];
+	float lengthX = abs(_axisX.DotProduct(distance));
+	float lengthY = abs(_axisY.DotProduct(distance));
+
+	if (lengthX > _temp.halfSize.x || lengthY > _temp.halfSize.y)
+		return false;
 	
-	return false;
+	return true;
 }
 
-bool RectCollider::IsCollision(shared_ptr<RectCollider> other)
+bool RectCollider::IsCollision(shared_ptr<RectCollider> other, bool isObb)
 {
-	Vector _centre = _transform->GetWorldPos();
-	Vector _otherCentre = other->GetTransform()->GetWorldPos();
-	Vector distance = (this->GetWorldScale() + other->GetWorldScale()) * 0.5f;
+	if (isObb)
+		return IsCollision_OBB(other);
 
-	if (distance.x < abs(_centre.x - _otherCentre.x)) return false;
-	else if (distance.y < abs(_centre.y - _otherCentre.y)) return false;
+	return IsCollision_AABB(other);
+}
+
+bool RectCollider::IsCollision(shared_ptr<CircleCollider> other, bool isObb)
+{
+	if (isObb)
+		return IsCollision_OBB(other);
+
+	return IsCollision_AABB(other);
+}
+
+bool RectCollider::IsCollision_AABB(shared_ptr<RectCollider> other)
+{
+	Vector _centre = GetWorldPos();
+	Vector _otherCentre = other->GetWorldPos();
+	Vector distance = (GetWorldScale() + other->GetWorldScale()) * 0.5f;
+
+	if (distance.x < abs(_centre.x - _otherCentre.x) ||
+		distance.y < abs(_centre.y - _otherCentre.y))
+		return false;
 
 	return true;
 }
 
-bool RectCollider::IsCollision(shared_ptr<CircleCollider> other)
+bool RectCollider::IsCollision_AABB(shared_ptr<CircleCollider> other)
 {
-	AABB_DESC rect = GetAABBDesc();
-	Vector circlePos = other->GetTransform()->GetWorldPos();
-	float radius = other->GetWorldRadius();
+	AABB_DESC _temp = GetAABBDesc();
+	
+	Vector _circlePos = other->GetWorldPos();
+	float _radius = other->GetWorldRadius();
 
-	Vector closestPoint;
-	closestPoint.x = max(rect.left, min(circlePos.x, rect.right));
-	closestPoint.y = max(rect.bottom, min(circlePos.y, rect.top));
+	float closestX = max(_temp.left, min(_temp.right, _circlePos.x));
+	float closestY = max(_temp.bottom, min(_temp.top, _circlePos.y));
+	Vector closePoint = Vector(closestX, closestY);
 
-	float distance = (circlePos - closestPoint).Length();
+	float distance = (_circlePos - closePoint).Length();
 
-	if (distance > radius)
+	if (distance > _radius)
 		return false;
 
 	return true;
@@ -121,21 +144,43 @@ bool RectCollider::IsCollision_OBB(shared_ptr<RectCollider> other)
 
 	Vector _dis = _temp.pos - _tempRect.pos;
 
-	Vector _axisX = _temp.direction[0];
-	Vector _axisY = _temp.direction[1];
-	Vector _edgea1 = _temp.direction[0] * _temp.halfSize.x;
-	Vector _edgea2 = _temp.direction[1] * _temp.halfSize.y;
+	Vector _axisX1 = _temp.direction[0];
+	Vector _axisY1 = _temp.direction[1];
+	Vector _lineX1 = _axisX1 * _temp.halfSize.x;
+	Vector _lineY1 = _axisY1 * _temp.halfSize.y;
 
-	Vector _edgeb1 = _tempRect.direction[0] * _tempRect.halfSize.x;
-	Vector _edgeb2 = _tempRect.direction[1] * _tempRect.halfSize.y;
+	Vector _axisX2 = _tempRect.direction[0];
+	Vector _axisY2 = _tempRect.direction[1];
+	Vector _lineX2 = _axisX2 * _tempRect.halfSize.x;
+	Vector _lineY2 = _axisY2 * _tempRect.halfSize.y;
 
-	float _standX = abs(_axisX.DotProduct(_dis));
-	float _standY = abs(_axisY.DotProduct(_dis));
-	float lengthX = abs(_axisX.DotProduct(_edgea1)) + abs(_axisX.DotProduct(_edgeb1));
-	float lengthY = abs(_axisY.DotProduct(_edgea2)) + abs(_axisY.DotProduct(_edgeb2));
+	float length = abs(_axisX1.DotProduct(_dis));
+	float lengthA = _lineX1.Length();
+	float lengthB = abs(_axisX1.DotProduct(_lineX2)) + abs(_axisX1.DotProduct(_lineY2));
 
-	if (_standX > lengthX) return false;
-	if (_standY > lengthY) return false;
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(_axisY1.DotProduct(_dis));
+	lengthA = _lineY1.Length();
+	lengthB = abs(_axisY1.DotProduct(_lineY2)) + abs(_axisY1.DotProduct(_lineX2));
+
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(_axisX2.DotProduct(_dis));
+	lengthA = _lineX2.Length();
+	lengthB = abs(_axisX2.DotProduct(_lineX1)) + abs(_axisX2.DotProduct(_lineY1));
+
+	if (length > lengthA + lengthB)
+		return false;
+
+	length = abs(_axisY2.DotProduct(_dis));
+	lengthA = _lineY2.Length();
+	lengthB = abs(_axisY2.DotProduct(_lineY1)) + abs(_axisY2.DotProduct(_lineX1));
+
+	if (length > lengthA + lengthB)
+		return false;
 
 	return true;
 }
@@ -144,20 +189,22 @@ bool RectCollider::IsCollision_OBB(shared_ptr<CircleCollider> other)
 {
 	OBB_DESC _temp = GetOBBDesc();
 
-	Vector _dis = _temp.pos - other->GetWorldPos();
+	Vector _dis = other->GetWorldPos() - _temp.pos;
+	float _radius = other->GetWorldRadius();
+
+	float longest = _temp.halfSize.Length();
+	if (_dis.Length() > longest + _radius)
+		return false;
 
 	Vector _axisX = _temp.direction[0];
+	float lengthA = abs(_axisX.DotProduct(_dis));
+	if (lengthA > _temp.halfSize.x + _radius)
+		return false;
+
 	Vector _axisY = _temp.direction[1];
-	Vector _edgea1 = _temp.direction[0] * _temp.halfSize.x;
-	Vector _edgea2 = _temp.direction[1] * _temp.halfSize.y;
-
-	float _standX = abs(_axisX.DotProduct(_dis));
-	float _standY = abs(_axisY.DotProduct(_dis));
-	float lengthX = abs(_axisX.DotProduct(_edgea1)) + other->GetWorldRadius();
-	float lengthY = abs(_axisY.DotProduct(_edgea2)) + other->GetWorldRadius();
-
-	if (_standX > lengthX) return false;
-	if (_standY > lengthY) return false;
+	float lengthB = abs(_axisY.DotProduct(_dis));
+	if (lengthB > _temp.halfSize.y + _radius)
+		return false;
 
 	return true;
 }

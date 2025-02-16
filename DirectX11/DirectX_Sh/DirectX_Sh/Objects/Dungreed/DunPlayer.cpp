@@ -1,29 +1,56 @@
 #include "framework.h"
-#include "Player.h"
+#include "DunPlayer.h"
 
-Player::Player(wstring textureFile)
+DunPlayer::DunPlayer(wstring textureFile)
 	: Quad(textureFile)
 {
-    Init();
+	Init();
+
+	_collider = make_shared<RectCollider>(GetImageSize());
+	_collider->SetParent(GetTransform());
+	_collider->GetTransform()->SetScale(Vector(0.9f, 0.9f));
+	_collider->GetTransform()->SetPos(GetTransform()->GetWorldPos());
 }
 
-Player::~Player()
+DunPlayer::~DunPlayer()
 {
 }
 
-void Player::Update()
+void DunPlayer::PreUpdate()
 {
-    Move();
+	if (_isDead == true)
+		return;
 
-    Quad::Update();
+	_collider->Update();
 }
 
-void Player::Render()
+void DunPlayer::Update()
 {
-    Quad::Render();
+	if (_isDead == true)
+		return;
+
+	Move();
+
+	Quad::Update();
 }
 
-void Player::CreateMesh()
+void DunPlayer::Render()
+{
+	if (_isDead == true)
+		return;
+
+	Quad::Render();
+}
+
+void DunPlayer::PostRender()
+{
+	if (_isDead == true)
+		return;
+
+	_collider->Render();
+}
+
+void DunPlayer::CreateMesh()
 {
     Vector _halfSize = _srv->GetImageSize() * 0.5f;
 
@@ -47,10 +74,10 @@ void Player::CreateMesh()
     _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
 }
 
-void Player::Move()
+void DunPlayer::Move()
 {
-	Vector moveDir = Vector(0,0);
-	
+	Vector moveDir = Vector(0, 0);
+
 	if (KEY_PRESS('W'))
 		moveDir.y += 1.0f;
 	if (KEY_PRESS('S'))
@@ -59,10 +86,20 @@ void Player::Move()
 		moveDir.x -= 1.0f;
 	if (KEY_PRESS('D'))
 		moveDir.x += 1.0f;
-		
+
 	if (moveDir.Length() > 0.0f)
 	{
 		moveDir.Normalize();
-        GetTransform()->AddPos(moveDir * _playerSpeed * DELTA_TIME);
+		GetTransform()->AddPos(moveDir * _playerSpeed * DELTA_TIME);
 	}
 }
+
+void DunPlayer::TakeDamage(int damage)
+{
+	_hp -= damage;
+
+	if (_hp == 0)
+		_isDead = true;
+}
+
+// TODO : 몬스터와 충돌 시, 잠시 동안 무적

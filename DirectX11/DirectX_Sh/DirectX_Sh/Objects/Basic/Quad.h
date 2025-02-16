@@ -6,13 +6,16 @@ public:
 	Quad(wstring textureFile);
 	~Quad();
 
+	virtual void PreUpdate() {};
 	virtual void Update();
 	virtual void Render();
+	virtual void PostRender() {};
 
 	void Init();
 	void CreateMaterial(wstring textureFile);
 	virtual void CreateMesh();
 
+	Vector GetImageSize() { return _srv->GetImageSize(); }
 	shared_ptr<Transform> GetTransform() { return _transform; }
 
 protected:

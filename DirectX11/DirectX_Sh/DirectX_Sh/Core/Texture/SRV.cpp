@@ -15,6 +15,11 @@ void SRV::PSSet_SRV(int slot)
 	DC->PSSetShaderResources(slot, 1, srv.GetAddressOf());
 }
 
+Vector SRV::GetImageSize()
+{
+	return Vector(image.GetMetadata().width, image.GetMetadata().height);
+}
+
 void SRV::CreateSRV(wstring path)
 {
 	LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, nullptr, image);

@@ -8,6 +8,8 @@ public:
 
 	void PSSet_SRV(int slot);
 
+	Vector GetImageSize();
+
 private:
 	void CreateSRV(wstring path);
 

@@ -85,6 +85,7 @@ public:
     }
 
     float Length() const { return sqrtf(x * x + y * y); }
+    float LengthSq() const { return x * x + y * y; }
     Vector NormalVector()
     {
         float length = Length();

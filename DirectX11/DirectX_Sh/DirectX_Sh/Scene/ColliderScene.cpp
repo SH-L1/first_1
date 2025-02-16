@@ -3,71 +3,82 @@
 
 ColliderScene::ColliderScene()
 {
-	_rect1 = make_shared<RectCollider>(Vector(100.0f, 100.0f));
-	_rect2 = make_shared<RectCollider>(Vector(120.0f, 80.0f));
-	_circle1 = make_shared<CircleCollider>(100.0f);
-	_circle2 = make_shared<CircleCollider>(120.0f);
+	_rect = make_shared<RectCollider>(Vector(100, 70));
+	_rotatedRect = make_shared<RectCollider>(Vector(70, 70));
+	_movingRect = make_shared<RectCollider>(Vector(50, 90));
 
-	_rect1->GetTransform()->SetScale(Vector(2.0f, 2.0f));
-	_rect2->GetTransform()->SetScale(Vector(3.0f, 3.0f));
-	_circle1->GetTransform()->SetScale(Vector(0.7f, 0.7f));
-	_circle2->GetTransform()->SetScale(Vector(0.35f, 0.35f));
+	_circle = make_shared<CircleCollider>(50);
+	_movingCircle = make_shared<CircleCollider>(80);
 
-	_rect1->SetPos(CENTRE);
-	_rect2->SetPos(CENTRE * 0.5f);
-	_circle1->GetTransform()->SetPos(Vector(800.0f, 450.0f));
+	_rect->SetPos(CENTRE);
+	_rotatedRect->SetParent(_rect->GetTransform());
+	_rotatedRect->SetPos(Vector(100, 100));
+	_circle->SetParent(_rect->GetTransform());
+	_circle->SetPos(Vector(-100, -100));
+
+	_rotatedRect->GetTransform()->SetAngle(45);
 }
 
 ColliderScene::~ColliderScene()
 {
 }
 
+void ColliderScene::PreUpdate()
+{
+}
+
 void ColliderScene::Update()
 {
-	_circle2->GetTransform()->AddPos(mousePos * 1.0f * DELTA_TIME);
+	_movingRect->SetPos(mousePos);
+	_movingCircle->SetPos(mousePos);
 
-	if (KEY_PRESS('W'))
-		_rect1->GetTransform()->AddPos(Vector(0.0f, 100.0f) * DELTA_TIME);
-	if (KEY_PRESS('S'))
-		_rect1->GetTransform()->AddPos(Vector(0.0f, -100.0f) * DELTA_TIME);
-	if (KEY_PRESS('A'))
-		_rect1->GetTransform()->AddPos(Vector(-100.0f, 0.0f) * DELTA_TIME);
-	if (KEY_PRESS('D'))
-		_rect1->GetTransform()->AddPos(Vector(100.0f, 0.0f) * DELTA_TIME);
-
-	if (_circle2->IsCollision(_rect1))
-	{
-		_rect1->SetRed();
-		_circle2->SetRed();
-	}
-	else if (_circle2->IsCollision(_rect2))
-	{
-		_rect2->SetColor(BLUE);
-		_circle2->SetColor(BLUE);
-	}
-	else if (_circle2->IsCollision(_circle1))
-	{
-		_circle1->SetGreen();
-		_circle2->SetGreen();
-	}
-	else
-	{
-		_rect1->SetColor(WHITE);
-		_rect2->SetColor(WHITE);
-		_circle1->SetColor(WHITE);
-		_circle2->SetColor(WHITE);
-	}
-
-	_rect1->Update();
-	_rect2->Update();
-	_circle1->Update();
-	_circle2->Update();
+	_rect->Update();
+	_rotatedRect->Update();
+	_movingRect->Update();
+	_circle->Update();
+	_movingCircle->Update();
 }
 
 void ColliderScene::Render()
 {
-	_rect1->Render();
-	_rect2->Render();
-	_circle1->Render();
-	_circle2->Render();
+	if (_movingRect->IsCollision(_rect))
+	{
+		_movingCircle->SetRed();
+		_movingRect->SetRed();
+		_rect->SetRed();
+	}
+	else if (_movingRect->IsCollision(_rotatedRect, true))
+	{
+		_movingCircle->SetRed();
+		_movingRect->SetRed();
+		_rotatedRect->SetRed();
+	}
+	else if (_movingRect->IsCollision(_circle, true))
+	{
+		_movingCircle->SetRed();
+		_movingRect->SetRed();
+		_circle->SetRed();
+	}
+	else
+	{
+		_rect->SetGreen();
+		_rotatedRect->SetGreen();
+		_movingRect->SetGreen();
+		_circle->SetGreen();
+		_movingCircle->SetGreen();
+	}
+
+	_rect->Render();
+	_rotatedRect->Render();
+	_movingRect->Render();
+	_circle->Render();
+	_movingCircle->Render();
+}
+
+void ColliderScene::PostRender()
+{
+}
+
+void ColliderScene::Input()
+{
 }

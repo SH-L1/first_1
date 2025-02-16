@@ -20,14 +20,11 @@ public:
 	virtual void CreateMesh() = 0;
 	void CreateMaterial();
 
-	bool IsCollision(shared_ptr<Collider> other);
+	bool IsCollision(shared_ptr<Collider> other, bool isObb);
 
 	virtual bool IsCollision(const Vector& pos) = 0;
-	virtual bool IsCollision(shared_ptr<class CircleCollider> other) = 0;
-	virtual bool IsCollision(shared_ptr<class RectCollider> other) = 0;
-
-	virtual bool IsCollision_OBB(shared_ptr<class CircleCollider> other) = 0;
-	virtual bool IsCollision_OBB(shared_ptr<class RectCollider> other) = 0;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other, bool isObb = false) = 0;
+	virtual bool IsCollision(shared_ptr<class RectCollider> other, bool isObb = false) = 0;
 
 	void SetColor(XMFLOAT4 color) { _colorBuffer->SetData(color); _colorBuffer->Update(); }
 	void SetRed() { _colorBuffer->SetData(RED); _colorBuffer->Update(); }
@@ -39,6 +36,13 @@ public:
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	void SetParent(shared_ptr<Transform> transform) { _transform->SetParent(transform); }
+
+protected:
+	virtual bool IsCollision_AABB(shared_ptr<class RectCollider> other) = 0;
+	virtual bool IsCollision_AABB(shared_ptr<class CircleCollider> other) = 0;
+
+	virtual bool IsCollision_OBB(shared_ptr<class CircleCollider> other) = 0;
+	virtual bool IsCollision_OBB(shared_ptr<class RectCollider> other) = 0;
 
 protected:
 	Type _type = NONE;

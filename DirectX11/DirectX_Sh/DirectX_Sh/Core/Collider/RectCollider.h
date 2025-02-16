@@ -33,8 +33,12 @@ public:
 	OBB_DESC GetOBBDesc();
 
 	virtual bool IsCollision(const Vector& pos) override;
-	virtual bool IsCollision(shared_ptr<RectCollider> other) override;
-	virtual bool IsCollision(shared_ptr<class CircleCollider> other) override;
+	virtual bool IsCollision(shared_ptr<class CircleCollider> other, bool isObb = false) override;
+	virtual bool IsCollision(shared_ptr<RectCollider> other, bool isObb = false) override;
+
+private:
+	virtual bool IsCollision_AABB(shared_ptr<RectCollider> other) override;
+	virtual bool IsCollision_AABB(shared_ptr<class CircleCollider> other) override;
 
 	virtual bool IsCollision_OBB(shared_ptr<class CircleCollider> other) override;
 	virtual bool IsCollision_OBB(shared_ptr<RectCollider> other) override;

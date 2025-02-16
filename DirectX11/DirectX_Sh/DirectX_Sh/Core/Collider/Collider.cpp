@@ -4,10 +4,6 @@
 Collider::Collider(Type type)
 	: _type(type)
 {
-	_transform = make_shared<Transform>();
-
-	_colorBuffer = make_shared<ColorBuffer>();
-	SetColor(WHITE);
 }
 
 Collider::~Collider()
@@ -40,23 +36,28 @@ void Collider::CreateMaterial()
 {
 	_vs = make_shared<VertexShader>(L"Shaders/ColliderVertexShader.hlsl");
 	_ps = make_shared<PixelShader>(L"Shaders/ColliderPixelShader.hlsl");
+
+	_transform = make_shared<Transform>();
+
+	_colorBuffer = make_shared<ColorBuffer>();
+	SetColor(WHITE);
 }
 
-bool Collider::IsCollision(shared_ptr<Collider> other)
+bool Collider::IsCollision(shared_ptr<Collider> other, bool isObb)
 {
 	switch (other->_type)
 	{
-	case Collider::NONE:
+	case Collider::Type::NONE:
 		break;
-	case Collider::CIRCLE:
+	case Collider::Type::CIRCLE:
 	{
 		auto circle = dynamic_pointer_cast<CircleCollider>(other);
-		return IsCollision(circle);
+		return IsCollision(circle, isObb);
 	}
-	case Collider::RECT:
+	case Collider::Type::RECT:
 	{
 		auto rect = dynamic_pointer_cast<RectCollider>(other);
-		return IsCollision(rect);
+		return IsCollision(rect, isObb);
 	}
 	default:
 		break;
