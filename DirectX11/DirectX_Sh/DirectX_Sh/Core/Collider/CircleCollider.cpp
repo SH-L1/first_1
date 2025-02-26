@@ -56,6 +56,56 @@ bool CircleCollider::IsCollision(shared_ptr<RectCollider> other, bool isObb)
 	return IsCollision_AABB(other);
 }
 
+bool CircleCollider::Block(shared_ptr<RectCollider> other)
+{
+	if(!IsCollision(other)) return false;
+
+	Vector thisHalfSize = Vector(GetWorldRadius(), GetWorldRadius());
+	Vector dir = GetWorldPos() - other->GetWorldPos();
+	Vector sum = thisHalfSize + other->GetWorldScale() * 0.5f;
+	Vector overlap = Vector(sum.x - abs(dir.x), sum.y - abs(dir.y));
+	Vector curPos = other->GetWorldPos();
+
+	dir.NormalVector();
+
+	if (overlap.x > overlap.y)
+	{
+		if (dir.y < 0.0f)
+			dir.y = -1.0f;
+		else if (dir.y > 0.0f)
+			dir.y = 1.0f;
+
+		curPos.y += dir.y * overlap.y;
+	}
+	else
+	{
+		if (dir.x < 0.0f)
+			dir.x = -1.0f;
+		else if (dir.x > 0.0f)
+			dir.x = 1.0f;
+
+		curPos.x += dir.x * overlap.x;
+	}
+
+	other->GetTransform()->SetPos(curPos);
+
+	return true;
+}
+
+bool CircleCollider::Block(shared_ptr<CircleCollider> other)
+{
+	if (!IsCollision(other)) return false;
+
+	Vector dir = GetWorldPos() - other->GetWorldPos();
+	float scalar = abs(GetWorldRadius() + other->GetWorldRadius() - dir.Length());
+
+	dir.NormalVector();
+
+	other->GetTransform()->AddPos(dir * scalar * DELTA_TIME);
+
+	return true;
+}
+
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other, bool isObb)
 {
 	if (isObb)

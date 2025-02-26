@@ -97,6 +97,77 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> other, bool isObb)
 	return IsCollision_AABB(other);
 }
 
+bool RectCollider::Block(shared_ptr<RectCollider> other)
+{
+	if (!IsCollision(other)) return false;
+
+	Vector dir = other->GetTransform()->GetWorldPos() - GetWorldPos();
+	Vector sum = other->GetWorldScale() * 0.5f + GetWorldScale() * 0.5f;
+	Vector overlap = Vector(sum.x - abs(dir.x), sum.y - abs(dir.y));
+	Vector curPos = other->GetWorldPos();
+	
+	dir.NormalVector();
+
+	if (overlap.x > overlap.y)
+	{
+		if (dir.y < 0.0f)
+			dir.y = -1.0f;
+		else if (dir.y > 0.0f)
+			dir.y = 1.0f;
+
+		curPos.y += dir.y * overlap.y;
+	}
+	else
+	{
+		if (dir.x < 0.0f)
+			dir.x = -1.0f;
+		else if (dir.x > 0.0f)
+			dir.x = 1.0f;
+
+		curPos.x += dir.x * overlap.x;
+	}
+
+	other->GetTransform()->SetPos(curPos);
+
+	return true;
+}
+
+bool RectCollider::Block(shared_ptr<CircleCollider> other)
+{
+	if (!IsCollision(other)) return false;
+
+	Vector otherHalfSize = Vector(other->GetWorldRadius(), other->GetWorldRadius());
+	Vector dir = GetWorldPos() - other->GetWorldPos();
+	Vector sum = GetWorldScale() * 0.5f + otherHalfSize;
+	Vector overlap = Vector(sum.x - abs(dir.x), sum.y - abs(dir.y));
+	Vector curPos = other->GetWorldPos();
+
+	dir.NormalVector();
+
+	if (overlap.x > overlap.y)
+	{
+		if (dir.y < 0.0f)
+			dir.y = -1.0f;
+		else if (dir.y > 0.0f)
+			dir.y = 1.0f;
+
+		curPos.y += dir.y * overlap.y;
+	}
+	else
+	{
+		if (dir.x < 0.0f)
+			dir.x = -1.0f;
+		else if (dir.x > 0.0f)
+			dir.x = 1.0f;
+
+		curPos.x += dir.x * overlap.x;
+	}
+
+	other->GetTransform()->SetPos(curPos);
+
+	return true;
+}
+
 bool RectCollider::IsCollision(shared_ptr<CircleCollider> other, bool isObb)
 {
 	if (isObb)

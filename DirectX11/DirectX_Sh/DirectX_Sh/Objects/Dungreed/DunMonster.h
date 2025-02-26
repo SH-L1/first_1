@@ -1,30 +1,30 @@
 #pragma once
 
-class DunMonster : public Quad
+class DunMonster
 {
 public:
-	DunMonster(wstring textureFile);
+	DunMonster();
 	~DunMonster();
 
-	void PreUpdate() override;
-	void Update() override;
-	void Render() override;
-	void PostRender() override;
-
-	void CreateMesh() override;
+	void PreUpdate();
+	void Update();
+	void Render();
+	void PostRender();
 
 	void SetActive(bool active) { _isActive = active; }
 	
 	bool GetActive() { return _isActive; }
 	bool IsDead() { return _isDead; }
+	shared_ptr<Transform> GetTransform() { return _monster->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	int GetDamage() { return _atk; }
 
 	void TakeDamage(int damage);
 
-	void Move(shared_ptr<Quad> _player);
+	void Move(Vector pos);
 
 private:
+	shared_ptr<Quad> _monster;
 	shared_ptr<RectCollider> _collider;
 
 private:

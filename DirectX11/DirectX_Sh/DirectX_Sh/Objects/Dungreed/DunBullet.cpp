@@ -1,16 +1,15 @@
 #include "framework.h"
 #include "DunBullet.h"
 
-DunBullet::DunBullet(wstring textureFile)
-	: Quad(textureFile)
+DunBullet::DunBullet()
 {
-	Init();
-
+    _bullet = make_shared<Quad>(L"Resource/Bullet.png");
 	_collider = make_shared<CircleCollider>(50);
-	_collider->SetParent(GetTransform());
-    _collider->SetPos(Vector(300, 0));
-    _collider->GetTransform()->SetScale(Vector(0.7f, 0.7f));
-    _collider->GetTransform()->SetPos(Vector(0, 0));
+ 
+    _collider->GetTransform()->SetParent(_bullet->GetTransform());
+    _bullet->GetTransform()->SetScale(Vector(0.1f, 0.1f));
+    _collider->GetTransform()->SetScale(Vector(0.8f, 0.8f));
+    _collider->SetPos(Vector(330, 0));
 }
 
 DunBullet::~DunBullet()
@@ -28,7 +27,7 @@ void DunBullet::Update()
 {
     if (_isActive == false) return;
 
-    _time += TimeManager::Instance()->DeltaTime();
+    _time += DELTA_TIME;
 
     if (_time > _lifeTime)
     {
@@ -36,16 +35,15 @@ void DunBullet::Update()
         _isActive = false;
     }
 
-    GetTransform()->AddPos(_bulletDir * _bulletSpeed * TimeManager::Instance()->DeltaTime());
-
-    Quad::Update();
+    _bullet->GetTransform()->AddPos(_bulletDir * _bulletSpeed * DELTA_TIME);
+    _bullet->Update();
 }
 
 void DunBullet::Render()
 {
     if (_isActive == false) return;
 
-    Quad::Render();
+    _bullet->Render();
 }
 
 void DunBullet::PostRender()
@@ -55,30 +53,6 @@ void DunBullet::PostRender()
     _collider->Render();
 }
 
-void DunBullet::CreateMesh()
-{
-    Vector _halfSize = _srv->GetImageSize() * 0.5f;
-
-    _vertices =
-    {
-        { XMFLOAT3(-_halfSize.x, _halfSize.y, 0.0f), XMFLOAT2(0, 0) },
-        { XMFLOAT3(_halfSize.x, _halfSize.y, 0.0f), XMFLOAT2(1, 0) },
-        { XMFLOAT3(_halfSize.x, -_halfSize.y, 0.0f), XMFLOAT2(1, 1) },
-        { XMFLOAT3(-_halfSize.x, -_halfSize.y, 0.0f), XMFLOAT2(0, 1) }
-    };
-
-    _indices.push_back(0);
-    _indices.push_back(1);
-    _indices.push_back(2);
-
-    _indices.push_back(0);
-    _indices.push_back(2);
-    _indices.push_back(3);
-
-    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
-    _indexBuffer = make_shared<IndexBuffer>(&_indices[0], _indices.size());
-}
-
 void DunBullet::SetDir(Vector dir)
 {
     _bulletDir = dir.NormalVector();
@@ -86,10 +60,10 @@ void DunBullet::SetDir(Vector dir)
 
 void DunBullet::SetPos(Vector pos)
 {
-    GetTransform()->SetPos(pos);
+    _bullet->GetTransform()->SetPos(pos);
 }
 
 void DunBullet::SetAngle(float angle)
 {
-    GetTransform()->SetAngle(angle);
+    _bullet->GetTransform()->SetAngle(angle);
 }

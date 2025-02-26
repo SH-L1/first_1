@@ -6,17 +6,16 @@ public:
 	Quad(wstring textureFile);
 	~Quad();
 
-	virtual void PreUpdate() {};
-	virtual void Update();
-	virtual void Render();
-	virtual void PostRender() {};
+	void Update();
+	void Render();
 
-	void Init();
 	void CreateMaterial(wstring textureFile);
-	virtual void CreateMesh();
+	void CreateMesh();
 
 	Vector GetImageSize() { return _srv->GetImageSize(); }
 	shared_ptr<Transform> GetTransform() { return _transform; }
+	void SetLeftRight(int value) { _leftRightBuffer->SetData(value); _leftRightBuffer->Update(); }
+	void AddColor(XMFLOAT4 color) { _colorBuffer->SetData(color); _colorBuffer->Update(); }
 
 protected:
 	vector<Vertex_Texture> _vertices;
@@ -31,4 +30,6 @@ protected:
 	shared_ptr<SRV> _srv;
 
 	shared_ptr<Transform> _transform;
+	shared_ptr<LeftRightBuffer> _leftRightBuffer;
+	shared_ptr<ColorBuffer> _colorBuffer;
 };

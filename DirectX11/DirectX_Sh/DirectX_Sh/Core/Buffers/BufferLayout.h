@@ -39,3 +39,24 @@ public:
 private:
 	Data _data;
 };
+
+class LeftRightBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		int leftRight = 0;
+		int padding[3];
+	};
+
+	LeftRightBuffer() : ConstantBuffer(&_data, sizeof(Data)) {}
+	~LeftRightBuffer() {}
+
+	void SetData(int leftRight)
+	{
+		_data.leftRight = leftRight;
+	}
+
+private:
+	Data _data;
+};

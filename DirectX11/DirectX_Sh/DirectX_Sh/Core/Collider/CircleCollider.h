@@ -18,6 +18,9 @@ public:
 	virtual bool IsCollision(shared_ptr<CircleCollider> other, bool isObb = false) override;
 	virtual bool IsCollision(shared_ptr<class RectCollider> other, bool isObb = false) override;
 
+	virtual bool Block(shared_ptr<class RectCollider> other) override;
+	virtual bool Block(shared_ptr<CircleCollider> other) override;
+
 private:
 	virtual bool IsCollision_AABB(shared_ptr<CircleCollider> other) override;
 	virtual bool IsCollision_AABB(shared_ptr<class RectCollider> other) override;

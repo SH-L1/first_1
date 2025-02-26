@@ -47,6 +47,7 @@ void Program::Render()
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     ALPHA->SetState();
+    //ADDITIVE->SetState();
 
     _view->SetVS(1);
     _projection->SetVS(2);

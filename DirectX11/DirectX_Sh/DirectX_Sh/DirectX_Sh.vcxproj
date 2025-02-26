@@ -140,9 +140,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Core\Collider\CircleCollider.h" />
     <ClInclude Include="Core\Collider\Collider.h" />
     <ClInclude Include="Core\Collider\RectCollider.h" />
+    <ClInclude Include="Objects\Dungreed\Background.h" />
     <ClInclude Include="Objects\Dungreed\DunBow.h" />
     <ClInclude Include="Objects\Dungreed\DunBullet.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
@@ -174,9 +176,11 @@
     <ClInclude Include="Core\Utility\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Dungreed\Items\Bible.cpp" />
     <ClCompile Include="Core\Collider\CircleCollider.cpp" />
     <ClCompile Include="Core\Collider\Collider.cpp" />
     <ClCompile Include="Core\Collider\RectCollider.cpp" />
+    <ClCompile Include="Objects\Dungreed\Background.cpp" />
     <ClCompile Include="Objects\Dungreed\DunBow.cpp" />
     <ClCompile Include="Objects\Dungreed\DunBullet.cpp" />
     <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
@@ -210,9 +214,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX_Sh.ico" />
+    <Image Include="Resource\Bible.png" />
     <Image Include="Resource\Bow.png" />
     <Image Include="Resource\Bullet.png" />
+    <Image Include="Resource\Map.png" />
     <Image Include="Resource\monster.png" />
+    <Image Include="Resource\MonsterAttack.png.png" />
     <Image Include="Resource\Player.png" />
     <Image Include="Resource\sun.png" />
     <Image Include="small.ico" />
@@ -239,6 +246,24 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shaders\TexturePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </AdditionalIncludeDirectories>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shaders\TextureVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shaders\TutorialShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

@@ -51,6 +51,8 @@
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunBow.h" />
     <ClInclude Include="Objects\Dungreed\DunBullet.h" />
+    <ClInclude Include="Objects\Dungreed\Background.h" />
+    <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -134,6 +136,12 @@
     <ClCompile Include="Objects\Dungreed\DunBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Dungreed\Background.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Dungreed\Items\Bible.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc">
@@ -162,10 +170,21 @@
     <Image Include="Resource\Player.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\MonsterAttack.png.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Map.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Bible.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\TutorialShader.hlsl" />
     <FxCompile Include="Shaders\ColliderVertexShader.hlsl" />
     <FxCompile Include="Shaders\ColliderPixelShader.hlsl" />
+    <FxCompile Include="Shaders\TextureVertexShader.hlsl" />
+    <FxCompile Include="Shaders\TexturePixelShader.hlsl" />
   </ItemGroup>
 </Project>

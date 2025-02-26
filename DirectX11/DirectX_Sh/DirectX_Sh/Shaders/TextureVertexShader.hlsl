@@ -1,5 +1,3 @@
-Texture2D map : register(t0);
-SamplerState samp : register(s0);
 
 cbuffer World : register(b0)
 {
@@ -39,11 +37,4 @@ PixelInput VS(VertexInput input)
     result.uv = input.uv;
     
     return result;
-}
-
-float4 PS(PixelInput input) : SV_TARGET
-{
-    input.uv.x *= 1;
-    
-    return map.Sample(samp, input.uv);
 }

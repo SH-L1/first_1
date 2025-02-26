@@ -1,17 +1,21 @@
 #pragma once
 
-class DunBow : public Quad
+class DunBow
 {
 public:
-	DunBow(wstring textureFile);
+	DunBow();
 	~DunBow();
 
-	void PreUpdate() override;
-	void Update() override;
-	void Render() override;
-	void PostRender() override;
+	void PreUpdate();
+	void Update();
+	void Render();
+	void PostRender();
 
-	void CreateMesh() override;
+	shared_ptr<Transform> GetTransform() { return _bow->GetTransform(); }
 
 private:
+	void SetAim();
+
+private:
+	shared_ptr<Quad> _bow;
 };

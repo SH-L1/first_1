@@ -1,17 +1,15 @@
 #pragma once
 
-class DunBullet : public Quad
+class DunBullet
 {
 public:
-	DunBullet(wstring textureFile);
+	DunBullet();
 	~DunBullet();
 
-	void PreUpdate() override;
-	void Update() override;
-	void Render() override;
-	void PostRender() override;
-
-	void CreateMesh() override;
+	void PreUpdate();
+	void Update();
+	void Render();
+	void PostRender();
 
 	void SetDir(Vector dir);
 	void SetPos(Vector pos);
@@ -19,10 +17,12 @@ public:
 	void SetActive(bool active) { _isActive = active; }
 
 	bool GetActive() { return _isActive; }
+	shared_ptr<Transform> GetTransform() { return _bullet->GetTransform(); }
 	shared_ptr<CircleCollider> GetCollider() { return _collider; }
 	int GetDamage() { return _damage; }
 
 private:
+	shared_ptr<Quad> _bullet;
 	shared_ptr<CircleCollider> _collider;
 
 private:
