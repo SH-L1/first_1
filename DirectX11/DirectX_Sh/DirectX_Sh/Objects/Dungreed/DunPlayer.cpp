@@ -1,7 +1,8 @@
 #include "framework.h"
 #include "DunPlayer.h"	
 
-#include "DunBow.h"
+#include "Items/DunBow.h"
+#include "Items/DunBullet.h"
 #include "Items/Bible.h"
 
 DunPlayer::DunPlayer()
@@ -24,6 +25,7 @@ DunPlayer::DunPlayer()
 	_player->GetTransform()->AddPos(Vector(0, 25));
 
 	CreateBow();
+	CreateBullet();
 	CreateBible();
 }
 
@@ -33,9 +35,12 @@ DunPlayer::~DunPlayer()
 
 void DunPlayer::PreUpdate()
 {
-	if (_isDead == true) return;
+	if (_isActive == false) return;
 
 	_collider->Update();
+
+	for (auto bullet : _bullets)
+		bullet->PreUpdate();
 
 	for (auto bible : _bibles)
 		bible->PreUpdate();
@@ -43,9 +48,10 @@ void DunPlayer::PreUpdate()
 
 void DunPlayer::Update()
 {
-	if (_isDead == true) return;
+	if (_isActive == false) return;
 
 	Move();
+	Fire();
 	UpdateBible();
 	SetAim();
 
@@ -60,6 +66,9 @@ void DunPlayer::Update()
 		_bibleTime = 0.0f;
 	}
 
+	for (auto bullet : _bullets)
+		bullet->Update();
+
 	for (auto bible : _bibles)
 		bible->Update();
 	
@@ -68,10 +77,13 @@ void DunPlayer::Update()
 
 void DunPlayer::Render()
 {
-	if (_isDead == true) return;
+	if (_isActive == false) return;
 
 	_player->Render();
 	_bow->Render();
+
+	for (auto bullet : _bullets)
+		bullet->Render();
 
 	for (auto bible : _bibles)
 		bible->Render();
@@ -79,9 +91,12 @@ void DunPlayer::Render()
 
 void DunPlayer::PostRender()
 {
-	if (_isDead == true) return;
+	if (_isActive == false) return;
 
 	_collider->Render();
+
+	for (auto bullet : _bullets)
+		bullet->PostRender();
 
 	for (auto bible : _bibles)
 		bible->PostRender();
@@ -98,26 +113,35 @@ void DunPlayer::TakeDamage(int damage)
 	_hp -= damage;
 
 	if (_hp == 0)
-		_isDead = true;
+		_isActive = false;
 }
 
 void DunPlayer::Move()
 {
 	Vector moveDir = Vector(0, 0);
+	Vector curPos = _collider->GetWorldPos();
+	Vector space = _collider->GetWorldScale() * 0.5f;
 	
 	if (KEY_PRESS('W'))
-		moveDir.y += 1.0f;
+	{
+		if(curPos.y < WIN_HEIGHT - space.y)
+			moveDir.y += 1.0f;
+	}
 	if (KEY_PRESS('S'))
-		moveDir.y -= 1.0f;
+	{
+		if(curPos.y > space.y)
+			moveDir.y -= 1.0f;
+	}
 	if (KEY_PRESS('A'))
 	{
-		moveDir.x -= 1.0f;
+		if(curPos.x > space.x)
+			moveDir.x -= 1.0f;
 		_player->SetLeftRight(1);
-		// _playerScene->
 	}
 	if (KEY_PRESS('D'))
 	{
-		moveDir.x += 1.0f;
+		if(curPos.x < WIN_WIDTH - space.x)
+			moveDir.x += 1.0f;
 		_player->SetLeftRight(0);
 	}
 
@@ -125,6 +149,25 @@ void DunPlayer::Move()
 	{
 		moveDir.Normalize();
 		_collider->GetTransform()->AddPos(moveDir * _playerSpeed * DELTA_TIME);
+	}
+}
+
+void DunPlayer::Fire()
+{
+	if (KEY_DOWN(VK_LBUTTON))
+	{
+		auto notActiveBullet = find_if(_bullets.begin(), _bullets.end(),
+			[](shared_ptr<DunBullet> b)->bool {
+				return !(b->GetActive());
+			});
+	
+		if (notActiveBullet == _bullets.end())
+			return;
+
+		(*notActiveBullet)->SetActive(true);
+		(*notActiveBullet)->SetPos(_muzzle->GetWorldPos());
+		(*notActiveBullet)->SetDir(_bowDir);
+		(*notActiveBullet)->SetAngle(_bowDir.Angle());
 	}
 }
 
@@ -137,6 +180,15 @@ void DunPlayer::CreateBow()
 
 	_muzzle->SetParent(_bow->GetTransform());
 	_muzzle->SetPos(Vector(50, 3));
+}
+
+void DunPlayer::CreateBullet()
+{
+	for (int i = 0; i < _bulletNum; i++)
+	{
+		shared_ptr<DunBullet> _bullet = make_shared<DunBullet>();
+		_bullets.push_back(_bullet);
+	}
 }
 
 void DunPlayer::CreateBible()
@@ -177,6 +229,41 @@ void DunPlayer::ActivateBible()
 
 void DunPlayer::UpdateBible()
 {
-	_playerBible->AddAngle(PI * DELTA_TIME);
+	_playerBible->AddAngle(0.5f * PI * DELTA_TIME);
 	_playerBible->Update();
+}
+
+bool DunPlayer::IsCollision_Bullet(shared_ptr<Collider> other)
+{
+	if (_isActive == false) return false;
+
+	for (auto bullet : _bullets)
+	{
+		if (bullet->GetActive() == false)
+			continue;
+
+		if (other->IsCollision(bullet->GetCollider()))
+		{
+			bullet->SetActive(false);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool DunPlayer::IsCollision_Bible(shared_ptr<Collider> other)
+{
+	if (_isActive == false) return false;
+
+	for (auto bible : _bibles)
+	{
+		if (bible->GetActive() == false)
+			continue;
+
+		if (other->IsCollision(bible->GetCollider()))
+			return true;
+	}
+
+	return false;
 }

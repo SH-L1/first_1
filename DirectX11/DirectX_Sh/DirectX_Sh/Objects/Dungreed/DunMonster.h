@@ -14,7 +14,6 @@ public:
 	void SetActive(bool active) { _isActive = active; }
 	
 	bool GetActive() { return _isActive; }
-	bool IsDead() { return _isDead; }
 	shared_ptr<Transform> GetTransform() { return _monster->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	int GetDamage() { return _atk; }
@@ -22,6 +21,8 @@ public:
 	void TakeDamage(int damage);
 
 	void Move(Vector pos);
+
+	bool IsCollision_Monster(shared_ptr<Collider> other);
 
 private:
 	shared_ptr<Quad> _monster;
@@ -34,5 +35,4 @@ private:
 	float _speed = 50.0f;
 
 	bool _isActive = false;
-	bool _isDead = false;
 };

@@ -5,11 +5,11 @@ DunBullet::DunBullet()
 {
     _bullet = make_shared<Quad>(L"Resource/Bullet.png");
 	_collider = make_shared<CircleCollider>(50);
- 
-    _collider->GetTransform()->SetParent(_bullet->GetTransform());
-    _bullet->GetTransform()->SetScale(Vector(0.1f, 0.1f));
-    _collider->GetTransform()->SetScale(Vector(0.8f, 0.8f));
-    _collider->SetPos(Vector(330, 0));
+
+    _bullet->GetTransform()->SetParent(_collider->GetTransform());
+    _bullet->GetTransform()->SetScale(Vector(1, 1));
+    _collider->GetTransform()->SetScale(Vector(0.08f, 0.08f));
+    _bullet->GetTransform()->SetPos(Vector(-300, 0));
 }
 
 DunBullet::~DunBullet()
@@ -35,7 +35,7 @@ void DunBullet::Update()
         _isActive = false;
     }
 
-    _bullet->GetTransform()->AddPos(_bulletDir * _bulletSpeed * DELTA_TIME);
+    _collider->GetTransform()->AddPos(_bulletDir * _bulletSpeed * DELTA_TIME);
     _bullet->Update();
 }
 
@@ -60,10 +60,10 @@ void DunBullet::SetDir(Vector dir)
 
 void DunBullet::SetPos(Vector pos)
 {
-    _bullet->GetTransform()->SetPos(pos);
+    _collider->SetPos(pos);
 }
 
 void DunBullet::SetAngle(float angle)
 {
-    _bullet->GetTransform()->SetAngle(angle);
+    _collider->GetTransform()->SetAngle(angle);
 }

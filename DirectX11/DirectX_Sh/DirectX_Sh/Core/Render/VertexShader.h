@@ -1,4 +1,5 @@
 #pragma once
+
 class VertexShader
 {
 public:
@@ -14,8 +15,9 @@ private:
 	void CreateInputLayOut();
 	void CreateVertexShader();
 
-	Microsoft::WRL::ComPtr<ID3DBlob> vertexBlob;
+	Microsoft::WRL::ComPtr<ID3DBlob> _vertexBlob;
 
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayOut;
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> vertexShader;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> _inputLayOut;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> _vertexShader;
+	Microsoft::WRL::ComPtr<ID3D11ShaderReflection> _reflection;
 };

@@ -140,13 +140,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Dungreed\DunSkeleton.h" />
     <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Core\Collider\CircleCollider.h" />
     <ClInclude Include="Core\Collider\Collider.h" />
     <ClInclude Include="Core\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Dungreed\Background.h" />
-    <ClInclude Include="Objects\Dungreed\DunBow.h" />
-    <ClInclude Include="Objects\Dungreed\DunBullet.h" />
+    <ClInclude Include="Objects\Dungreed\Items\DunBow.h" />
+    <ClInclude Include="Objects\Dungreed\Items\DunBullet.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
     <ClInclude Include="Scene\DungreedScene.h" />
@@ -171,18 +172,20 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
+    <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Math\Transform.h" />
     <ClInclude Include="Core\Utility\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\Dungreed\DunSkeleton.cpp" />
     <ClCompile Include="Objects\Dungreed\Items\Bible.cpp" />
     <ClCompile Include="Core\Collider\CircleCollider.cpp" />
     <ClCompile Include="Core\Collider\Collider.cpp" />
     <ClCompile Include="Core\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Dungreed\Background.cpp" />
-    <ClCompile Include="Objects\Dungreed\DunBow.cpp" />
-    <ClCompile Include="Objects\Dungreed\DunBullet.cpp" />
+    <ClCompile Include="Objects\Dungreed\Items\DunBow.cpp" />
+    <ClCompile Include="Objects\Dungreed\Items\DunBullet.cpp" />
     <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
     <ClCompile Include="Objects\Dungreed\DunPlayer.cpp" />
     <ClCompile Include="Scene\DungreedScene.cpp" />
@@ -208,6 +211,7 @@
     <ClCompile Include="Core\Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
     <ClCompile Include="Core\Utility\TimeManager.cpp" />
+    <ClCompile Include="Scene\TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc" />
@@ -221,6 +225,7 @@
     <Image Include="Resource\monster.png" />
     <Image Include="Resource\MonsterAttack.png.png" />
     <Image Include="Resource\Player.png" />
+    <Image Include="Resource\Skeleton.png" />
     <Image Include="Resource\sun.png" />
     <Image Include="small.ico" />
   </ItemGroup>

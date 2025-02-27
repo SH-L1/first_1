@@ -18,7 +18,6 @@ DunMonster::~DunMonster()
 void DunMonster::PreUpdate()
 {
     if (_isActive == false) return;
-    if (_isDead == true) return;
 
 	_collider->Update();
 }
@@ -26,7 +25,6 @@ void DunMonster::PreUpdate()
 void DunMonster::Update()
 {
     if (_isActive == false) return;
-    if (_isDead == true) return;
 
 	_monster->Update();
 }
@@ -34,7 +32,6 @@ void DunMonster::Update()
 void DunMonster::Render()
 {
     if (_isActive == false) return;
-    if (_isDead == true) return;
 
 	_monster->Render();
 }
@@ -42,7 +39,6 @@ void DunMonster::Render()
 void DunMonster::PostRender()
 {
     if (_isActive == false) return;
-    if (_isDead == true) return;
 
 	_collider->Render();
 }
@@ -52,7 +48,7 @@ void DunMonster::TakeDamage(int damage)
     _hp -= damage;
 
     if (_hp == 0)
-        _isDead = true;
+        _isActive = false;
 }
 
 void DunMonster::Move(Vector pos)
@@ -64,4 +60,14 @@ void DunMonster::Move(Vector pos)
     if (abs(pos.x - _monsterPos.x) <= 0.1f && abs(pos.y - _monsterPos.y) <= 0.1f) return;
 
     _collider->GetTransform()->AddPos(_dir * _speed * DELTA_TIME);
+}
+
+bool DunMonster::IsCollision_Monster(shared_ptr<Collider> other)
+{
+    if (_isActive == false) return false;
+
+    if (other->IsCollision(_collider))
+        return true;
+
+    return false;
 }

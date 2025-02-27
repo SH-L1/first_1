@@ -20,8 +20,6 @@ private:
 	shared_ptr<Quad> _bible;
 	shared_ptr<RectCollider> _collider;
 
-private:
-	int _damage = 1;
-	
+private:	
 	bool _isActive = false;
 };

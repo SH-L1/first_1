@@ -19,15 +19,12 @@ public:
 	bool GetActive() { return _isActive; }
 	shared_ptr<Transform> GetTransform() { return _bullet->GetTransform(); }
 	shared_ptr<CircleCollider> GetCollider() { return _collider; }
-	int GetDamage() { return _damage; }
 
 private:
 	shared_ptr<Quad> _bullet;
 	shared_ptr<CircleCollider> _collider;
 
 private:
-	int _damage = 1;
-
 	float _time = 0.0f;
 	float _lifeTime = 5.0f;
 

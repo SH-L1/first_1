@@ -49,10 +49,12 @@
     <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
-    <ClInclude Include="Objects\Dungreed\DunBow.h" />
-    <ClInclude Include="Objects\Dungreed\DunBullet.h" />
+    <ClInclude Include="Objects\Dungreed\Items\DunBow.h" />
+    <ClInclude Include="Objects\Dungreed\Items\DunBullet.h" />
     <ClInclude Include="Objects\Dungreed\Background.h" />
     <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
+    <ClInclude Include="Objects\Dungreed\DunSkeleton.h" />
+    <ClInclude Include="Scene\TutorialScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -130,16 +132,22 @@
     <ClCompile Include="Objects\Dungreed\DunMonster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Dungreed\DunBow.cpp">
+    <ClCompile Include="Objects\Dungreed\Items\DunBow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Dungreed\DunBullet.cpp">
+    <ClCompile Include="Objects\Dungreed\Items\DunBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Dungreed\Background.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Dungreed\Items\Bible.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Dungreed\DunSkeleton.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TutorialScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -177,6 +185,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\Bible.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Skeleton.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

@@ -1,31 +1,36 @@
 #include "framework.h"
 #include "TutorialScene.h"
 
+#include "Objects/Dungreed/Items/DunBullet.h"
+
 TutorialScene::TutorialScene()
 {
-    _quad1 = make_shared<Quad>(L"Resource/SIUUUU.jpg");
-    _quad2 = make_shared<Quad>(L"Resource/CryingMessi.jpg");
+	test = make_shared<DunBullet>();
 
-    _quad1->GetTransform()->SetPos(CENTRE);
-    _quad1->GetTransform()->SetScale(Vector(0.5f, 0.5f));
-    _quad2->GetTransform()->SetScale(Vector(0.5f, 0.5f));
+	test->SetActive(true);
+	test->SetPos(CENTRE);
 }
 
 TutorialScene::~TutorialScene()
 {
 }
 
+void TutorialScene::PreUpdate()
+{
+	test->PreUpdate();
+}
+
 void TutorialScene::Update()
 {
-    _quad1->GetTransform()->AddAngle(0.001f);
-    _quad2->GetTransform()->AddPos(Vector(1, 1) * 0.001);
-
-    _quad1->Update();
-    _quad2->Update();
+	test->Update();
 }
 
 void TutorialScene::Render()
 {
-    _quad1->Render();
-    _quad2->Render();
+	test->Render();
+}
+
+void TutorialScene::PostRender()
+{
+	test->PostRender();
 }
