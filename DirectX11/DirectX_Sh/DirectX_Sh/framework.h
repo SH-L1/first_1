@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <string>
 #include <memory>
+#include <random>
 #include <wrl/client.h>
 
 #include <d3d11.h>
@@ -49,6 +50,7 @@ using namespace Microsoft;
 // MATH
 #include "Core/Math/Vector.h"
 #include "Core/Math/Transform.h"
+#include "Core/Math/Random.h"
 
 // RENDER
 #include "Core/Render/VertexLayout.h"

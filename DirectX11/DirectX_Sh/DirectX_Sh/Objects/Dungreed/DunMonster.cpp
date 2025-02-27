@@ -51,13 +51,15 @@ void DunMonster::TakeDamage(int damage)
         _isActive = false;
 }
 
-void DunMonster::Move(Vector pos)
+void DunMonster::Move(shared_ptr<Collider> other)
 {
     Vector _monsterPos = _collider->GetTransform()->GetWorldPos();
 
-    Vector _dir = (pos - _monsterPos).NormalVector();
+    Vector _dir = (other->GetWorldPos() - _monsterPos).NormalVector();
 
-    if (abs(pos.x - _monsterPos.x) <= 0.1f && abs(pos.y - _monsterPos.y) <= 0.1f) return;
+    if (abs(other->GetWorldPos().x - _monsterPos.x) <= 0.1f &&
+        abs(other->GetWorldPos().y - _monsterPos.y) <= 0.1f)
+        return;
 
     _collider->GetTransform()->AddPos(_dir * _speed * DELTA_TIME);
 }

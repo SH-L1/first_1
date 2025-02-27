@@ -20,7 +20,7 @@ public:
 
 	void TakeDamage(int damage);
 
-	void Move(Vector pos);
+	void Move(shared_ptr<Collider> other);
 
 	bool IsCollision_Monster(shared_ptr<Collider> other);
 

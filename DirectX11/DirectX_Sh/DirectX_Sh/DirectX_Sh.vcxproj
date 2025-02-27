@@ -150,6 +150,7 @@
     <ClInclude Include="Objects\Dungreed\Items\DunBullet.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
+    <ClInclude Include="Core\Math\Random.h" />
     <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Core\Utility\InputManager.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Objects\Dungreed\Items\DunBullet.cpp" />
     <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
     <ClCompile Include="Objects\Dungreed\DunPlayer.cpp" />
+    <ClCompile Include="Core\Math\Random.cpp" />
     <ClCompile Include="Scene\DungreedScene.cpp" />
     <ClCompile Include="Core\Utility\InputManager.cpp" />
     <ClCompile Include="Core\Texture\BlendState.cpp" />

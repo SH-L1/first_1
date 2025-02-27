@@ -55,6 +55,7 @@
     <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Objects\Dungreed\DunSkeleton.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
+    <ClInclude Include="Core\Math\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -148,6 +149,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\TutorialScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Random.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
