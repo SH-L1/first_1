@@ -93,7 +93,7 @@ void DungreedScene::PlayerCollision()
 	for (auto skeleton : _skeletons)
 	{
 		if (skeleton->GetActive() == false)
-			return;
+			continue;
 
 		skeleton->GetCollider()->Block(_player->GetCollider());
 	}
@@ -110,7 +110,7 @@ void DungreedScene::PlayerCollision()
 
 		Vector _dir = (_player->GetCollider()->GetWorldPos() -
 			_monster->GetCollider()->GetWorldPos()).NormalVector();
-		float pushDis = 50.0f;
+		float pushDis = 20.0f;
 
 		_player->GetCollider()->GetTransform()->AddPos(_dir * pushDis);
 
@@ -120,7 +120,7 @@ void DungreedScene::PlayerCollision()
 	for (auto skeleton : _skeletons)
 	{
 		if (skeleton->GetActive() == false)
-			return;
+			continue;
 
 		if (skeleton->IsCollision_Skeleton(_player->GetCollider()))
 		{
@@ -128,7 +128,7 @@ void DungreedScene::PlayerCollision()
 
 			Vector _dir = (_player->GetCollider()->GetWorldPos() -
 				skeleton->GetCollider()->GetWorldPos()).NormalVector();
-			float pushDis = 50.0f;
+			float pushDis = 10.0f;
 
 			_player->GetCollider()->GetTransform()->AddPos(_dir * pushDis);
 
@@ -139,14 +139,24 @@ void DungreedScene::PlayerCollision()
 
 void DungreedScene::MonsterCollision()
 {
+	if (_monster->GetActive() == false)
+		return;
+
 	if (_player->IsCollision_Bullet(_monster->GetCollider()))
 	{
 		_monster->TakeDamage(_player->GetDamage());
 	}
 
+	if (_bibleDamageTime > 0)
+	{
+		_bibleDamageTime -= DELTA_TIME;
+		return;
+	}
+
 	if (_player->IsCollision_Bible(_monster->GetCollider()))
 	{
 		_monster->TakeDamage(_player->GetDamage());
+		_bibleDamageTime = 0.5f;
 	}
 }
 
@@ -162,12 +172,17 @@ void DungreedScene::SkeletonCollision()
 			skeleton->TakeDamage(_player->GetDamage());
 		}
 
+		if (skeleton->GetTime() > 0)
+		{
+			skeleton->EditTime(DELTA_TIME);
+			continue;
+		}
+
 		if (_player->IsCollision_Bible(skeleton->GetCollider()))
 		{
 			skeleton->TakeDamage(_player->GetDamage());
+			skeleton->SetTime(0.0f);
 		}
-
-		break;
 	}
 }
 
@@ -184,5 +199,10 @@ void DungreedScene::ActivateSkeleton()
 	(*notActiveSkeleton)->SetActive(true);
 }
 
-// TODO(추가)
-// 2. player 반전 시, bow와 bible도 반전
+// TODO
+// 1. 부모 Srt 반영 안됨
+// 2. Skeleton 재활용 시, 죽은 자리에서 잠깐 랜더링됨
+// 3. Bible 충돌 처리 및 데미지 처리 체크
+// 4. player 반전 시, bow와 bible도 반전
+
+// 랜더링을 업데이트 후에?

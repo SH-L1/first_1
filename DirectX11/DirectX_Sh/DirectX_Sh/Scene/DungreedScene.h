@@ -32,4 +32,5 @@ private:
 
 	float _damageTime = 0.0f;
 	float _skeletonSpawnTime = 0.0f;
+	float _bibleDamageTime = 0.0f;
 };

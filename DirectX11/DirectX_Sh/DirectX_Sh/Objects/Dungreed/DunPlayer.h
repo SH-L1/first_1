@@ -53,7 +53,7 @@ private:
 	float _bibleTime = 0.0f;
 	int _bibleNum = 3;
 	int _bibleCount = 0;
-	float _bibleRadius = 700.0f;
+	float _bibleRadius = 1000.0f;
 
 	int _bulletNum = 30;
 	int _curMag = 0;

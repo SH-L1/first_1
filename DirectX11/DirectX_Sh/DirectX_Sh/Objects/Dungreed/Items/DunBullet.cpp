@@ -7,9 +7,9 @@ DunBullet::DunBullet()
 	_collider = make_shared<CircleCollider>(50);
 
     _bullet->GetTransform()->SetParent(_collider->GetTransform());
-    _bullet->GetTransform()->SetScale(Vector(1, 1));
-    _collider->GetTransform()->SetScale(Vector(0.08f, 0.08f));
-    _bullet->GetTransform()->SetPos(Vector(-300, 0));
+    _bullet->GetTransform()->SetScale(Vector(1.5f, 1.5f));
+    _collider->GetTransform()->SetScale(Vector(0.03f, 0.03f));
+    _bullet->GetTransform()->SetPos(Vector(-500, 0));
 }
 
 DunBullet::~DunBullet()

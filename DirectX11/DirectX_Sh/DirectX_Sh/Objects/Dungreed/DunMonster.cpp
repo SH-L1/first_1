@@ -9,6 +9,8 @@ DunMonster::DunMonster()
     _collider->SetPos(Vector(CENTRE.x, WIN_HEIGHT));
     _monster->GetTransform()->SetParent(_collider->GetTransform());
     _collider->GetTransform()->SetScale(Vector(0.2f, 0.2f));
+
+    _collider->Update();
 }
 
 DunMonster::~DunMonster()

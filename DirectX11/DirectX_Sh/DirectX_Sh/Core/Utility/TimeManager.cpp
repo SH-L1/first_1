@@ -45,4 +45,4 @@ void TimeManager::Update()
 	}
 
 	_runTime += _deltaTime; // 실제 진행된 시간
-}	
+}

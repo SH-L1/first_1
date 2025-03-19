@@ -3,14 +3,16 @@
 
 DunSkeleton::DunSkeleton()
 {
-    _skeleton = make_shared<Quad>(L"Resource/Skeleton.h");
+    _skeleton = make_shared<Quad>(L"Resource/Skeleton.png");
     _collider = make_shared<RectCollider>(_skeleton->GetImageSize());
 
-    Vector randPos = Random::RandomCord(_collider->GetWorldScale() * 0.5f);
-
-    _collider->SetPos(randPos);
     _skeleton->GetTransform()->SetParent(_collider->GetTransform());
-    _collider->GetTransform()->SetScale(Vector(1, 1));
+    _collider->GetTransform()->SetScale(Vector(0.15f, 0.2f));
+    _skeleton->GetTransform()->SetScale(Vector(6, 4.5));
+    
+    _skeleton->GetTransform()->SetPos(Vector(0, 40));
+
+    _collider->Update();
 }
 
 DunSkeleton::~DunSkeleton()
@@ -43,6 +45,19 @@ void DunSkeleton::PostRender()
     if (_isActive == false) return;
 
     _collider->Render();
+}
+
+void DunSkeleton::SetActive(bool active)
+{
+    _isActive = active;
+
+    if (_isActive = true)
+    {
+        Vector randPos = Random::RandomCord(_collider->GetWorldScale() * 0.5f);
+        _collider->SetPos(randPos);
+
+        _hp = 3;
+    }
 }
 
 void DunSkeleton::TakeDamage(int damage)

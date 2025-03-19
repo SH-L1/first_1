@@ -6,10 +6,11 @@
 #include "Scene/ArrowScene.h"
 #include "Scene/ColliderScene.h"
 #include "Scene/DungreedScene.h"
+#include "Scene/SuperMarioScene.h"
 
 Program::Program()
 {
-    _scene = make_shared<DungreedScene>();
+    _scene = make_shared<SuperMarioScene>();
 
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();
@@ -19,6 +20,8 @@ Program::Program()
 
     _view->Update();
     _projection->Update();
+
+    TimeManager::Instance()->SetLockFps(60);
 }
 
 Program::~Program()

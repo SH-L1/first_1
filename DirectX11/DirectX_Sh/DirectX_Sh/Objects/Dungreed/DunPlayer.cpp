@@ -15,12 +15,13 @@ DunPlayer::DunPlayer()
 	_playerBible = make_shared<Transform>();
 
 	_collider->SetPos(CENTRE);
+	_collider->Update();
 
 	_player->GetTransform()->SetParent(_collider->GetTransform());
 	_playerBow->SetParent(_collider->GetTransform());
 	_playerBible->SetParent(_collider->GetTransform());
 
-	_collider->GetTransform()->SetScale(Vector(0.08f, 0.08f));
+	_collider->GetTransform()->SetScale(Vector(0.05f, 0.05f));
 	_player->GetTransform()->AddScale(Vector(0.1f, 0.1f));
 	_player->GetTransform()->AddPos(Vector(0, 25));
 
@@ -52,13 +53,7 @@ void DunPlayer::Update()
 
 	Move();
 	Fire();
-	UpdateBible();
 	SetAim();
-
-	_player->Update();
-	_playerBow->Update();
-	_bow->Update();
-	_muzzle->Update();
 
 	if (_bibleTime > 10.0f)
 	{
@@ -73,6 +68,12 @@ void DunPlayer::Update()
 		bible->Update();
 	
 	_bibleTime += DELTA_TIME;
+
+	_player->Update();
+	_playerBow->Update();
+	_bow->Update();
+	_muzzle->Update();
+	UpdateBible();
 }
 
 void DunPlayer::Render()
@@ -164,10 +165,10 @@ void DunPlayer::Fire()
 		if (notActiveBullet == _bullets.end())
 			return;
 
-		(*notActiveBullet)->SetActive(true);
 		(*notActiveBullet)->SetPos(_muzzle->GetWorldPos());
 		(*notActiveBullet)->SetDir(_bowDir);
 		(*notActiveBullet)->SetAngle(_bowDir.Angle());
+		(*notActiveBullet)->SetActive(true);
 	}
 }
 
@@ -180,6 +181,9 @@ void DunPlayer::CreateBow()
 
 	_muzzle->SetParent(_bow->GetTransform());
 	_muzzle->SetPos(Vector(50, 3));
+
+	_bow->Update();
+	_muzzle->Update();
 }
 
 void DunPlayer::CreateBullet()
@@ -195,11 +199,11 @@ void DunPlayer::CreateBible()
 {
 	for (int i = 0; i < _bibleNum; i++)
 	{
-		shared_ptr<Bible> _bible = make_shared<Bible>();
-		_bible->GetCollider()->SetParent(_playerBible);
-		_bible->GetCollider()->SetPos(Vector(_bibleRadius, 0));
-		_bible->GetCollider()->GetTransform()->SetScale(Vector(1.5f, 1.5f));
-		_bibles.push_back(_bible);
+		shared_ptr<Bible> bible = make_shared<Bible>();
+		bible->GetCollider()->SetParent(_playerBible);
+		bible->GetCollider()->SetPos(Vector(_bibleRadius, 0));
+		bible->GetCollider()->GetTransform()->SetScale(Vector(1.5f, 1.5f));
+		_bibles.push_back(bible);
 	}
 }
 

@@ -1,14 +1,16 @@
 #include "framework.h"
 #include "TutorialScene.h"
 
-#include "Objects/Dungreed/Items/DunBullet.h"
+#include "Objects/Dungreed/DunSkeleton.h"
 
 TutorialScene::TutorialScene()
 {
-	test = make_shared<DunBullet>();
+	test = make_shared<DunSkeleton>();
 
 	test->SetActive(true);
-	test->SetPos(CENTRE);
+	test->GetCollider()->SetPos(CENTRE);
+
+	test->PreUpdate();
 }
 
 TutorialScene::~TutorialScene()

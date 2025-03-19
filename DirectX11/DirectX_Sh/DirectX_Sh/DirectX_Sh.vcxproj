@@ -140,18 +140,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Objects\Dungreed\DunSkeleton.h" />
-    <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Core\Collider\CircleCollider.h" />
     <ClInclude Include="Core\Collider\Collider.h" />
     <ClInclude Include="Core\Collider\RectCollider.h" />
-    <ClInclude Include="Objects\Dungreed\Background.h" />
-    <ClInclude Include="Objects\Dungreed\Items\DunBow.h" />
-    <ClInclude Include="Objects\Dungreed\Items\DunBullet.h" />
-    <ClInclude Include="Objects\Dungreed\DunMonster.h" />
-    <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
     <ClInclude Include="Core\Math\Random.h" />
-    <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Core\Utility\InputManager.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
     <ClInclude Include="Core\Buffers\ConstantBuffer.h" />
@@ -168,29 +160,23 @@
     <ClInclude Include="DirectX_Sh.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Core\Render\IndexBuffer.h" />
+    <ClInclude Include="Objects\SuperMario\Mario.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
+    <ClInclude Include="Scene\SuperMarioScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Math\Transform.h" />
     <ClInclude Include="Core\Utility\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Objects\Dungreed\DunSkeleton.cpp" />
-    <ClCompile Include="Objects\Dungreed\Items\Bible.cpp" />
     <ClCompile Include="Core\Collider\CircleCollider.cpp" />
     <ClCompile Include="Core\Collider\Collider.cpp" />
     <ClCompile Include="Core\Collider\RectCollider.cpp" />
-    <ClCompile Include="Objects\Dungreed\Background.cpp" />
-    <ClCompile Include="Objects\Dungreed\Items\DunBow.cpp" />
-    <ClCompile Include="Objects\Dungreed\Items\DunBullet.cpp" />
-    <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
-    <ClCompile Include="Objects\Dungreed\DunPlayer.cpp" />
     <ClCompile Include="Core\Math\Random.cpp" />
-    <ClCompile Include="Scene\DungreedScene.cpp" />
     <ClCompile Include="Core\Utility\InputManager.cpp" />
     <ClCompile Include="Core\Texture\BlendState.cpp" />
     <ClCompile Include="Core\Buffers\ConstantBuffer.cpp" />
@@ -207,6 +193,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Core\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Objects\SuperMario\Mario.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -214,6 +201,7 @@
     <ClCompile Include="Core\Texture\StateManager.cpp" />
     <ClCompile Include="Core\Utility\TimeManager.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />
+    <ClCompile Include="Scene\SuperMarioScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc" />
@@ -224,6 +212,55 @@
     <Image Include="Resource\Bow.png" />
     <Image Include="Resource\Bullet.png" />
     <Image Include="Resource\Map.png" />
+    <Image Include="Resource\Mario\1upMushroom.png" />
+    <Image Include="Resource\Mario\Brick.png" />
+    <Image Include="Resource\Mario\Bush1.png" />
+    <Image Include="Resource\Mario\Bush2.png" />
+    <Image Include="Resource\Mario\Bush3.png" />
+    <Image Include="Resource\Mario\Castle.png" />
+    <Image Include="Resource\Mario\Cloud1.png" />
+    <Image Include="Resource\Mario\Cloud2.png" />
+    <Image Include="Resource\Mario\Cloud3.png" />
+    <Image Include="Resource\Mario\Coin.png" />
+    <Image Include="Resource\Mario\Coin_Underground.png" />
+    <Image Include="Resource\Mario\EmptyBlock.png" />
+    <Image Include="Resource\Mario\Flag.png" />
+    <Image Include="Resource\Mario\FlagPole.png" />
+    <Image Include="Resource\Mario\Goomba_Flat.png" />
+    <Image Include="Resource\Mario\Goomba_Walk1.png" />
+    <Image Include="Resource\Mario\Goomba_Walk2.png" />
+    <Image Include="Resource\Mario\GroundBlock.png" />
+    <Image Include="Resource\Mario\HardBlock.png" />
+    <Image Include="Resource\Mario\Hill1.png" />
+    <Image Include="Resource\Mario\Hill2.png" />
+    <Image Include="Resource\Mario\Koopa_Shell.png" />
+    <Image Include="Resource\Mario\Koopa_Walk1.png" />
+    <Image Include="Resource\Mario\Koopa_Walk2.png" />
+    <Image Include="Resource\Mario\MagicMushroom.png" />
+    <Image Include="Resource\Mario\Mario_Big_Idle.png" />
+    <Image Include="Resource\Mario\Mario_Big_Jump.png" />
+    <Image Include="Resource\Mario\Mario_Big_Run1.png" />
+    <Image Include="Resource\Mario\Mario_Big_Run2.png" />
+    <Image Include="Resource\Mario\Mario_Big_Run3.png" />
+    <Image Include="Resource\Mario\Mario_Big_Slide.png" />
+    <Image Include="Resource\Mario\Mario_Small_Death.png" />
+    <Image Include="Resource\Mario\Mario_Small_Idle.png" />
+    <Image Include="Resource\Mario\Mario_Small_Jump.png" />
+    <Image Include="Resource\Mario\Mario_Small_Run1.png" />
+    <Image Include="Resource\Mario\Mario_Small_Run2.png" />
+    <Image Include="Resource\Mario\Mario_Small_Run3.png" />
+    <Image Include="Resource\Mario\Mario_Small_Slide.png" />
+    <Image Include="Resource\Mario\MysteryBlock.png" />
+    <Image Include="Resource\Mario\PipeBottom.png" />
+    <Image Include="Resource\Mario\PipeConnection.png" />
+    <Image Include="Resource\Mario\PipeTop.png" />
+    <Image Include="Resource\Mario\Starman.png" />
+    <Image Include="Resource\Mario\Tiles\bg-1-1-a.png" />
+    <Image Include="Resource\Mario\Tiles\blocks.png" />
+    <Image Include="Resource\Mario\Tiles\enemies.png" />
+    <Image Include="Resource\Mario\Tiles\mario_and_items.png" />
+    <Image Include="Resource\Mario\UndergroundBlock.png" />
+    <Image Include="Resource\Mario\UndergroundBrick.png" />
     <Image Include="Resource\monster.png" />
     <Image Include="Resource\MonsterAttack.png.png" />
     <Image Include="Resource\Player.png" />
