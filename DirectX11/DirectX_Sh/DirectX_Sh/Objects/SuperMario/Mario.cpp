@@ -3,7 +3,7 @@
 
 Mario::Mario()
 {
-	_mario = make_shared<Quad>(L"Resource/")
+	_mario = make_shared<Quad>(L"Resource/");
 }
 
 Mario::~Mario()

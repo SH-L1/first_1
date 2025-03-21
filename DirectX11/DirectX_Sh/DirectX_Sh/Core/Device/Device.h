@@ -14,7 +14,7 @@ public:
 			delete _instance;
 	}
 
-	static Device* Instance()
+	static Device* GetInstance()
 	{
 		return _instance;
 	}

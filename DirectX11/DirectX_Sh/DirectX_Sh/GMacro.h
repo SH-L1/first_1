@@ -2,24 +2,24 @@
 
 #define PI 3.141592f
 
-#define DEVICE Device::Instance()->GetDevice()
-#define DC Device::Instance()->GetDC()
+#define DEVICE Device::GetInstance()->GetDevice()
+#define DC Device::GetInstance()->GetDC()
 
 #define WIN_WIDTH 1280
 #define WIN_HEIGHT 720
 #define CENTRE Vector(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f)
 
-#define SAMPLER StateManager::Instance()->GetSampler()
-#define BLEND StateManager::Instance()->GetBlend()
-#define ALPHA StateManager::Instance()->GetAlpha()
-#define ADDITIVE StateManager::Instance()->GetAdditive()
+#define SAMPLER StateManager::GetInstance()->GetSampler()
+#define BLEND StateManager::GetInstance()->GetBlend()
+#define ALPHA StateManager::GetInstance()->GetAlpha()
+#define ADDITIVE StateManager::GetInstance()->GetAdditive()
 
-#define KEY_DOWN(k) InputManager::Instance()->Down(k)
-#define KEY_UP(k) InputManager::Instance()->Up(k)
-#define KEY_PRESS(k) InputManager::Instance()->Press(k)
+#define KEY_DOWN(k) InputManager::GetInstance()->Down(k)
+#define KEY_UP(k) InputManager::GetInstance()->Up(k)
+#define KEY_PRESS(k) InputManager::GetInstance()->Press(k)
 
-#define DELTA_TIME TimeManager::Instance()->DeltaTime()
-#define RUN_TIME TimeManager::Instance()->RunTime()
+#define DELTA_TIME TimeManager::GetInstance()->DeltaTime()
+#define RUN_TIME TimeManager::GetInstance()->RunTime()
 
 #define LERP(start, end, ratio)  start + (end - start) * ratio
 

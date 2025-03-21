@@ -19,7 +19,7 @@ public:
 			delete _instance;
 	}
 
-	static TimeManager* Instance()
+	static TimeManager* GetInstance()
 	{
 		if (_instance != nullptr)
 			return _instance;

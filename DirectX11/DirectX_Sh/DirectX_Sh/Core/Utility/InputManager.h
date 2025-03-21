@@ -29,7 +29,7 @@ public:
 			delete _instance;
 	}
 
-	static InputManager* Instance()
+	static InputManager* GetInstance()
 	{
 		if (_instance != nullptr)
 			return _instance;

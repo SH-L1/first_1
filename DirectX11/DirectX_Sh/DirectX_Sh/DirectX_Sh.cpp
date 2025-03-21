@@ -34,6 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DIRECTXSH));
 
     Device::Create();
+
     StateManager::Create();
     InputManager::Create();
     TimeManager::Create();

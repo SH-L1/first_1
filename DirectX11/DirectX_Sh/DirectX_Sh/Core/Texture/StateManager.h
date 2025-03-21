@@ -15,7 +15,7 @@ public:
 			delete _instance;
 	}
 
-	static StateManager* Instance() { return _instance; }
+	static StateManager* GetInstance() { return _instance; }
 
 	shared_ptr<SamplerState> GetSampler() { return _sampler; }
 	shared_ptr<BlendState> GetBlend() { return _blendState; }

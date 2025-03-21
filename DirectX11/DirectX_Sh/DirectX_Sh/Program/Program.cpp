@@ -21,7 +21,7 @@ Program::Program()
     _view->Update();
     _projection->Update();
 
-    TimeManager::Instance()->SetLockFps(60);
+    TimeManager::GetInstance()->SetLockFps(60);
 }
 
 Program::~Program()
@@ -30,8 +30,8 @@ Program::~Program()
 
 void Program::Update()
 {
-    InputManager::Instance()->Update();
-    TimeManager::Instance()->Update();
+    InputManager::GetInstance()->Update();
+    TimeManager::GetInstance()->Update();
 
     _scene->PreUpdate();
     _scene->Update();
@@ -45,7 +45,7 @@ void Program::Render()
 
     FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
 
-    DC->ClearRenderTargetView(Device::Instance()->GetRTV().Get(), clearColor);
+    DC->ClearRenderTargetView(Device::GetInstance()->GetRTV().Get(), clearColor);
 
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -58,5 +58,5 @@ void Program::Render()
     _scene->Render();
     _scene->PostRender();
 
-    Device::Instance()->GetSwapChain()->Present(0, 0);
+    Device::GetInstance()->GetSwapChain()->Present(0, 0);
 }
