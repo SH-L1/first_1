@@ -58,6 +58,7 @@
     <ClInclude Include="Objects\Dungreed\Background.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
+    <ClInclude Include="Scene\RayTracingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -160,6 +161,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Dungreed\DunSkeleton.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\RayTracingScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -356,5 +360,6 @@
     <FxCompile Include="Shaders\ColliderPixelShader.hlsl" />
     <FxCompile Include="Shaders\TextureVertexShader.hlsl" />
     <FxCompile Include="Shaders\TexturePixelShader.hlsl" />
+    <FxCompile Include="Shaders\RayTracingPixelShader.hlsl" />
   </ItemGroup>
 </Project>

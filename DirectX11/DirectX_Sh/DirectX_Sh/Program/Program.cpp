@@ -7,10 +7,11 @@
 #include "Scene/ColliderScene.h"
 #include "Scene/DungreedScene.h"
 #include "Scene/SuperMarioScene.h"
+#include "Scene/RayTracingScene.h"
 
 Program::Program()
 {
-    _scene = make_shared<SuperMarioScene>();
+    _scene = make_shared<RayTracingScene>();
 
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();

@@ -80,6 +80,7 @@ using namespace Microsoft;
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"
+#include "Objects/RayTracing/RayTracingRenderer.h"
 
 // SCENE
 #include "Scene/Scene.h"

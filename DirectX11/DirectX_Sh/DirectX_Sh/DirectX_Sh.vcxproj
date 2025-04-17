@@ -172,6 +172,7 @@
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\DungreedScene.h" />
+    <ClInclude Include="Scene\RayTracingScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Scene\DungreedScene.cpp" />
+    <ClCompile Include="Scene\RayTracingScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Core\Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
@@ -306,6 +308,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shaders\RayTracingPixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\TexturePixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
