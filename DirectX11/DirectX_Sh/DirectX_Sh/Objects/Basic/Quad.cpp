@@ -9,6 +9,8 @@ Quad::Quad(wstring textureFile)
     _transform = make_shared<Transform>();
     _leftRightBuffer = make_shared<LeftRightBuffer>();
     _colorBuffer = make_shared<ColorBuffer>();
+    _rayBuffer = make_shared<RayTracingBuffer>();
+    _objects = make_shared<StructuredBuffer<ObjectData>>(1);
 
     SetLeftRight(0);
     AddColor(XMFLOAT4(0, 0, 0, 0));
@@ -35,6 +37,8 @@ void Quad::Render()
     _transform->SetVS(0);
     _leftRightBuffer->SetPS(0);
     _colorBuffer->SetPS(1);
+    _rayBuffer->SetPS(2);
+    _objects->SetPS(1);
 
     _srv->PSSet_SRV(0);
     SAMPLER->PSSet_Sampler(0);
@@ -45,7 +49,7 @@ void Quad::Render()
 void Quad::CreateMaterial(wstring textureFile)
 {
     _vs = make_shared<VertexShader>(L"Shaders/TextureVertexShader.hlsl");
-    _ps = make_shared<PixelShader>(L"Shaders/TexturePixelShader.hlsl");
+    _ps = make_shared<PixelShader>(L"Shaders/RayTracingPixelShader.hlsl");
 
     _srv = make_shared<SRV>(textureFile);
 }

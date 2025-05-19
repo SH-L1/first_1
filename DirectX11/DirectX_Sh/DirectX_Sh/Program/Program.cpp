@@ -2,11 +2,7 @@
 #include "Program.h"
 
 #include "Scene/TutorialScene.h"
-#include "Scene/SolarSystemScene.h"
-#include "Scene/ArrowScene.h"
-#include "Scene/ColliderScene.h"
 #include "Scene/DungreedScene.h"
-#include "Scene/SuperMarioScene.h"
 #include "Scene/RayTracingScene.h"
 
 Program::Program()

@@ -27,5 +27,4 @@ void IndexBuffer::CreateIndexBuffer(void* data)
     initData.pSysMem = data;
 
     DEVICE->CreateBuffer(&bd, &initData, _indexBuffer.GetAddressOf());
-
 }

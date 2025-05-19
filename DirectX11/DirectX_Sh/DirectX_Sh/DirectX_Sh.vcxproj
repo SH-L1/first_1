@@ -160,6 +160,7 @@
     <ClInclude Include="DirectX_Sh.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Core\Render\IndexBuffer.h" />
+    <ClInclude Include="Objects\Ray\Mario.h" />
     <ClInclude Include="Objects\Dungreed\Background.h" />
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
@@ -167,19 +168,19 @@
     <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Objects\Dungreed\Items\DunBow.h" />
     <ClInclude Include="Objects\Dungreed\Items\DunBullet.h" />
-    <ClInclude Include="Objects\SuperMario\Mario.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Scene\RayTracingScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
-    <ClInclude Include="Scene\SuperMarioScene.h" />
+    <ClInclude Include="Core\Buffers\StructuredBuffer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Math\Transform.h" />
     <ClInclude Include="Core\Utility\TimeManager.h" />
+    <ClInclude Include="Objects\Ray\Torch.h" />
+    <ClInclude Include="Objects\Ray\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Collider\CircleCollider.cpp" />
@@ -202,6 +203,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">framework.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Core\Render\IndexBuffer.cpp" />
+    <ClCompile Include="Objects\Ray\Mario.cpp" />
     <ClCompile Include="Objects\Dungreed\Background.cpp" />
     <ClCompile Include="Objects\Dungreed\DunMonster.cpp" />
     <ClCompile Include="Objects\Dungreed\DunPlayer.cpp" />
@@ -209,17 +211,17 @@
     <ClCompile Include="Objects\Dungreed\Items\Bible.cpp" />
     <ClCompile Include="Objects\Dungreed\Items\DunBow.cpp" />
     <ClCompile Include="Objects\Dungreed\Items\DunBullet.cpp" />
-    <ClCompile Include="Objects\SuperMario\Mario.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
-    <ClCompile Include="Scene\DungreedScene.cpp" />
     <ClCompile Include="Scene\RayTracingScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Core\Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
     <ClCompile Include="Core\Utility\TimeManager.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />
-    <ClCompile Include="Scene\SuperMarioScene.cpp" />
+    <ClCompile Include="Objects\Ray\Torch.cpp" />
+    <ClCompile Include="Objects\Ray\Wall.cpp" />
+    <ClCompile Include="Core\Buffers\StructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_Sh.rc" />

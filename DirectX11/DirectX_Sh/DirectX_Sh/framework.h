@@ -68,6 +68,7 @@ using namespace Microsoft;
 // BUFFER
 #include "Core/Buffers/ConstantBuffer.h"
 #include "Core/Buffers/BufferLayout.h"
+#include "Core/Buffers/StructuredBuffer.h"
 
 // UTILITY
 #include "Core/Utility/InputManager.h"
@@ -80,7 +81,10 @@ using namespace Microsoft;
 
 // OBJECTS
 #include "Objects/Basic/Quad.h"
-#include "Objects/RayTracing/RayTracingRenderer.h"
+
+#include "Objects/Ray/Mario.h"
+#include "Objects/Ray/Torch.h"
+#include "Objects/Ray/Wall.h"
 
 // SCENE
 #include "Scene/Scene.h"

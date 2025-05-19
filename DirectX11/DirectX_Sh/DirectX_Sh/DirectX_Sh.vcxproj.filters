@@ -48,9 +48,6 @@
     <ClInclude Include="Core\Collider\RectCollider.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="Core\Math\Random.h" />
-    <ClInclude Include="Scene\SuperMarioScene.h" />
-    <ClInclude Include="Objects\SuperMario\Mario.h" />
-    <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Objects\Dungreed\DunSkeleton.h" />
     <ClInclude Include="Objects\Dungreed\Items\Bible.h" />
     <ClInclude Include="Objects\Dungreed\Items\DunBow.h" />
@@ -59,6 +56,10 @@
     <ClInclude Include="Objects\Dungreed\DunMonster.h" />
     <ClInclude Include="Objects\Dungreed\DunPlayer.h" />
     <ClInclude Include="Scene\RayTracingScene.h" />
+    <ClInclude Include="Objects\Ray\Mario.h" />
+    <ClInclude Include="Objects\Ray\Torch.h" />
+    <ClInclude Include="Objects\Ray\Wall.h" />
+    <ClInclude Include="Core\Buffers\StructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_Sh.cpp">
@@ -133,15 +134,6 @@
     <ClCompile Include="Core\Math\Random.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\SuperMarioScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\SuperMario\Mario.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\DungreedScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Dungreed\Items\Bible.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -164,6 +156,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\RayTracingScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Ray\Mario.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Ray\Torch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Ray\Wall.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Buffers\StructuredBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
