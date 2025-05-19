@@ -32,6 +32,9 @@ private:
 	weak_ptr<Torch> _torch;
 	weak_ptr<RectCollider> _ground;
 
+	RayTracingBuffer::Data _rayData;
+	ObjectData _objData;
+
 private:
 	Vector _velocity = Vector(0, 0);
 	bool _isJumping = false;
