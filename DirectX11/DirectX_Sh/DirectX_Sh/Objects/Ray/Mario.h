@@ -21,6 +21,7 @@ public:
 
 	shared_ptr<Transform> GetTransform() { return _player->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
+	shared_ptr<Quad> GetQuad() { return _player; }
 	ObjectData GetObjectData() { return _objData; }
 	RayTracingBuffer::Data GetLightData() { return _rayData; }
 
@@ -34,7 +35,7 @@ private:
 	shared_ptr<Quad> _player;
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Transform> _equipment;
-	
+
 	weak_ptr<Torch> _torch;
 	weak_ptr<RectCollider> _ground;
 

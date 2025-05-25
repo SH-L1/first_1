@@ -1,4 +1,3 @@
-// Quad.cpp - 디버깅 강화 버전
 #include "framework.h"
 #include "Quad.h"
 
@@ -15,9 +14,6 @@ Quad::Quad(wstring textureFile)
 
     SetLeftRight(0);
     AddColor(XMFLOAT4(0, 0, 0, 0));
-
-    // 디버그 출력
-    OutputDebugStringA("Quad created successfully\n");
 }
 
 Quad::~Quad()
@@ -31,123 +27,36 @@ void Quad::Update()
 
 void Quad::Render()
 {
-    // 디버그 출력 추가
-    static int renderCount = 0;
-    if (renderCount % 60 == 0) // 1초마다 한 번씩 출력
-    {
-        OutputDebugStringA("Quad::Render() called\n");
-    }
-    renderCount++;
-
-    // 모든 업데이트 확인
     _transform->Update();
     _leftRightBuffer->Update();
     _colorBuffer->Update();
     _rayBuffer->Update();
     _objects->Update();
 
-    // 입력 레이아웃 설정 확인
-    if (_vs)
-    {
-        _vs->IASetInputLayout();
-        OutputDebugStringA("Input layout set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: Vertex shader is null!\n");
-        return;
-    }
+    _vs->IASetInputLayout();
+    _vertexBuffer->IASet(0);
+    _indexBuffer->IASetIndexBuffer();
 
-    // 버퍼 설정 확인
-    if (_vertexBuffer)
-    {
-        _vertexBuffer->IASet(0);
-        OutputDebugStringA("Vertex buffer set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: Vertex buffer is null!\n");
-        return;
-    }
+    _vs->VSSet();
+    _ps->PSSet();
 
-    if (_indexBuffer)
-    {
-        _indexBuffer->IASetIndexBuffer();
-        OutputDebugStringA("Index buffer set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: Index buffer is null!\n");
-        return;
-    }
-
-    // 셰이더 설정 확인
-    if (_vs && _ps)
-    {
-        _vs->VSSet();
-        _ps->PSSet();
-        OutputDebugStringA("Shaders set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: Shaders are null!\n");
-        return;
-    }
-
-    // 상수 버퍼 설정
     _transform->SetVS(0);
     _leftRightBuffer->SetPS(0);
     _objects->SetPS(1);
     _colorBuffer->SetPS(2);
     _rayBuffer->SetPS(3);
 
-    // 텍스처 및 샘플러 설정 확인
-    if (_srv)
-    {
-        _srv->PSSet_SRV(0);
-        OutputDebugStringA("Texture set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: SRV is null!\n");
-    }
+    _srv->PSSet_SRV(0);
+    SAMPLER->PSSet_Sampler(0);
 
-    if (SAMPLER)
-    {
-        SAMPLER->PSSet_Sampler(0);
-        OutputDebugStringA("Sampler set\n");
-    }
-    else
-    {
-        OutputDebugStringA("ERROR: Sampler is null!\n");
-    }
-
-    // 드로우 콜 전 최종 확인
-    OutputDebugStringA("About to call DrawIndexed\n");
-
-    // 실제 드로우 콜
     DC->DrawIndexed(_indices.size(), 0, 0);
-
-    OutputDebugStringA("DrawIndexed completed\n");
 }
 
 void Quad::CreateMaterial(wstring textureFile)
 {
-    try
-    {
-        _vs = make_shared<VertexShader>(L"Shaders/TextureVertexShader.hlsl");
-        OutputDebugStringA("Vertex shader created\n");
-
-        _ps = make_shared<PixelShader>(L"Shaders/RayTracingPixelShader.hlsl");
-        OutputDebugStringA("Pixel shader created\n");
-
-        _srv = make_shared<SRV>(textureFile);
-        OutputDebugStringA("SRV created\n");
-    }
-    catch (...)
-    {
-        OutputDebugStringA("ERROR: Exception in CreateMaterial\n");
-    }
+    _vs = make_shared<VertexShader>(L"Shaders/TextureVertexShader.hlsl");
+    _ps = make_shared<PixelShader>(L"Shaders/RayTracingPixelShader.hlsl");
+    _srv = make_shared<SRV>(textureFile);
 }
 
 void Quad::CreateMesh()
@@ -162,16 +71,6 @@ void Quad::CreateMesh()
 
     _indices = { 0, 1, 2, 0, 2, 3 };
 
-    try
-    {
-        _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
-        OutputDebugStringA("Vertex buffer created\n");
-
-        _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
-        OutputDebugStringA("Index buffer created\n");
-    }
-    catch (...)
-    {
-        OutputDebugStringA("ERROR: Exception in CreateMesh\n");
-    }
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(Vertex_Texture), _vertices.size(), 0);
+    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
 }

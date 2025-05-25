@@ -14,7 +14,7 @@ Program::Program()
 
     XMMATRIX viewM = XMMatrixIdentity();
     XMMATRIX projectionM = XMMatrixOrthographicOffCenterLH(0, WIN_WIDTH, 0, WIN_HEIGHT, 0, 1.0f);
-    
+
     _view->SetData(viewM);
     _projection->SetData(projectionM);
 
@@ -50,7 +50,6 @@ void Program::Render()
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     ALPHA->SetState();
-    //ADDITIVE->SetState();
 
     _view->SetVS(1);
     _projection->SetVS(2);

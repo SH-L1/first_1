@@ -109,9 +109,8 @@ float3 TraceRay(float2 origin, float2 dir)
             hitSomething = true;
             float2 hit2D = origin + dir * t;
             
-            // UV 계산 수정
             float2 localUV = (hit2D - (obj.pos - obj.size * 0.5)) / obj.size;
-            localUV = saturate(localUV); // 0-1 범위로 클램핑
+            localUV = saturate(localUV);
             float2 texUV = obj.uvOffset + localUV * obj.uvScale;
             
             if (leftRight == 0)
@@ -128,23 +127,20 @@ float3 TraceRay(float2 origin, float2 dir)
             float diff = max(dot(N, L), 0.0);
 
             float dist = length(lightPos3 - float3(hit2D, 0));
-            float attenuation = 1.0 / (1.0 + dist * 0.01); // 감쇠 공식 수정
+            float attenuation = 1.0 / (1.0 + dist * 0.01);
 
             finalColor = baseCol * (ambient + diffCoef * diff * lightInt * attenuation) + color.rgb;
         }
     }
 
-    // 아무것도 맞지 않았을 때 배경 처리
     if (!hitSomething)
     {
-        // 기본 텍스처 사용 (현재 오브젝트의 텍스처)
-        float2 uv = (origin / float2(1280, 720)); // 화면 좌표를 UV로 변환
+        float2 uv = (origin / float2(1280, 720));
         if (leftRight != 0)
             uv.x = 1.0 - uv.x;
         
         float3 texColor = map.Sample(samp, saturate(uv)).rgb;
         
-        // 간단한 거리 기반 조명
         float dist = length(lightPos3.xy - origin);
         float attenuation = 1.0 / (1.0 + dist * 0.005);
         float lighting = ambient + diffCoef * lightInt * attenuation;
@@ -157,23 +153,21 @@ float3 TraceRay(float2 origin, float2 dir)
 
 float4 PS(PixelInput input) : SV_TARGET
 {
-    // 현재 픽셀의 월드 좌표 (수정된 변환)
     float2 pixelPos = input.pos.xy;
-    float2 worldPos = float2(pixelPos.x, screenOrigin.y - pixelPos.y);
+    float2 worldPos = float2(pixelPos.x, pixelPos.y);
     
-    // 여러 방향으로 레이 발사 (더 현실적인 레이트레이싱)
     float3 finalColor = float3(0, 0, 0);
-    int rayCount = 4; // 4개 방향으로 레이 발사
+    int rayCount = 4;
     
     for (int r = 0; r < rayCount; r++)
     {
-        float angle = (float(r) / float(rayCount)) * 6.28318; // 2*PI
+        float angle = (float(r) / float(rayCount)) * 6.28318;
         float2 rayDir = float2(cos(angle), sin(angle));
         
         finalColor += TraceRay(worldPos, rayDir);
     }
     
-    finalColor /= float(rayCount); // 평균값
+    finalColor /= float(rayCount);
     
     return float4(finalColor, 1.0);
 }
