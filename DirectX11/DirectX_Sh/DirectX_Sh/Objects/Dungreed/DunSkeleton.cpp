@@ -6,6 +6,26 @@ DunSkeleton::DunSkeleton()
     _skeleton = make_shared<Quad>(L"Resource/Skeleton.png");
     _collider = make_shared<RectCollider>(_skeleton->GetImageSize());
 
+    RayTracingBuffer::Data rayData;
+    rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
+    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);  // 광원 제거
+    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);  // ambient만 사용
+    rayData.objectCount = 1;
+    _skeleton->SetRayTracingData(rayData);
+
+    Vector imageSize = _skeleton->GetImageSize();
+    Vector worldScale = _skeleton->GetTransform()->GetWorldScale();
+    ObjectData objData;
+    objData.pos = _collider->GetWorldPos();
+    objData.size = XMFLOAT2(imageSize.x * worldScale.x, imageSize.y * worldScale.y);
+    objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
+    objData.uvScale = XMFLOAT2(1.0f, 1.0f);
+    objData.reflectivity = 0.0f;  // 반사 제거
+    objData.type = 0;
+    objData.pad0 = 0;
+    objData.pad1 = 0;
+    _skeleton->SetObjectData(objData);
+
     _skeleton->GetTransform()->SetParent(_collider->GetTransform());
     _collider->GetTransform()->SetScale(Vector(0.15f, 0.2f));
     _skeleton->GetTransform()->SetScale(Vector(6, 4.5));
@@ -30,12 +50,36 @@ void DunSkeleton::Update()
 {
     if (_isActive == false) return;
 
+    Vector imageSize = _skeleton->GetImageSize();
+    Vector worldScale = _skeleton->GetTransform()->GetWorldScale();
+    ObjectData objData;
+    objData.pos = _collider->GetWorldPos();
+    objData.size = XMFLOAT2(imageSize.x * worldScale.x, imageSize.y * worldScale.y);
+    objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
+    objData.uvScale = XMFLOAT2(1.0f, 1.0f);
+    objData.reflectivity = 0.0f;  // 반사 제거
+    objData.type = 0;
+    objData.pad0 = 0;
+    objData.pad1 = 0;
+    _skeleton->SetObjectData(objData);
+
     _skeleton->Update();
 }
 
 void DunSkeleton::Render()
 {
     if (_isActive == false) return;
+
+    // 디버그용 색상 설정
+    _skeleton->AddColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));  // 흰색으로 설정
+    
+    // 버퍼 업데이트
+    RayTracingBuffer::Data rayData;
+    rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
+    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);  // 광원 제거
+    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);  // ambient만 사용
+    rayData.objectCount = 1;
+    _skeleton->SetRayTracingData(rayData);
 
     _skeleton->Render();
 }

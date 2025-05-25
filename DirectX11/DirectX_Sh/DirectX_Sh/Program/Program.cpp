@@ -12,7 +12,10 @@ Program::Program()
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();
 
+    XMMATRIX viewM = XMMatrixIdentity();
     XMMATRIX projectionM = XMMatrixOrthographicOffCenterLH(0, WIN_WIDTH, 0, WIN_HEIGHT, 0, 1.0f);
+    
+    _view->SetData(viewM);
     _projection->SetData(projectionM);
 
     _view->Update();
@@ -38,7 +41,7 @@ void Program::Render()
 {
     FLOAT myColorR = 0.0f;
     FLOAT myColorG = 0.0f;
-    FLOAT myColorB = 0.0f;
+    FLOAT myColorB = 1.0f;
 
     FLOAT clearColor[4] = { myColorR, myColorG, myColorB, 1.0f };
 

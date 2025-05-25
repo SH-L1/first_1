@@ -1,5 +1,7 @@
 #pragma once
 
+class Torch;
+
 class Mario
 {
 public:
@@ -14,10 +16,14 @@ public:
 	void SetGround(const shared_ptr<RectCollider>& ground) { _ground = ground; }
 	void SetTorch(const shared_ptr<Torch>& torch) { _torch = torch; }
 	void SetPos(Vector pos) { _collider->GetTransform()->SetPos(pos); }
+	void SetObjectData(ObjectData objData) { _objData = objData; }
+	void SetLightData(RayTracingBuffer::Data rayData, int size) { _rayData = rayData; }
 
 	shared_ptr<Transform> GetTransform() { return _player->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
-	 
+	ObjectData GetObjectData() { return _objData; }
+	RayTracingBuffer::Data GetLightData() { return _rayData; }
+
 	void Input();
 
 private:

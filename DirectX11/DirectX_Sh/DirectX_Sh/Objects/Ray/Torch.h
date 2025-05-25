@@ -14,16 +14,25 @@ public:
 	void Falling();
 
 	void SetActive(bool active) { _isActive = active; }
+	void SetGround(const shared_ptr<RectCollider>& ground) { _ground = ground; }
 
 	shared_ptr<Transform> GetTransform() { return _torch->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	bool GetActive() { return _isActive; }
+
+	void SetLightData(const RayTracingBuffer::Data& data) { _rayData = data; }
+	RayTracingBuffer::Data GetLightData() { return _rayData; }
+	void SetObjectData(const ObjectData& data) { _objData = data; }
+	ObjectData GetObjectData() { return _objData; }
 
 private:
 	shared_ptr<Quad> _torch;
 	shared_ptr<RectCollider> _collider;
 
 	weak_ptr<RectCollider> _ground;
+
+	RayTracingBuffer::Data _rayData;
+	ObjectData _objData;
 
 private:
 	bool _isActive = false;

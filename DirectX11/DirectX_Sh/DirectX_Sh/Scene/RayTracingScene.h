@@ -6,10 +6,10 @@ public:
     RayTracingScene();
     ~RayTracingScene();
 
-    virtual void PreUpdate() override {}
+    virtual void PreUpdate() override;
     virtual void Update() override;
     virtual void Render() override;
-    virtual void PostRender() override {}
+    virtual void PostRender() override;
 
     void CreateTorchOnSreen();
 

@@ -3,7 +3,7 @@
 
 Wall::Wall()
 {
-	_wall = make_shared<Quad>(L"");
+	_wall = make_shared<Quad>(L"Resource/Mario/GroundBlock.png");
 	_collider = make_shared<RectCollider>(_wall->GetImageSize());
 }
 

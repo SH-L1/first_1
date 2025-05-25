@@ -70,7 +70,7 @@ public:
 		XMFLOAT4 lightAndShadow;
 		XMFLOAT4 material;
 		int objectCount;
-		int padding[3];
+		int padding2[3];
 	};
 
 	RayTracingBuffer() : ConstantBuffer(&_data, sizeof(Data)) {}
