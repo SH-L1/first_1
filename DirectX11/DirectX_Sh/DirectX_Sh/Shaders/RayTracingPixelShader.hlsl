@@ -133,41 +133,32 @@ float3 TraceRay(float2 origin, float2 dir)
         }
     }
 
-    if (!hitSomething)
-    {
-        float2 uv = (origin / float2(1280, 720));
-        if (leftRight != 0)
-            uv.x = 1.0 - uv.x;
-        
-        float3 texColor = map.Sample(samp, saturate(uv)).rgb;
-        
-        float dist = length(lightPos3.xy - origin);
-        float attenuation = 1.0 / (1.0 + dist * 0.005);
-        float lighting = ambient + diffCoef * lightInt * attenuation;
-        
-        finalColor = texColor * lighting + color.rgb;
-    }
-
     return finalColor;
 }
 
 float4 PS(PixelInput input) : SV_TARGET
 {
-    float2 pixelPos = input.pos.xy;
-    float2 worldPos = float2(pixelPos.x, pixelPos.y);
+    float2 worldPos = float2(input.pos.x, input.pos.y);
     
-    float3 finalColor = float3(0, 0, 0);
-    int rayCount = 4;
+    float2 lightPos = lightAndShadow.xy;
+    float2 rayDir = normalize(lightPos - worldPos);
     
-    for (int r = 0; r < rayCount; r++)
+    float3 rayColor = TraceRay(worldPos, rayDir);
+    
+    if (length(rayColor) < 0.01)
     {
-        float angle = (float(r) / float(rayCount)) * 6.28318;
-        float2 rayDir = float2(cos(angle), sin(angle));
+        float2 uv = input.uv;
+        if (leftRight != 0)
+            uv.x = 1.0 - uv.x;
         
-        finalColor += TraceRay(worldPos, rayDir);
+        float3 texColor = map.Sample(samp, uv).rgb;
+        
+        float dist = length(lightPos - worldPos);
+        float attenuation = 1.0 / (1.0 + dist * 0.005);
+        float lighting = material.x + material.y * lightAndShadow.z * attenuation;
+        
+        rayColor = texColor * lighting + color.rgb;
     }
     
-    finalColor /= float(rayCount);
-    
-    return float4(finalColor, 1.0);
+    return float4(rayColor, 1.0);
 }

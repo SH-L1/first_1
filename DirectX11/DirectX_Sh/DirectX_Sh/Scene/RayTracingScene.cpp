@@ -17,11 +17,11 @@ RayTracingScene::RayTracingScene()
         _walls.push_back(wall);
     }
 
-    _walls[0]->SetPos(Vector(WIN_WIDTH * 0.5f, 50.0f));
-    _walls[1]->SetPos(Vector(WIN_WIDTH * 0.2f, WIN_HEIGHT * 0.3f));
-    _walls[2]->SetPos(Vector(WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.6f));
+    _walls[0]->SetPos(Vector(WIN_WIDTH * 0.5f, 100.0f));  
+    _walls[1]->SetPos(Vector(WIN_WIDTH * 0.2f, WIN_HEIGHT * 0.4f)); 
+    _walls[2]->SetPos(Vector(WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.7f)); 
 
-    _player->SetPos(Vector(CENTRE.x, 200.0f));
+    _player->SetPos(Vector(CENTRE.x, 300.0f));
     _player->SetGround(_walls[0]->GetCollider());
 
     vector<shared_ptr<RectCollider>> allGrounds;
@@ -83,7 +83,10 @@ void RayTracingScene::Update()
     for (auto torch : _torches)
     {
         if (torch->GetActive())
+        {
             _player->SetTorch(torch);
+            break; 
+        }
     }
 }
 
@@ -95,10 +98,10 @@ void RayTracingScene::Render()
     {
         ObjectData objData;
         objData.pos = wall->GetCollider()->GetWorldPos();
-        objData.size = wall->GetCollider()->GetWorldScale();
+        objData.size = wall->GetFinalSize();
         objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
         objData.uvScale = XMFLOAT2(1.0f, 1.0f);
-        objData.reflectivity = 0.5f;
+        objData.reflectivity = 0.3f;
         objData.type = 0;
         objData.pad0 = 0;
         objData.pad1 = 0;
@@ -147,16 +150,16 @@ void RayTracingScene::Render()
     _player->GetQuad()->SetRayTracingData(rayData);
     _player->GetQuad()->SetObjectData(objects.data(), objects.size());
 
+    for (auto wall : _walls)
+    {
+        wall->Render();
+    }
+
     _player->Render();
 
     for (auto torch : activeTorches)
     {
         torch->Render();
-    }
-
-    for (auto wall : _walls)
-    {
-        wall->Render();
     }
 }
 

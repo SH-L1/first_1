@@ -3,22 +3,25 @@
 
 Torch::Torch()
 {
-    _torch = make_shared<Quad>(L"Resource/Mario/Coin.png");
+    _torch = make_shared<Quad>(L"Resource/Torch.png");
     _collider = make_shared<RectCollider>(_torch->GetImageSize());
 
     _torch->GetTransform()->SetParent(_collider->GetTransform());
-    _torch->GetTransform()->SetScale(Vector(8.0f, 8.0f));
-    _collider->GetTransform()->SetScale(Vector(1.5f, 1.5f));
+    _collider->GetTransform()->SetScale(_colliderScale);
+    _torch->GetTransform()->SetScale(_textureScale);
 
     _collider->Update();
 
     _rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
-    _rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 3.0f, 0.8f);
+    _rayData.lightAndShadow = XMFLOAT4(CENTRE.x, CENTRE.y, 3.0f, 0.8f);
     _rayData.material = XMFLOAT4(0.3f, 0.9f, 1.0f, 32.0f);
     _rayData.objectCount = 1;
 
+    Vector imageSize = _torch->GetImageSize();
+
     _objData.pos = _collider->GetWorldPos();
-    _objData.size = _torch->GetImageSize() * 2.0f;
+    _objData.size = Vector(imageSize.x * _colliderScale.x * _textureScale.x,
+        imageSize.y * _colliderScale.y * _textureScale.y);
     _objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
     _objData.uvScale = XMFLOAT2(1.0f, 1.0f);
     _objData.reflectivity = 0.8f;
@@ -73,24 +76,25 @@ void Torch::Falling()
 {
     Vector moveDir = Vector(0, 0);
 
-    _velocity.y += _gravity * DELTA_TIME;
-    moveDir.y -= _velocity.y * DELTA_TIME;
+    _velocity.y -= _gravity * DELTA_TIME;
+    moveDir.y += _velocity.y * DELTA_TIME;
 
     _collider->GetTransform()->AddPos(moveDir);
 
     for (auto& ground : _grounds)
     {
-        if (_collider->IsCollision(ground))
+        if (_collider->IsCollision(ground) && _velocity.y <= 0.0f)
         {
             float torchBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
             float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
 
-            if (torchBottom <= groundTop + 5.0f && _velocity.y > 0)
+            if (torchBottom <= groundTop + 5.0f)
             {
                 _velocity.y = 0;
                 Vector pos = _collider->GetWorldPos();
                 pos.y = groundTop + _collider->GetWorldScale().y * 0.5f;
                 _collider->SetPos(pos);
+                break;
             }
         }
     }

@@ -47,11 +47,14 @@ private:
 	ObjectData _objData;
 
 private:
+	Vector _textureScale = Vector(8.0f, 16.0f);  
+	Vector _colliderScale = Vector(4.0f, 3.0f);
+
 	Vector _velocity = Vector(0, 0);
 	bool _isJumping = false;
 	bool _isEquip = false;
 
 	float _playerSpeed = 400.0f;
-	float _jumpHeight = 200.0f;
-	float _gravity = 12.0f;
+	float _jumpHeight = 30.0f;
+	float _gravity = 12.0f;	
 };

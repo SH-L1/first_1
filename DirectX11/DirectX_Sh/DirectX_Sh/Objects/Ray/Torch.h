@@ -44,9 +44,10 @@ private:
 	ObjectData _objData;
 
 private:
-	bool _isActive = false;
+	Vector _textureScale = Vector(140.0f, 120.0f);
+	Vector _colliderScale = Vector(0.1f, 0.2f);
 
 	Vector _velocity = Vector(0, 0);
-
+	bool _isActive = false;
 	float _gravity = 12.0f;
 };
