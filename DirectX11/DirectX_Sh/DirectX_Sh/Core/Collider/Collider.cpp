@@ -18,6 +18,8 @@ void Collider::Update()
 
 void Collider::Render()
 {
+	_transform->Update();
+
 	_vs->IASetInputLayout();
 	_vertexBuffer->IASet(0);
 

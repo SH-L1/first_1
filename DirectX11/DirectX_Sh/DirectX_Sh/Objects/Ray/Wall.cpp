@@ -7,8 +7,8 @@ Wall::Wall()
     _collider = make_shared<RectCollider>(_wall->GetImageSize());
 
     _wall->GetTransform()->SetParent(_collider->GetTransform());
-    _wall->GetTransform()->SetScale(Vector(4.0f, 4.0f));
-    _collider->GetTransform()->SetScale(Vector(4.0f, 4.0f));
+    _wall->GetTransform()->SetScale(Vector(8.0f, 8.0f));
+    _collider->GetTransform()->SetScale(Vector(10.0f, 5.0f));
 }
 
 Wall::~Wall()

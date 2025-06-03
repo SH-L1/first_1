@@ -24,9 +24,17 @@ RayTracingScene::RayTracingScene()
     _player->SetPos(Vector(CENTRE.x, 200.0f));
     _player->SetGround(_walls[0]->GetCollider());
 
+    vector<shared_ptr<RectCollider>> allGrounds;
+    for (auto wall : _walls)
+    {
+        allGrounds.push_back(wall->GetCollider());
+    }
+
+    _player->SetGrounds(allGrounds);
+
     for (auto torch : _torches)
     {
-        torch->SetGround(_walls[0]->GetCollider());
+        torch->SetGrounds(allGrounds);
     }
 }
 
@@ -53,7 +61,19 @@ void RayTracingScene::Update()
     }
 
     for (auto torch : _torches)
+    {
+        if (torch->GetActive())
+        {
+            for (auto wall : _walls)
+            {
+                if (torch->GetCollider()->IsCollision(wall->GetCollider()))
+                {
+                    wall->GetCollider()->Block(torch->GetCollider());
+                }
+            }
+        }
         torch->Update();
+    }
 
     _player->Update();
 
@@ -106,7 +126,7 @@ void RayTracingScene::Render()
     else
     {
         rayData = _player->GetLightData();
-        rayData.lightAndShadow = XMFLOAT4(CENTRE.x, WIN_HEIGHT * 0.8f, 2.0f, 0.7f);
+        rayData.lightAndShadow = XMFLOAT4(CENTRE.x, WIN_HEIGHT * 0.8f, 1.5f, 0.7f);
     }
 
     rayData.objectCount = static_cast<int>(objects.size());
@@ -143,11 +163,21 @@ void RayTracingScene::Render()
 void RayTracingScene::PostRender()
 {
     for (auto wall : _walls)
+    {
+        wall->GetCollider()->SetColor(RED);
         wall->PostRender();
+    }
 
     for (auto torch : _torches)
-        torch->PostRender();
+    {
+        if (torch->GetActive())
+        {
+            torch->GetCollider()->SetColor(BLUE);
+            torch->PostRender();
+        }
+    }
 
+    _player->GetCollider()->SetColor(GREEN);
     _player->PostRender();
 }
 

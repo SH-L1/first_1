@@ -7,8 +7,10 @@ Torch::Torch()
     _collider = make_shared<RectCollider>(_torch->GetImageSize());
 
     _torch->GetTransform()->SetParent(_collider->GetTransform());
-    _torch->GetTransform()->SetScale(Vector(2.0f, 2.0f));
-    _collider->GetTransform()->SetScale(Vector(2.0f, 2.0f));
+    _torch->GetTransform()->SetScale(Vector(8.0f, 8.0f));
+    _collider->GetTransform()->SetScale(Vector(1.5f, 1.5f));
+
+    _collider->Update();
 
     _rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
     _rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 3.0f, 0.8f);
@@ -72,18 +74,24 @@ void Torch::Falling()
     Vector moveDir = Vector(0, 0);
 
     _velocity.y += _gravity * DELTA_TIME;
-    moveDir.y += _velocity.y * DELTA_TIME;
+    moveDir.y -= _velocity.y * DELTA_TIME;
 
     _collider->GetTransform()->AddPos(moveDir);
 
-    if (auto ground = _ground.lock())
+    for (auto& ground : _grounds)
     {
         if (_collider->IsCollision(ground))
         {
-            _velocity.y = 0;
-            Vector pos = _collider->GetWorldPos();
-            pos.y = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f + _collider->GetWorldScale().y * 0.5f;
-            _collider->SetPos(pos);
+            float torchBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
+            float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
+
+            if (torchBottom <= groundTop + 5.0f && _velocity.y > 0)
+            {
+                _velocity.y = 0;
+                Vector pos = _collider->GetWorldPos();
+                pos.y = groundTop + _collider->GetWorldScale().y * 0.5f;
+                _collider->SetPos(pos);
+            }
         }
     }
 }

@@ -7,13 +7,12 @@ Mario::Mario()
     _collider = make_shared<RectCollider>(_player->GetImageSize());
     _equipment = make_shared<Transform>();
 
-    Vector initialPos = Vector(CENTRE.x, 200.0f);
-    _collider->SetPos(initialPos);
+    _collider->SetPos(CENTRE);
     _collider->Update();
 
     _player->GetTransform()->SetParent(_collider->GetTransform());
     _player->GetTransform()->SetScale(Vector(3.0f, 3.0f));
-    _collider->GetTransform()->SetScale(Vector(3.0f, 3.0f));
+    _collider->GetTransform()->SetScale(Vector(10.0f, 10.0f));
 
     _equipment->SetParent(_collider->GetTransform());
     _equipment->SetPos(Vector(0.0f, 1.0f));
@@ -23,7 +22,7 @@ Mario::Mario()
     _rayData.material = XMFLOAT4(0.4f, 0.8f, 1.0f, 32.0f);
     _rayData.objectCount = 1;
 
-    _objData.pos = initialPos;
+    _objData.pos = _collider->GetWorldPos();
     _objData.size = _player->GetImageSize() * 3.0f;
     _objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
     _objData.uvScale = XMFLOAT2(1.0f, 1.0f);
@@ -45,6 +44,7 @@ Mario::~Mario()
 void Mario::PreUpdate()
 {
     _collider->Update();
+    _collider->GetTransform()->Update();
 }
 
 void Mario::Update()
@@ -63,6 +63,7 @@ void Mario::Render()
 
 void Mario::PostRender()
 {
+    _collider->SetColor(XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f));
     _collider->Render();
 }
 
@@ -95,26 +96,53 @@ void Mario::Move()
         _player->SetLeftRight(0);
     }
 
-    if (auto ground = _ground.lock())
-    {
-        bool onGround = _collider->IsCollision(ground);
-        if (KEY_DOWN(VK_SPACE) && onGround && !_isJumping)
-        {
-            _velocity.y = _jumpHeight;
-            _isJumping = true;
-        }
+    shared_ptr<RectCollider> currentGround;
+    bool onGround = CheckGroundCollision(currentGround);
 
-        if (onGround && _velocity.y <= 0.0f)
-        {
-            _isJumping = false;
-            _velocity.y = 0.0f;
-        }
+    if (KEY_DOWN(VK_SPACE) && onGround && !_isJumping)
+    {
+        _velocity.y = -_jumpHeight;
+        _isJumping = true;
     }
 
-    _velocity.y -= _gravity * DELTA_TIME;
-    moveDir.y += _velocity.y * DELTA_TIME;
+    if (onGround && _velocity.y >= 0.0f)
+    {
+        _isJumping = false;
+        _velocity.y = 0.0f;
+
+        Vector pos = _collider->GetWorldPos();
+        pos.y = currentGround->GetWorldPos().y + currentGround->GetWorldScale().y * 0.5f + _collider->GetWorldScale().y * 0.5f;
+        _collider->SetPos(pos);
+    }
+
+    _velocity.y += _gravity * DELTA_TIME;
+    moveDir.y -= _velocity.y * DELTA_TIME;
 
     _collider->GetTransform()->AddPos(moveDir);
+
+    for (auto& ground : _grounds)
+    {
+        if (_collider->IsCollision(ground))
+        {
+            float playerBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
+            float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
+
+            if (playerBottom >= groundTop - 5.0f)
+            {
+                if (_velocity.y > 0)
+                {
+                    Vector pos = _collider->GetWorldPos();
+                    pos.y = groundTop + _collider->GetWorldScale().y * 0.5f;
+                    _collider->SetPos(pos);
+                    _velocity.y = 0;
+                }
+            }
+            else
+            {
+                ground->Block(_collider);
+            }
+        }
+    }
 }
 
 void Mario::Pick()
@@ -128,4 +156,23 @@ void Mario::Pick()
             _isEquip = true;
         }
     }
+}
+
+bool Mario::CheckGroundCollision(shared_ptr<RectCollider>& hitGround)
+{
+    for (auto& ground : _grounds)
+    {
+        if (_collider->IsCollision(ground))
+        {
+            float playerBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
+            float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
+
+            if (playerBottom <= groundTop + 10.0f && _velocity.y >= 0)
+            {
+                hitGround = ground;
+                return true;
+            }
+        }
+    }
+    return false;
 }

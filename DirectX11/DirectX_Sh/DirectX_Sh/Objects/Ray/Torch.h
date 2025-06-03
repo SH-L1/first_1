@@ -14,7 +14,7 @@ public:
 	void Falling();
 
 	void SetActive(bool active) { _isActive = active; }
-	void SetGround(const shared_ptr<RectCollider>& ground) { _ground = ground; }
+	void SetGrounds(const vector<shared_ptr<RectCollider>>& grounds) { _grounds = grounds; }
 
 	shared_ptr<Transform> GetTransform() { return _torch->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
@@ -38,7 +38,7 @@ private:
 	shared_ptr<Quad> _torch;
 	shared_ptr<RectCollider> _collider;
 
-	weak_ptr<RectCollider> _ground;
+	vector<shared_ptr<RectCollider>> _grounds;
 
 	RayTracingBuffer::Data _rayData;
 	ObjectData _objData;
@@ -48,5 +48,5 @@ private:
 
 	Vector _velocity = Vector(0, 0);
 
-	float _gravity = 8.0f;
+	float _gravity = 12.0f;
 };

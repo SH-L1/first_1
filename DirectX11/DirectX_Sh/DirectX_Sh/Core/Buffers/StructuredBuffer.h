@@ -10,7 +10,7 @@ public:
     void CreateSRV();
     void CreateUAV();
 
-    void SetData(const T* data, UINT count); // const 추가
+    void SetData(const T* data, UINT count);
     void SetPS(UINT slot);
     void SetCS(UINT slot);
     void Update();
@@ -77,7 +77,7 @@ void StructuredBuffer<T>::CreateUAV()
 }
 
 template<typename T>
-void StructuredBuffer<T>::SetData(const T* data, UINT count) // const 추가
+void StructuredBuffer<T>::SetData(const T* data, UINT count)
 {
     _count = count;
     _data.resize(count);

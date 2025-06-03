@@ -14,6 +14,7 @@ public:
 	void PostRender();
 
 	void SetGround(const shared_ptr<RectCollider>& ground) { _ground = ground; }
+	void SetGrounds(const vector<shared_ptr<RectCollider>>& grounds) { _grounds = grounds; }
 	void SetTorch(const shared_ptr<Torch>& torch) { _torch = torch; }
 	void SetPos(Vector pos) { _collider->GetTransform()->SetPos(pos); }
 	void SetObjectData(ObjectData objData) { _objData = objData; }
@@ -31,6 +32,8 @@ private:
 	void Move();
 	void Pick();
 
+	bool CheckGroundCollision(shared_ptr<RectCollider>& hitGround);
+
 private:
 	shared_ptr<Quad> _player;
 	shared_ptr<RectCollider> _collider;
@@ -38,6 +41,7 @@ private:
 
 	weak_ptr<Torch> _torch;
 	weak_ptr<RectCollider> _ground;
+	vector<shared_ptr<RectCollider>> _grounds;
 
 	RayTracingBuffer::Data _rayData;
 	ObjectData _objData;
@@ -47,7 +51,7 @@ private:
 	bool _isJumping = false;
 	bool _isEquip = false;
 
-	float _playerSpeed = 300.0f;
-	float _jumpHeight = 100.0f;
-	float _gravity = 8.0f;
+	float _playerSpeed = 400.0f;
+	float _jumpHeight = 200.0f;
+	float _gravity = 12.0f;
 };

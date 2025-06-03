@@ -24,8 +24,9 @@ void Transform::Update()
     }
 
     _world->SetData(_srtMatrix);
-
     _world->Update();
+
+    _world->SetVS(0);
 }
 
 void Transform::SetVS(int slot)
