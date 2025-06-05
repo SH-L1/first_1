@@ -24,5 +24,5 @@ private:
 
 private:
 	Vector _textureScale = Vector(8.0f, 8.0f);
-	Vector _colliderScale = Vector(25.0f, 5.0f);
+	Vector _colliderScale = Vector(30.0f, 5.0f);
 };

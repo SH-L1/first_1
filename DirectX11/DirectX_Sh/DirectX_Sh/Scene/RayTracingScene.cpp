@@ -4,12 +4,7 @@
 RayTracingScene::RayTracingScene()
 {
     _player = make_shared<Mario>();
-
-    for (int i = 0; i < _torchNum; i++)
-    {
-        shared_ptr<Torch> torch = make_shared<Torch>();
-        _torches.push_back(torch);
-    }
+    _torch = make_shared<Torch>();
 
     for (int i = 0; i < _wallNum; i++)
     {
@@ -17,9 +12,9 @@ RayTracingScene::RayTracingScene()
         _walls.push_back(wall);
     }
 
-    _walls[0]->SetPos(Vector(WIN_WIDTH * 0.5f, 100.0f));  
-    _walls[1]->SetPos(Vector(WIN_WIDTH * 0.2f, WIN_HEIGHT * 0.4f)); 
-    _walls[2]->SetPos(Vector(WIN_WIDTH * 0.8f, WIN_HEIGHT * 0.7f)); 
+    _walls[0]->SetPos(Vector(WIN_WIDTH * 0.5f, 80.0f));  
+    _walls[1]->SetPos(Vector(WIN_WIDTH * 0.07f, WIN_HEIGHT * 0.3f)); 
+    _walls[2]->SetPos(Vector(WIN_WIDTH * 0.85f, WIN_HEIGHT * 0.4f)); 
 
     _player->SetPos(Vector(CENTRE.x, 300.0f));
     _player->SetGround(_walls[0]->GetCollider());
@@ -31,11 +26,8 @@ RayTracingScene::RayTracingScene()
     }
 
     _player->SetGrounds(allGrounds);
-
-    for (auto torch : _torches)
-    {
-        torch->SetGrounds(allGrounds);
-    }
+    _torch->SetGrounds(allGrounds);
+    _player->SetTorch(_torch);
 }
 
 RayTracingScene::~RayTracingScene()
@@ -44,10 +36,8 @@ RayTracingScene::~RayTracingScene()
 
 void RayTracingScene::PreUpdate()
 {
-    for (auto torch : _torches)
-        torch->PreUpdate();
-
     _player->PreUpdate();
+    _torch->PreUpdate();
 
     for (auto wall : _walls)
         wall->PreUpdate();
@@ -55,144 +45,95 @@ void RayTracingScene::PreUpdate()
 
 void RayTracingScene::Update()
 {
+    _player->Update();
+
     if (KEY_DOWN(VK_LBUTTON))
     {
         CreateTorchOnSreen();
     }
 
-    for (auto torch : _torches)
-    {
-        if (torch->GetActive())
-        {
-            for (auto wall : _walls)
-            {
-                if (torch->GetCollider()->IsCollision(wall->GetCollider()))
-                {
-                    wall->GetCollider()->Block(torch->GetCollider());
-                }
-            }
-        }
-        torch->Update();
-    }
-
-    _player->Update();
+    _torch->Update();
 
     for (auto wall : _walls)
         wall->Update();
-
-    for (auto torch : _torches)
-    {
-        if (torch->GetActive())
-        {
-            _player->SetTorch(torch);
-            break; 
-        }
-    }
 }
 
 void RayTracingScene::Render()
 {
-    vector<ObjectData> objects;
+    RayTracingBuffer::Data lightData;
+    lightData.material = XMFLOAT4(0.15f, 0.85f, 0.0f, 0.0f);
+    lightData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
 
-    for (auto wall : _walls)
+    if (_torch->GetActive())
     {
-        ObjectData objData;
-        objData.pos = wall->GetCollider()->GetWorldPos();
-        objData.size = wall->GetFinalSize();
-        objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
-        objData.uvScale = XMFLOAT2(1.0f, 1.0f);
-        objData.reflectivity = 0.3f;
-        objData.type = 0;
-        objData.pad0 = 0;
-        objData.pad1 = 0;
-        objects.push_back(objData);
-    }
+        Vector lightPos;
+        float lightIntensity = 1.2f;
+        float lightRadius = 500.0f;
 
-    vector<shared_ptr<Torch>> activeTorches;
-    for (auto torch : _torches)
-    {
-        if (torch->GetActive())
+        if (_player->IsEquipped())
         {
-            objects.push_back(torch->GetObjectData());
-            activeTorches.push_back(torch);
+            lightPos = _player->GetCollider()->GetWorldPos();
+            lightPos.y += 50.0f;
         }
-    }
+        else
+        {
+            lightPos = _torch->GetCollider()->GetWorldPos();
+        }
 
-    objects.push_back(_player->GetObjectData());
-
-    RayTracingBuffer::Data rayData;
-
-    if (!activeTorches.empty())
-    {
-        rayData = activeTorches[0]->GetLightData();
+        lightData.lightAndShadow = XMFLOAT4(
+            lightPos.x,
+            lightPos.y,
+            lightIntensity,
+            lightRadius
+        );
+        lightData.objectCount = 1; 
     }
     else
     {
-        rayData = _player->GetLightData();
-        rayData.lightAndShadow = XMFLOAT4(CENTRE.x, WIN_HEIGHT * 0.8f, 1.5f, 0.7f);
+        lightData.lightAndShadow = XMFLOAT4(0, 0, 0, 0);
+        lightData.objectCount = 0;
     }
-
-    rayData.objectCount = static_cast<int>(objects.size());
 
     for (auto wall : _walls)
     {
-        wall->GetQuad()->SetRayTracingData(rayData);
-        wall->GetQuad()->SetObjectData(objects.data(), objects.size());
-    }
-
-    for (auto torch : activeTorches)
-    {
-        torch->SetRayTracingData(rayData);
-        torch->SetObjectData(objects.data(), objects.size());
-    }
-
-    _player->SetLightData(rayData, static_cast<int>(objects.size()));
-    _player->GetQuad()->SetRayTracingData(rayData);
-    _player->GetQuad()->SetObjectData(objects.data(), objects.size());
-
-    for (auto wall : _walls)
-    {
+        wall->GetQuad()->SetRayTracingData(lightData);
         wall->Render();
     }
 
     _player->Render();
 
-    for (auto torch : activeTorches)
+    if (_torch->GetActive() && !_player->IsEquipped())
     {
-        torch->Render();
+        RayTracingBuffer::Data torchLightData = lightData;
+        torchLightData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 0.0f);
+        _torch->GetQuad()->SetRayTracingData(torchLightData);
+        _torch->Render();
     }
 }
 
 void RayTracingScene::PostRender()
 {
+    _player->GetCollider()->SetColor(GREEN);
+    _player->PostRender();
+
     for (auto wall : _walls)
     {
         wall->GetCollider()->SetColor(RED);
         wall->PostRender();
     }
 
-    for (auto torch : _torches)
+    if (_torch->GetActive())
     {
-        if (torch->GetActive())
-        {
-            torch->GetCollider()->SetColor(BLUE);
-            torch->PostRender();
-        }
+        _torch->GetCollider()->SetColor(BLUE);
+        _torch->PostRender();
     }
-
-    _player->GetCollider()->SetColor(GREEN);
-    _player->PostRender();
 }
 
 void RayTracingScene::CreateTorchOnSreen()
 {
-    auto deactiveTorch = find_if(_torches.begin(), _torches.end(), [](const auto& torch) -> bool {
-        return !torch->GetActive();
-        });
-
-    if (deactiveTorch != _torches.end())
+    if (!_torch->GetActive())
     {
-        (*deactiveTorch)->SetActive(true);
-        (*deactiveTorch)->SetPosition(mousePos);
+        _torch->SetActive(true);
+        _torch->SetPosition(mousePos);
     }
 }

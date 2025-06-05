@@ -23,6 +23,7 @@ public:
 	void SetLightData(const RayTracingBuffer::Data& data) { _rayData = data; }
 	RayTracingBuffer::Data GetLightData() { return _rayData; }
 	void SetObjectData(const ObjectData& data) { _objData = data; }
+	shared_ptr<Quad> GetQuad() { return _torch; }
 	ObjectData GetObjectData() { return _objData; }
 
 	void SetRayTracingData(const RayTracingBuffer::Data& data) { _rayData = data; }
@@ -44,7 +45,7 @@ private:
 	ObjectData _objData;
 
 private:
-	Vector _textureScale = Vector(140.0f, 120.0f);
+	Vector _textureScale = Vector(300.0f, 120.0f);
 	Vector _colliderScale = Vector(0.1f, 0.2f);
 
 	Vector _velocity = Vector(0, 0);

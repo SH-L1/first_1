@@ -15,10 +15,9 @@ public:
 
 private:
     shared_ptr<Mario> _player;
-    vector<shared_ptr<Torch>> _torches;
+    shared_ptr<Torch> _torch;
     vector<shared_ptr<Wall>> _walls;
 
 private:
-    int _torchNum = 30;
     int _wallNum = 3;
 }; 

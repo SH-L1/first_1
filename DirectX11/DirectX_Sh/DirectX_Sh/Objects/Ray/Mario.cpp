@@ -59,8 +59,6 @@ void Mario::Update()
 
 void Mario::Render()
 {
-    _player->SetRayTracingData(_rayData);
-    _player->SetObjectData(_objData);
     _player->Render();
 }
 
@@ -92,6 +90,7 @@ void Mario::Move()
             moveDir.x -= _playerSpeed * DELTA_TIME;
         _player->SetLeftRight(1);
     }
+
     if (KEY_PRESS('D'))
     {
         if (curPos.x < WIN_WIDTH - space.x)
@@ -99,70 +98,49 @@ void Mario::Move()
         _player->SetLeftRight(0);
     }
 
-    shared_ptr<RectCollider> currentGround;
-    bool onGround = CheckGroundCollision(currentGround);
+    _velocity.y += _gravity * DELTA_TIME;
+    moveDir.y -= _velocity.y * DELTA_TIME;
 
-    if (KEY_DOWN(VK_SPACE) && onGround && !_isJumping)
-    {
-        _velocity.y = _jumpHeight; 
-        _isJumping = true;
-    }
+    // 먼저 y축만 이동
+    _collider->GetTransform()->AddPos(Vector(0, moveDir.y));
 
-    _velocity.y -= _gravity * DELTA_TIME;
-    moveDir.y += _velocity.y * DELTA_TIME;
-
-    if (onGround && _velocity.y <= 0.0f)
-    {
-        _isJumping = false;
-        _velocity.y = 0.0f;
-
-        Vector pos = _collider->GetWorldPos();
-        float playerBottom = pos.y - _collider->GetWorldScale().y * 0.5f;
-        float groundTop = currentGround->GetWorldPos().y + currentGround->GetWorldScale().y * 0.5f;
-
-        if (playerBottom < groundTop)
-        {
-            pos.y = groundTop + _collider->GetWorldScale().y * 0.5f;
-            _collider->SetPos(pos);
-        }
-    }
-
-    _collider->GetTransform()->AddPos(moveDir);
-
+    bool onGround = false;
     for (auto& ground : _grounds)
     {
         if (_collider->IsCollision(ground))
         {
-            Vector playerPos = _collider->GetWorldPos();
-            Vector groundPos = ground->GetWorldPos();
-            Vector playerScale = _collider->GetWorldScale();
-            Vector groundScale = ground->GetWorldScale();
+            ground->Block(_collider);
 
-            float playerBottom = playerPos.y - playerScale.y * 0.5f;
-            float playerTop = playerPos.y + playerScale.y * 0.5f;
-            float groundTop = groundPos.y + groundScale.y * 0.5f;
-            float groundBottom = groundPos.y - groundScale.y * 0.5f;
+            float playerBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
+            float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
 
-            if (playerBottom <= groundTop && playerTop > groundTop && _velocity.y <= 0)
+            if (abs(playerBottom - groundTop) < 5.0f)
             {
-                Vector pos = _collider->GetWorldPos();
-                pos.y = groundTop + playerScale.y * 0.5f;
-                _collider->SetPos(pos);
+                onGround = true;
                 _velocity.y = 0;
                 _isJumping = false;
             }
-            else if (playerTop >= groundBottom && playerBottom < groundBottom && _velocity.y > 0)
-            {
-                Vector pos = _collider->GetWorldPos();
-                pos.y = groundBottom - playerScale.y * 0.5f;
-                _collider->SetPos(pos);
-                _velocity.y = 0;
-            }
-            else
-            {
-                ground->Block(_collider);
-            }
         }
+    }
+
+    // 그 다음 x축 이동
+    _collider->GetTransform()->AddPos(Vector(moveDir.x, 0));
+
+    // x축 충돌 체크 (필요한 경우)
+    for (auto& ground : _grounds)
+    {
+        if (_collider->IsCollision(ground))
+        {
+            // x축 충돌 시 원위치로
+            _collider->GetTransform()->AddPos(Vector(-moveDir.x, 0));
+            break;
+        }
+    }
+
+    if (KEY_DOWN(VK_SPACE) && onGround && !_isJumping)
+    {
+        _velocity.y = _jumpHeight;
+        _isJumping = true;
     }
 }
 
@@ -173,32 +151,10 @@ void Mario::Pick()
         bool canPick = _collider->IsCollision(torch->GetCollider());
         if (KEY_DOWN('Z') && canPick)
         {
-            torch->GetTransform()->SetParent(_equipment);
+            torch->GetCollider()->GetTransform()->SetParent(_equipment);
+            torch->GetCollider()->SetPos(Vector(0.0f, 50.0f));
+            torch->SetActive(false);
             _isEquip = true;
         }
     }
-}
-
-bool Mario::CheckGroundCollision(shared_ptr<RectCollider>& hitGround)
-{
-    Vector playerPos = _collider->GetWorldPos();
-    Vector playerScale = _collider->GetWorldScale();
-    float playerBottom = playerPos.y - playerScale.y * 0.5f;
-
-    for (auto& ground : _grounds)
-    {
-        Vector groundPos = ground->GetWorldPos();
-        Vector groundScale = ground->GetWorldScale();
-        float groundTop = groundPos.y + groundScale.y * 0.5f;
-
-        bool xOverlap = (playerPos.x + playerScale.x * 0.5f > groundPos.x - groundScale.x * 0.5f) &&
-            (playerPos.x - playerScale.x * 0.5f < groundPos.x + groundScale.x * 0.5f);
-
-        if (xOverlap && playerBottom <= groundTop + 10.0f && _velocity.y <= 0)
-        {
-            hitGround = ground;
-            return true;
-        }
-    }
-    return false;
 }

@@ -19,7 +19,8 @@ public:
 	void SetPos(Vector pos) { _collider->GetTransform()->SetPos(pos); }
 	void SetObjectData(ObjectData objData) { _objData = objData; }
 	void SetLightData(RayTracingBuffer::Data rayData, int size) { _rayData = rayData; }
-
+	
+	bool IsEquipped() { return _isEquip; }
 	shared_ptr<Transform> GetTransform() { return _player->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Quad> GetQuad() { return _player; }
@@ -31,8 +32,6 @@ public:
 private:
 	void Move();
 	void Pick();
-
-	bool CheckGroundCollision(shared_ptr<RectCollider>& hitGround);
 
 private:
 	shared_ptr<Quad> _player;
@@ -56,5 +55,5 @@ private:
 
 	float _playerSpeed = 400.0f;
 	float _jumpHeight = 30.0f;
-	float _gravity = 12.0f;	
+	float _gravity = 500.0f;	
 };

@@ -59,9 +59,6 @@ void Torch::Render()
 {
     if (!_isActive) return;
 
-    _torch->SetRayTracingData(_rayData);
-    _torch->SetObjectData(_objData);
-
     _torch->Render();
 }
 
