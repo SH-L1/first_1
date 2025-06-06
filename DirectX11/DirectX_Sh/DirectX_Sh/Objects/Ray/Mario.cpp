@@ -34,7 +34,6 @@ Mario::Mario()
     _objData.pad0 = 0;
     _objData.pad1 = 0;
 
-    _player->AddColor(XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f));
     _player->SetLeftRight(0);
 
     _player->Update();
@@ -47,13 +46,13 @@ Mario::~Mario()
 void Mario::PreUpdate()
 {
     _collider->Update();
-    _collider->GetTransform()->Update();
 }
 
 void Mario::Update()
 {
     Input();
     _objData.pos = _collider->GetWorldPos();
+
     _player->Update();
 }
 
@@ -80,68 +79,113 @@ void Mario::Input()
 
 void Mario::Move()
 {
-    Vector moveDir = Vector(0, 0);
     Vector curPos = _collider->GetWorldPos();
     Vector space = _collider->GetWorldScale() * 0.5f;
 
     if (KEY_PRESS('A'))
     {
-        if (curPos.x > space.x)
-            moveDir.x -= _playerSpeed * DELTA_TIME;
+        curPos.x -= _playerSpeed * DELTA_TIME;
         _player->SetLeftRight(1);
     }
-
     if (KEY_PRESS('D'))
     {
-        if (curPos.x < WIN_WIDTH - space.x)
-            moveDir.x += _playerSpeed * DELTA_TIME;
+        curPos.x += _playerSpeed * DELTA_TIME;
         _player->SetLeftRight(0);
     }
 
-    _velocity.y += _gravity * DELTA_TIME;
-    moveDir.y -= _velocity.y * DELTA_TIME;
-
-    // 먼저 y축만 이동
-    _collider->GetTransform()->AddPos(Vector(0, moveDir.y));
-
     bool onGround = false;
+    float groundY = -9999.0f;
+    float floatHeight = 3.0f;
+
     for (auto& ground : _grounds)
     {
-        if (_collider->IsCollision(ground))
+        float playerBottom = curPos.y - _collider->GetWorldScale().y * 0.5f;
+        float playerLeft = curPos.x - _collider->GetWorldScale().x * 0.5f;
+        float playerRight = curPos.x + _collider->GetWorldScale().x * 0.5f;
+
+        float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
+        float groundLeft = ground->GetWorldPos().x - ground->GetWorldScale().x * 0.5f;
+        float groundRight = ground->GetWorldPos().x + ground->GetWorldScale().x * 0.5f;
+
+        if (playerRight > groundLeft && playerLeft < groundRight)
         {
-            ground->Block(_collider);
+            float expectedBottom = groundTop + floatHeight;
+            float tolerance = 2.0f;
 
-            float playerBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
-            float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
-
-            if (abs(playerBottom - groundTop) < 5.0f)
+            if (abs(playerBottom - expectedBottom) <= tolerance)
             {
                 onGround = true;
-                _velocity.y = 0;
-                _isJumping = false;
+                groundY = groundTop;
+                break;
+            }
+            else if (playerBottom < expectedBottom + 20.0f && playerBottom > expectedBottom && _velocity.y > 0)
+            {
+                if (groundTop > groundY)
+                {
+                    groundY = groundTop;
+                }
             }
         }
     }
 
-    // 그 다음 x축 이동
-    _collider->GetTransform()->AddPos(Vector(moveDir.x, 0));
-
-    // x축 충돌 체크 (필요한 경우)
-    for (auto& ground : _grounds)
+    if (KEY_DOWN(VK_SPACE))
     {
-        if (_collider->IsCollision(ground))
+        if (onGround && !_isJumping)
         {
-            // x축 충돌 시 원위치로
-            _collider->GetTransform()->AddPos(Vector(-moveDir.x, 0));
-            break;
+            _velocity.y = -_jumpHeight;
+            _isJumping = true;
+            onGround = false;
         }
     }
 
-    if (KEY_DOWN(VK_SPACE) && onGround && !_isJumping)
+    if (!onGround)
     {
-        _velocity.y = _jumpHeight;
-        _isJumping = true;
+        _velocity.y += _gravity * DELTA_TIME;
+        curPos.y -= _velocity.y * DELTA_TIME;
     }
+    else
+    {
+        if (_velocity.y > 0)
+        {
+            _velocity.y = 0;
+            _isJumping = false;
+        }
+        curPos.y = groundY + _collider->GetWorldScale().y * 0.5f + floatHeight;
+    }
+
+    _collider->SetPos(curPos);
+    _collider->GetTransform()->Update();
+
+    if (!onGround && _velocity.y > 0)
+    {
+        for (auto& ground : _grounds)
+        {
+            if (_collider->IsCollision(ground))
+            {
+                float playerBottom = _collider->GetWorldPos().y - _collider->GetWorldScale().y * 0.5f;
+                float groundTop = ground->GetWorldPos().y + ground->GetWorldScale().y * 0.5f;
+
+                _velocity.y = 0;
+                _isJumping = false;
+                curPos.y = groundTop + _collider->GetWorldScale().y * 0.5f + floatHeight;
+                _collider->SetPos(curPos);
+                _collider->GetTransform()->Update();
+                break;
+            }
+        }
+    }
+
+    Vector finalPos = _collider->GetWorldPos();
+    if (finalPos.x < space.x) finalPos.x = space.x;
+    if (finalPos.x > WIN_WIDTH - space.x) finalPos.x = WIN_WIDTH - space.x;
+    if (finalPos.y < space.y)
+    {
+        finalPos.y = space.y;
+        _velocity.y = 0;
+    }
+
+    _collider->SetPos(finalPos);
+    _collider->GetTransform()->Update();
 }
 
 void Mario::Pick()

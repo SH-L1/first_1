@@ -14,10 +14,10 @@ cbuffer Color : register(b2)
 
 cbuffer RayTracing : register(b3)
 {
-    float4 screenOrigin;
+    float4 screenOrigin; 
     float4 lightAndShadow; 
     float4 material; 
-    int objectCount; 
+    int objectCount;
     int padding2[3];
 }
 
@@ -40,15 +40,17 @@ float4 PS(PixelInput input) : SV_TARGET
     
     float2 pixelPos = input.pos.xy;
     
-    float lighting = material.x; 
+    float2 lightPosScreen = lightAndShadow.xy;
+    lightPosScreen.y = screenOrigin.y - lightPosScreen.y;
+    
+    float lighting = material.x;
     
     if (objectCount > 0 && lightAndShadow.z > 0.01)
     {
-        float2 lightPos = lightAndShadow.xy;
         float lightIntensity = lightAndShadow.z;
         float lightRadius = lightAndShadow.w;
         
-        float distance = length(lightPos - pixelPos);
+        float distance = length(lightPosScreen - pixelPos);
         
         if (distance < lightRadius)
         {
@@ -59,7 +61,7 @@ float4 PS(PixelInput input) : SV_TARGET
         }
     }
     
-    lighting = clamp(lighting, 0.0, 1.0);
+    lighting = saturate(lighting);
     
     float3 finalColor = texColor.rgb * lighting;
     

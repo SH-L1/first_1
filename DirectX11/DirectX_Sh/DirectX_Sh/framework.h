@@ -82,6 +82,7 @@ using namespace Microsoft;
 // OBJECTS
 #include "Objects/Basic/Quad.h"
 
+#include "Objects/Dungreed/Background.h"
 #include "Objects/Ray/Mario.h"
 #include "Objects/Ray/Torch.h"
 #include "Objects/Ray/Wall.h"

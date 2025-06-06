@@ -3,6 +3,7 @@
 
 RayTracingScene::RayTracingScene()
 {
+    _background = make_shared<Background>();
     _player = make_shared<Mario>();
     _torch = make_shared<Torch>();
 
@@ -45,6 +46,7 @@ void RayTracingScene::PreUpdate()
 
 void RayTracingScene::Update()
 {
+    _background->Update();
     _player->Update();
 
     if (KEY_DOWN(VK_LBUTTON))
@@ -94,12 +96,16 @@ void RayTracingScene::Render()
         lightData.objectCount = 0;
     }
 
+    _background->GetQuad()->SetRayTracingData(lightData);
+    _background->Render();
+
     for (auto wall : _walls)
     {
         wall->GetQuad()->SetRayTracingData(lightData);
         wall->Render();
     }
 
+    _player->GetQuad()->SetRayTracingData(lightData);
     _player->Render();
 
     if (_torch->GetActive() && !_player->IsEquipped())

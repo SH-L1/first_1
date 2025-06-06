@@ -54,6 +54,6 @@ private:
 	bool _isEquip = false;
 
 	float _playerSpeed = 400.0f;
-	float _jumpHeight = 30.0f;
-	float _gravity = 500.0f;	
+	float _jumpHeight = 700.0f;
+	float _gravity = 1000.0f;	
 };

@@ -8,8 +8,8 @@ DunSkeleton::DunSkeleton()
 
     RayTracingBuffer::Data rayData;
     rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
-    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);  // 광원 제거
-    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);  // ambient만 사용
+    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
+    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);
     rayData.objectCount = 1;
     _skeleton->SetRayTracingData(rayData);
 
@@ -20,7 +20,7 @@ DunSkeleton::DunSkeleton()
     objData.size = XMFLOAT2(imageSize.x * worldScale.x, imageSize.y * worldScale.y);
     objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
     objData.uvScale = XMFLOAT2(1.0f, 1.0f);
-    objData.reflectivity = 0.0f;  // 반사 제거
+    objData.reflectivity = 0.0f;
     objData.type = 0;
     objData.pad0 = 0;
     objData.pad1 = 0;
@@ -57,7 +57,7 @@ void DunSkeleton::Update()
     objData.size = XMFLOAT2(imageSize.x * worldScale.x, imageSize.y * worldScale.y);
     objData.uvOffset = XMFLOAT2(0.0f, 0.0f);
     objData.uvScale = XMFLOAT2(1.0f, 1.0f);
-    objData.reflectivity = 0.0f;  // 반사 제거
+    objData.reflectivity = 0.0f;
     objData.type = 0;
     objData.pad0 = 0;
     objData.pad1 = 0;
@@ -70,14 +70,12 @@ void DunSkeleton::Render()
 {
     if (_isActive == false) return;
 
-    // 디버그용 색상 설정
-    _skeleton->AddColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));  // 흰색으로 설정
+    _skeleton->AddColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
     
-    // 버퍼 업데이트
     RayTracingBuffer::Data rayData;
     rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
-    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);  // 광원 제거
-    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);  // ambient만 사용
+    rayData.lightAndShadow = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
+    rayData.material = XMFLOAT4(1.0f, 0.0f, 0.0f, 32.0f);
     rayData.objectCount = 1;
     _skeleton->SetRayTracingData(rayData);
 

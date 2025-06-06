@@ -50,5 +50,5 @@ private:
 
 	Vector _velocity = Vector(0, 0);
 	bool _isActive = false;
-	float _gravity = 12.0f;
+	float _gravity = 100.0f;
 };

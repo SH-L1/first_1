@@ -14,6 +14,7 @@ public:
     void CreateTorchOnSreen();
 
 private:
+    shared_ptr<Background> _background;
     shared_ptr<Mario> _player;
     shared_ptr<Torch> _torch;
     vector<shared_ptr<Wall>> _walls;
