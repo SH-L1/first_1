@@ -19,13 +19,15 @@ public:
 	shared_ptr<Transform> GetTransform() { return _torch->GetTransform(); }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	bool GetActive() { return _isActive; }
-
-	void SetLightData(const RayTracingBuffer::Data& data) { _rayData = data; }
 	RayTracingBuffer::Data GetLightData() { return _rayData; }
-	void SetObjectData(const ObjectData& data) { _objData = data; }
 	shared_ptr<Quad> GetQuad() { return _torch; }
 	ObjectData GetObjectData() { return _objData; }
 
+	bool IsPickedUp() { return _isPickedUp; }
+
+	void SetLightData(const RayTracingBuffer::Data& data) { _rayData = data; }
+	void SetObjectData(const ObjectData& data) { _objData = data; }
+	void SetPickedUp(bool picked) { _isPickedUp = picked; }
 	void SetRayTracingData(const RayTracingBuffer::Data& data) { _rayData = data; }
 	void SetObjectData(const ObjectData* objects, UINT count) { _torch->SetObjectData(objects, count); }
 
@@ -45,6 +47,8 @@ private:
 	ObjectData _objData;
 
 private:
+	bool _isPickedUp = false;
+
 	Vector _textureScale = Vector(300.0f, 120.0f);
 	Vector _colliderScale = Vector(0.1f, 0.2f);
 

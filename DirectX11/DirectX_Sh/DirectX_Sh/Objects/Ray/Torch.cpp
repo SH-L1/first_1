@@ -40,6 +40,11 @@ void Torch::PreUpdate()
 {
     if (!_isActive) return;
 
+    if (_isPickedUp)
+    {
+        _collider->GetTransform()->Update();
+    }
+    
     _collider->Update();
 }
 
@@ -47,11 +52,14 @@ void Torch::Update()
 {
     if (!_isActive) return;
 
-    Falling();
+    if (!_isPickedUp)
+    {
+        Falling();
+    }
 
     _objData.pos = _collider->GetWorldPos();
     _rayData.lightAndShadow = XMFLOAT4(_objData.pos.x, _objData.pos.y, 3.0f, 0.8f);
-
+    
     _torch->Update();
 }
 

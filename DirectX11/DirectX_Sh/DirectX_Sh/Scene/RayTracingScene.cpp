@@ -72,7 +72,7 @@ void RayTracingScene::Render()
         float lightIntensity = 1.2f;
         float lightRadius = 500.0f;
 
-        if (_player->IsEquipped())
+        if (_player->IsEquipped() && _torch->IsPickedUp())
         {
             lightPos = _player->GetCollider()->GetWorldPos();
             lightPos.y += 50.0f;
@@ -88,6 +88,7 @@ void RayTracingScene::Render()
             lightIntensity,
             lightRadius
         );
+
         lightData.objectCount = 1; 
     }
     else
@@ -137,9 +138,10 @@ void RayTracingScene::PostRender()
 
 void RayTracingScene::CreateTorchOnSreen()
 {
-    if (!_torch->GetActive())
+    if (!_torch->GetActive() && !_player->IsEquipped())
     {
         _torch->SetActive(true);
+        _torch->SetPickedUp(false);
         _torch->SetPosition(mousePos);
     }
 }

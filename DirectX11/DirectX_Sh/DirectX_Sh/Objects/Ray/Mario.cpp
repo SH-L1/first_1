@@ -15,7 +15,6 @@ Mario::Mario()
     _collider->GetTransform()->SetScale(_colliderScale);
 
     _equipment->SetParent(_collider->GetTransform());
-    _equipment->SetPos(Vector(0.0f, 1.0f));
 
     _rayData.screenOrigin = XMFLOAT4(WIN_WIDTH, WIN_HEIGHT, CENTRE.x, CENTRE.y);
     _rayData.lightAndShadow = XMFLOAT4(100.0f, 100.0f, 1.0f, 0.5f);
@@ -53,6 +52,7 @@ void Mario::Update()
     Input();
     _objData.pos = _collider->GetWorldPos();
 
+    _equipment->Update();
     _player->Update();
 }
 
@@ -192,13 +192,25 @@ void Mario::Pick()
 {
     if (auto torch = _torch.lock())
     {
-        bool canPick = _collider->IsCollision(torch->GetCollider());
-        if (KEY_DOWN('Z') && canPick)
+        if (!torch->IsPickedUp() && torch->GetActive())
         {
-            torch->GetCollider()->GetTransform()->SetParent(_equipment);
-            torch->GetCollider()->SetPos(Vector(0.0f, 50.0f));
-            torch->SetActive(false);
-            _isEquip = true;
+            bool canPick = _collider->IsCollision(torch->GetCollider());
+            if (KEY_DOWN('Z') && canPick)
+            {
+                torch->GetCollider()->GetTransform()->SetParent(_equipment);
+                torch->GetCollider()->GetTransform()->SetPos(Vector(0.0f, 20.0f));
+
+                Vector marioScale = _collider->GetTransform()->GetWorldScale();
+                Vector torchOriginalScale = torch->GetCollider()->GetTransform()->GetScale();
+                Vector compensatedScale = Vector(
+                    torchOriginalScale.x / marioScale.x,
+                    torchOriginalScale.y / marioScale.y
+                );
+                torch->GetCollider()->GetTransform()->SetScale(compensatedScale);
+
+                torch->SetPickedUp(true);
+                _isEquip = true;
+            }
         }
     }
 }
